@@ -16,7 +16,7 @@ Use these deployment settings:
 - Install command: `npm install`
 - Build command: leave empty
 - Start command: `npm start`
-- Entry file: `server.mjs`
+- Entry file: `server.js`
 
 Do not set `PORT` manually. Hostinger supplies it automatically. After deployment,
 verify `https://devices.stcdigitalhub.com/health` returns a JSON response with
