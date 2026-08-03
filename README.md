@@ -26,7 +26,7 @@ verify `https://devices.stcdigitalhub.com/health` returns a JSON response with
 
 Complete the GitHub connection in Hostinger once and enable Auto-deployment for
 the `main` branch. After that, double-click `COMMIT & DEPLOY.cmd` whenever local
-changes are ready. Enter a short commit description when prompted.
+changes are ready. No additional input is required.
 
 The command stages and commits all changes, pushes `main` to GitHub, waits for
 Hostinger's automatic deployment, and verifies the exact new deployment through

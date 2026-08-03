@@ -13,10 +13,7 @@ if (-not $changes) {
   exit 0
 }
 
-$commitMessage = Read-Host "Enter a short description of your changes"
-if ([string]::IsNullOrWhiteSpace($commitMessage)) {
-  $commitMessage = "Update STC dashboard"
-}
+$commitMessage = "Deploy STC dashboard " + (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
 
 $deploymentId = [Guid]::NewGuid().ToString("N").Substring(0, 12)
 $deploymentInfo = [ordered]@{
