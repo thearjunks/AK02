@@ -10,6 +10,7 @@ const publicDir = path.join(__dirname, "public");
 const dataDir = path.join(__dirname, "data");
 const snapshotPath = path.join(dataDir, "latest-snapshot.json");
 const port = Number(process.env.PORT || 4177);
+const host = process.env.HOST || "0.0.0.0";
 
 let lastData = null;
 
@@ -160,6 +161,15 @@ async function serveStatic(request, response) {
 const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://localhost:${port}`);
+    if (url.pathname === "/health" || url.pathname === "/api/health") {
+      sendJson(response, 200, {
+        status: "ok",
+        service: "stc-kuwait-live-device-dashboard",
+        cachedDataLoaded: Boolean(lastData),
+        timestamp: new Date().toISOString(),
+      });
+      return;
+    }
     if (url.pathname === "/api/live-data") {
       try {
         lastData = await fetchWithHistory();
@@ -200,6 +210,6 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(port, () => {
-  console.log(`STC dashboard running at http://localhost:${port}`);
+server.listen(port, host, () => {
+  console.log(`STC dashboard listening on ${host}:${port}`);
 });

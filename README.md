@@ -1,5 +1,27 @@
 # STC Kuwait Live Device Dashboard
 
+## Hostinger production deployment
+
+This repository is ready to deploy as a Hostinger Node.js application for:
+
+`https://devices.stcdigitalhub.com/`
+
+Use these deployment settings:
+
+- Repository: `https://github.com/thearjunks/AK02.git`
+- Branch: `main`
+- Node.js version: `20.x` (or any version compatible with `>=18.20.0`)
+- Root directory: `./`
+- Package manager: `npm`
+- Install command: `npm install`
+- Build command: leave empty
+- Start command: `npm start`
+- Entry file: `server.mjs`
+
+Do not set `PORT` manually. Hostinger supplies it automatically. After deployment,
+verify `https://devices.stcdigitalhub.com/health` returns a JSON response with
+`"status":"ok"` before testing the dashboard and Excel download.
+
 This app shows live STC Kuwait device information in a dashboard and lets you download the same data as an Excel file.
 
 It can:
