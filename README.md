@@ -22,6 +22,17 @@ Do not set `PORT` manually. Hostinger supplies it automatically. After deploymen
 verify `https://devices.stcdigitalhub.com/health` returns a JSON response with
 `"status":"ok"` before testing the dashboard and Excel download.
 
+### One-click commit and deployment
+
+Complete the GitHub connection in Hostinger once and enable Auto-deployment for
+the `main` branch. After that, double-click `COMMIT & DEPLOY.cmd` whenever local
+changes are ready. Enter a short commit description when prompted.
+
+The command stages and commits all changes, pushes `main` to GitHub, waits for
+Hostinger's automatic deployment, and verifies the exact new deployment through
+the public `/health` endpoint. It opens the dashboard only after that release is
+confirmed live.
+
 This app shows live STC Kuwait device information in a dashboard and lets you download the same data as an Excel file.
 
 It can:

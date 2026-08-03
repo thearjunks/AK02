@@ -9,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "public");
 const dataDir = path.join(__dirname, "data");
 const snapshotPath = path.join(dataDir, "latest-snapshot.json");
+const deploymentPath = path.join(__dirname, "deployment.json");
 const port = Number(process.env.PORT || 4177);
 const host = process.env.HOST || "0.0.0.0";
 
@@ -132,6 +133,14 @@ function sendJson(response, status, payload) {
   response.end(JSON.stringify(payload));
 }
 
+async function readDeploymentInfo() {
+  try {
+    return JSON.parse(await fs.readFile(deploymentPath, "utf8"));
+  } catch {
+    return { deploymentId: "unknown", createdAt: null };
+  }
+}
+
 function filenameStamp() {
   return new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
 }
@@ -162,9 +171,11 @@ const server = http.createServer(async (request, response) => {
   try {
     const url = new URL(request.url, `http://localhost:${port}`);
     if (url.pathname === "/health" || url.pathname === "/api/health") {
+      const deployment = await readDeploymentInfo();
       sendJson(response, 200, {
         status: "ok",
         service: "stc-kuwait-live-device-dashboard",
+        ...deployment,
         cachedDataLoaded: Boolean(lastData),
         timestamp: new Date().toISOString(),
       });
