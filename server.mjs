@@ -119,6 +119,7 @@ async function snapshotWithWarning(error) {
   return showRestoredAsAdded({
     ...previous,
     fetchWarning: error.message || "Live refresh failed; showing the last saved snapshot.",
+    refreshAttemptedAt: new Date().toISOString(),
   });
 }
 

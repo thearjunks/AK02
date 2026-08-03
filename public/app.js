@@ -91,7 +91,9 @@ function updateMetrics() {
   els.removedDevices.textContent = summary.removed ?? data.devices?.filter((device) => device.deviceStatus === "REMOVED").length ?? 0;
   els.totalSkus.textContent = data.colors?.length ?? 0;
   els.totalPlans.textContent = (data.plans?.length ?? 0) + (data.zeed?.length ?? 0);
-  els.generatedAt.textContent = `Generated ${formatDate(data.generatedAt)}`;
+  els.generatedAt.textContent = data.fetchWarning
+    ? `Last successful refresh ${formatDate(data.generatedAt)} | Failed attempt ${formatDate(data.refreshAttemptedAt)}`
+    : `Live data generated ${formatDate(data.generatedAt)}`;
 }
 
 function populateFilters() {

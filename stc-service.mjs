@@ -1,7 +1,10 @@
 import { Impit } from "impit";
 
 const STC_BASE = "https://digitalapi-gateway.stc.com.kw";
-const stcClient = new Impit({ browser: "chrome" });
+const stcClient = new Impit({
+  browser: "chrome",
+  ...(process.env.STC_PROXY_URL ? { proxyUrl: process.env.STC_PROXY_URL } : {}),
+});
 let tokenCache = null;
 let tokenExpiresAt = 0;
 let tokenRequest = null;
