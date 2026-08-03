@@ -1,10 +1,4 @@
-import { Impit } from "impit";
-
 const STC_BASE = "https://digitalapi-gateway.stc.com.kw";
-const stcClient = new Impit({
-  browser: "chrome",
-  ...(process.env.STC_PROXY_URL ? { proxyUrl: process.env.STC_PROXY_URL } : {}),
-});
 let tokenCache = null;
 let tokenExpiresAt = 0;
 let tokenRequest = null;
@@ -164,7 +158,7 @@ async function getToken() {
   if (tokenRequest) return tokenRequest;
 
   tokenRequest = (async () => {
-    const response = await stcClient.fetch(`${STC_BASE}/ClientCred/v1`, {
+    const response = await fetch(`${STC_BASE}/ClientCred/v1`, {
       method: "POST",
       headers: DEFAULT_HEADERS,
     });
@@ -191,7 +185,7 @@ async function createClient() {
   };
 
   async function request(pathname, options = {}) {
-    const response = await stcClient.fetch(`${STC_BASE}${pathname}`, {
+    const response = await fetch(`${STC_BASE}${pathname}`, {
       ...options,
       headers: {
         ...headers,
