@@ -1,0 +1,15 @@
+{
+  "name": "stc-kuwait-live-device-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  },
+  "engines": {
+    "node": ">=18.20.0"
+  }
+}
