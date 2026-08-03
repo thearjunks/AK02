@@ -157,7 +157,10 @@ async function serveStatic(request, response) {
     const body = await fs.readFile(filePath);
     const ext = path.extname(filePath);
     const type = ext === ".css" ? "text/css" : ext === ".js" ? "text/javascript" : "text/html";
-    response.writeHead(200, { "Content-Type": `${type}; charset=utf-8` });
+    response.writeHead(200, {
+      "Content-Type": `${type}; charset=utf-8`,
+      "Cache-Control": "no-cache",
+    });
     response.end(body);
   } catch {
     response.writeHead(404);
