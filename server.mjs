@@ -1,4 +1,3 @@
-import http from "node:http";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,8 +9,6 @@ const publicDir = path.join(__dirname, "public");
 const dataDir = path.join(__dirname, "data");
 const snapshotPath = path.join(dataDir, "latest-snapshot.json");
 const deploymentPath = path.join(__dirname, "deployment.json");
-const port = Number(process.env.PORT || 4177);
-const host = process.env.HOST || "0.0.0.0";
 
 let lastData = null;
 
@@ -146,7 +143,7 @@ function filenameStamp() {
 }
 
 async function serveStatic(request, response) {
-  const url = new URL(request.url, `http://localhost:${port}`);
+  const url = new URL(request.url, "http://localhost");
   const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
   const safePath = path.normalize(pathname).replace(/^(\.\.[/\\])+/, "");
   const filePath = path.join(publicDir, safePath);
@@ -167,9 +164,9 @@ async function serveStatic(request, response) {
   }
 }
 
-const server = http.createServer(async (request, response) => {
+export async function handleRequest(request, response) {
   try {
-    const url = new URL(request.url, `http://localhost:${port}`);
+    const url = new URL(request.url, "http://localhost");
     if (url.pathname === "/health" || url.pathname === "/api/health") {
       const deployment = await readDeploymentInfo();
       sendJson(response, 200, {
@@ -219,8 +216,4 @@ const server = http.createServer(async (request, response) => {
     console.error(error);
     sendJson(response, 500, { error: error.message || "Server error" });
   }
-});
-
-server.listen(port, host, () => {
-  console.log(`STC dashboard listening on ${host}:${port}`);
-});
+}
