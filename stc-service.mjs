@@ -1,4 +1,10 @@
+import { Impit } from "impit";
+
 const STC_BASE = "https://digitalapi-gateway.stc.com.kw";
+const stcClient = new Impit({ browser: "chrome" });
+let tokenCache = null;
+let tokenExpiresAt = 0;
+let tokenRequest = null;
 
 const DEFAULT_HEADERS = {
   channel: "WEB",
@@ -151,12 +157,27 @@ function imageFromThumb(value) {
 }
 
 async function getToken() {
-  const response = await fetch(`${STC_BASE}/ClientCred/v1`, {
-    method: "POST",
-    headers: DEFAULT_HEADERS,
-  });
-  if (!response.ok) throw new Error(`STC token request failed: ${response.status}`);
-  return response.json();
+  if (tokenCache && Date.now() < tokenExpiresAt) return tokenCache;
+  if (tokenRequest) return tokenRequest;
+
+  tokenRequest = (async () => {
+    const response = await stcClient.fetch(`${STC_BASE}/ClientCred/v1`, {
+      method: "POST",
+      headers: DEFAULT_HEADERS,
+    });
+    if (!response.ok) throw new Error(`STC token request failed: ${response.status}`);
+    const token = await response.json();
+    const lifetimeSeconds = Number(token.expires_in) || 300;
+    tokenCache = token;
+    tokenExpiresAt = Date.now() + Math.max(30, lifetimeSeconds - 60) * 1000;
+    return token;
+  })();
+
+  try {
+    return await tokenRequest;
+  } finally {
+    tokenRequest = null;
+  }
 }
 
 async function createClient() {
@@ -167,7 +188,7 @@ async function createClient() {
   };
 
   async function request(pathname, options = {}) {
-    const response = await fetch(`${STC_BASE}${pathname}`, {
+    const response = await stcClient.fetch(`${STC_BASE}${pathname}`, {
       ...options,
       headers: {
         ...headers,
