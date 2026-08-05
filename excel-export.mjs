@@ -48,6 +48,82 @@ function excelStatus(device) {
   return "LIVE";
 }
 
+function stockStatus(row) {
+  if (row.qty !== "" && row.qty != null && Number.isFinite(Number(row.qty))) {
+    return Number(row.qty) > 0 ? "IN STOCK" : "OUT OF STOCK";
+  }
+  if (row.available === true) return "IN STOCK";
+  if (row.available === false) return "OUT OF STOCK";
+  return "UNKNOWN";
+}
+
+function storageLabel(row) {
+  const capacity = String(row.capacity || "").trim();
+  const unit = String(row.unit || "").trim();
+  if (!capacity) return unit;
+  if (!unit || capacity.toLowerCase().endsWith(unit.toLowerCase())) return capacity;
+  return `${capacity} ${unit}`;
+}
+
+export async function buildStockExcel(data, filters = {}) {
+  const currentDevices = (data.devices || []).filter((device) => excelStatus(device) !== "REMOVED");
+  const deviceByGroup = new Map(currentDevices.map((device) => [device.itemGroup, device]));
+  const colorRows = (data.colors || []).filter((row) => deviceByGroup.has(row.itemGroup));
+  const groupsWithColor = new Set(colorRows.map((row) => row.itemGroup));
+  const fallbackRows = currentDevices
+    .filter((device) => !groupsWithColor.has(device.itemGroup))
+    .map((device) => ({ itemGroup: device.itemGroup, model: device.deviceName, itemCode: device.defaultItemCode }));
+  const search = String(filters.search || "").trim().toLowerCase();
+
+  const rows = [...colorRows, ...fallbackRows]
+    .map((row) => {
+      const device = deviceByGroup.get(row.itemGroup) || {};
+      return {
+        availabilityStatus: stockStatus(row),
+        stock: row.qty ?? "",
+        brand: device.brand || "",
+        category: device.category || "",
+        deviceName: device.deviceName || row.model || "",
+        itemGroup: row.itemGroup || "",
+        itemCode: row.itemCode || "",
+        storage: storageLabel(row),
+        colorName: row.colorName || "",
+        preorder: row.preorder === true ? "YES" : "NO",
+        standalonePrice: row.standalonePrice || "",
+        deviceUrl: device.productUrl || "",
+      };
+    })
+    .filter((row) => {
+      const haystack = Object.values(row).join(" ").toLowerCase();
+      return (!search || haystack.includes(search)) &&
+        (!filters.availability || row.availabilityStatus === filters.availability) &&
+        (!filters.brand || row.brand === filters.brand) &&
+        (!filters.category || row.category === filters.category);
+    })
+    .map((row, index) => ({ no: index + 1, ...row }));
+
+  const workbook = new ExcelJS.Workbook();
+  workbook.creator = "STC Kuwait Stock Management Board";
+  workbook.created = new Date();
+  addSheet(workbook, "Stock", rows, [
+    { key: "no", label: "No.", widthPx: 55 },
+    { key: "availabilityStatus", label: "Availability Status", widthPx: 145 },
+    { key: "stock", label: "Stock", widthPx: 80 },
+    { key: "brand", label: "Brand", widthPx: 120 },
+    { key: "category", label: "Category", widthPx: 120 },
+    { key: "deviceName", label: "Device Name", widthPx: 190 },
+    { key: "itemGroup", label: "Item Group", widthPx: 230 },
+    { key: "itemCode", label: "Item Code", widthPx: 250 },
+    { key: "storage", label: "Storage", widthPx: 110 },
+    { key: "colorName", label: "Color Name", widthPx: 150 },
+    { key: "preorder", label: "Preorder", widthPx: 90 },
+    { key: "standalonePrice", label: "Standalone Price", widthPx: 130 },
+    { key: "deviceUrl", label: "Device URL", widthPx: 320 },
+  ]);
+  const buffer = await workbook.xlsx.writeBuffer();
+  return Buffer.from(buffer);
+}
+
 export async function buildExcel(data) {
   const workbook = new ExcelJS.Workbook();
   workbook.creator = "STC Kuwait Live Device Dashboard";

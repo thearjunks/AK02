@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildExcel } from "./excel-export.mjs";
+import { buildExcel, buildStockExcel } from "./excel-export.mjs";
 import { fetchStcDevices } from "./stc-service.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -152,7 +152,8 @@ function filenameStamp() {
 
 async function serveStatic(request, response) {
   const url = new URL(request.url, "http://localhost");
-  const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
+  const dashboardRoutes = new Set(["/", "/all-devices", "/stock", "/zed-prices", "/content", "/plans", "/device-master"]);
+  const pathname = dashboardRoutes.has(url.pathname.replace(/\/$/, "") || "/") ? "/index.html" : url.pathname;
   const safePath = path.normalize(pathname).replace(/^(\.\.[/\\])+/, "");
   const filePath = path.join(publicDir, safePath);
   if (!filePath.startsWith(publicDir)) {
@@ -212,6 +213,24 @@ export async function handleRequest(request, response) {
       response.writeHead(200, {
         "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "Content-Disposition": `attachment; filename="stc_kuwait_live_devices_${filenameStamp()}.xlsx"`,
+        "Content-Length": workbook.length,
+        "Cache-Control": "no-store",
+      });
+      response.end(workbook);
+      return;
+    }
+    if (url.pathname === "/api/download-board" && url.searchParams.get("board") === "stock") {
+      const data = lastData || await readPreviousSnapshot();
+      if (!data) throw new Error("No saved device data is available for export.");
+      const workbook = await buildStockExcel(data, {
+        search: url.searchParams.get("search") || "",
+        availability: url.searchParams.get("availability") || "",
+        brand: url.searchParams.get("brand") || "",
+        category: url.searchParams.get("category") || "",
+      });
+      response.writeHead(200, {
+        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Content-Disposition": `attachment; filename="stc_stock_${filenameStamp()}.xlsx"`,
         "Content-Length": workbook.length,
         "Cache-Control": "no-store",
       });

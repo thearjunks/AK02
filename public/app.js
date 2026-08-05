@@ -1,61 +1,103 @@
+const ROUTES = {
+  "/": "all",
+  "/all-devices": "all",
+  "/stock": "stock",
+  "/zed-prices": "zed",
+  "/content": "content",
+  "/plans": "plans",
+  "/device-master": "master"
+};
+
+const BOARD = {
+  all: {
+    title: "All Devices Board",
+    subtitle: "Complete overview of devices currently available on the STC e-store",
+    empty: "No devices match the current filters."
+  },
+  stock: {
+    title: "Stock Management Board",
+    subtitle: "Availability and quantity by device, storage, color, and item code",
+    empty: "No stock rows match the current filters."
+  },
+  zed: {
+    title: "Device ZED Price Board",
+    subtitle: "Review ZED rental prices by device, item code, and commitment period",
+    empty: "No ZED price rows match the current filters."
+  },
+  content: {
+    title: "Device Content Information Board",
+    subtitle: "Review configured titles, descriptions, and specifications",
+    empty: "No device content matches the current filters."
+  },
+  plans: {
+    title: "Device by Plan Board",
+    subtitle: "Select a plan to see every associated device offer",
+    empty: "No devices are associated with the selected plan."
+  },
+  master: {
+    title: "Device Master Information Board",
+    subtitle: "Device and SKU master data with availability and product links",
+    empty: "No master-data rows match the current filters."
+  }
+};
+
 const state = {
+  board: ROUTES[window.location.pathname.replace(/\/$/, "") || "/"] || "all",
   data: null,
-  filtered: [],
-  activeDevice: null
+  rows: [],
+  filtered: []
 };
 
 const apiBase = String(window.STC_API_BASE || "").replace(/\/$/, "");
 const apiUrl = (path) => `${apiBase}${path}`;
+const els = Object.fromEntries([
+  "pageTitle", "pageSubtitle", "refreshBtn", "exportBtn", "metrics", "toolbar",
+  "status", "generatedAt", "resultCount", "tableHead", "tableBody", "dataTable",
+  "sidebarFreshness", "drawer", "drawerTitle", "drawerSubtitle", "drawerImage",
+  "drawerFacts", "drawerSpecs", "drawerColors", "drawerPlans", "drawerLink", "closeDrawer"
+].map((id) => [id, document.querySelector(`#${id}`)]));
 
-const els = {
-  refreshBtn: document.querySelector("#refreshBtn"),
-  downloadBtn: document.querySelector("#downloadBtn"),
-  status: document.querySelector("#status"),
-  generatedAt: document.querySelector("#generatedAt"),
-  totalDevices: document.querySelector("#totalDevices"),
-  activeDevices: document.querySelector("#activeDevices"),
-  addedDevices: document.querySelector("#addedDevices"),
-  removedDevices: document.querySelector("#removedDevices"),
-  totalSkus: document.querySelector("#totalSkus"),
-  totalPlans: document.querySelector("#totalPlans"),
-  searchInput: document.querySelector("#searchInput"),
-  statusFilter: document.querySelector("#statusFilter"),
-  categoryFilter: document.querySelector("#categoryFilter"),
-  brandFilter: document.querySelector("#brandFilter"),
-  resultCount: document.querySelector("#resultCount"),
-  tableBody: document.querySelector("#tableBody"),
-  drawer: document.querySelector("#drawer"),
-  drawerTitle: document.querySelector("#drawerTitle"),
-  drawerSubtitle: document.querySelector("#drawerSubtitle"),
-  drawerImage: document.querySelector("#drawerImage"),
-  drawerFacts: document.querySelector("#drawerFacts"),
-  drawerSpecs: document.querySelector("#drawerSpecs"),
-  drawerColors: document.querySelector("#drawerColors"),
-  drawerPlans: document.querySelector("#drawerPlans"),
-  drawerLink: document.querySelector("#drawerLink"),
-  closeDrawer: document.querySelector("#closeDrawer")
-};
+const esc = (value) => String(value ?? "")
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;");
 
-const esc = (value) =>
-  String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-
-const moneyText = (...values) => values.find((value) => String(value ?? "").trim()) || "-";
+const valueOrDash = (value) => String(value ?? "").trim() || "-";
+const unique = (values) => [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
+const currentDevices = () => (state.data?.devices || []).filter((device) => displayStatus(device) !== "REMOVED");
+const deviceMap = () => new Map(currentDevices().map((device) => [device.itemGroup, device]));
+const rowsFor = (collection, device) => (collection || []).filter((row) => row.itemGroup === device.itemGroup);
 
 function displayStatus(device) {
   const status = String(device?.deviceStatus || "ACTIVE").trim().toUpperCase();
   return status === "RESTORED" ? "ADDED" : status;
 }
 
-function rowsFor(collection, device) {
-  return (collection || []).filter((row) => row.itemGroup === device.itemGroup);
+function stockStatus(row) {
+  if (row.qty !== "" && row.qty != null && Number.isFinite(Number(row.qty))) {
+    return Number(row.qty) > 0 ? "IN STOCK" : "OUT OF STOCK";
+  }
+  if (row.available === true) return "IN STOCK";
+  if (row.available === false) return "OUT OF STOCK";
+  return "UNKNOWN";
 }
 
-function unique(values) {
-  return [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
+function storageLabel(row) {
+  const capacity = String(row.capacity || "").trim();
+  const unit = String(row.unit || "").trim();
+  if (!capacity) return unit;
+  if (!unit || capacity.toLowerCase().endsWith(unit.toLowerCase())) return capacity;
+  return `${capacity} ${unit}`;
+}
+
+function formatDate(value) {
+  if (!value) return "-";
+  try {
+    return new Intl.DateTimeFormat("en-KW", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+  } catch {
+    return value;
+  }
 }
 
 function setStatus(message, mode = "idle") {
@@ -63,267 +105,330 @@ function setStatus(message, mode = "idle") {
   els.status.dataset.mode = mode;
 }
 
-function setLoading(isLoading) {
-  els.refreshBtn.disabled = isLoading;
-  els.refreshBtn.innerHTML = isLoading
+function setLoading(loading) {
+  els.refreshBtn.disabled = loading;
+  els.refreshBtn.innerHTML = loading
     ? '<span class="spinner"></span> Fetching live data'
     : '<span aria-hidden="true">&#8635;</span> Refresh live data';
 }
 
-function formatDate(value) {
-  if (!value) return "-";
-  try {
-    return new Intl.DateTimeFormat("en-KW", {
-      dateStyle: "medium",
-      timeStyle: "short"
-    }).format(new Date(value));
-  } catch {
-    return value;
+function filterField(id, label, options, placeholder = null) {
+  if (placeholder != null) {
+    return `<label class="field searchField"><span>${esc(label)}</span><input id="${id}" type="search" placeholder="${esc(placeholder)}" /></label>`;
   }
+  return `<label class="field"><span>${esc(label)}</span><select id="${id}">${options.map((option) => `<option value="${esc(option.value)}">${esc(option.label)}</option>`).join("")}</select></label>`;
 }
 
-function updateMetrics() {
-  const data = state.data || {};
-  const summary = data.changeSummary || {};
-  els.totalDevices.textContent = summary.displayedTotal ?? data.devices?.length ?? 0;
-  els.activeDevices.textContent = summary.currentTotal ?? data.devices?.filter((device) => device.deviceStatus !== "REMOVED").length ?? 0;
-  els.addedDevices.textContent = (summary.added ?? 0) + (summary.restored ?? 0);
-  els.removedDevices.textContent = summary.removed ?? data.devices?.filter((device) => device.deviceStatus === "REMOVED").length ?? 0;
-  els.totalSkus.textContent = data.colors?.length ?? 0;
-  els.totalPlans.textContent = (data.plans?.length ?? 0) + (data.zeed?.length ?? 0);
-  els.generatedAt.textContent = data.fetchWarning
-    ? `Last successful refresh ${formatDate(data.generatedAt)} | Failed attempt ${formatDate(data.refreshAttemptedAt)}`
-    : `Live data generated ${formatDate(data.generatedAt)}`;
+function options(values, allLabel) {
+  return [{ value: "", label: allLabel }, ...unique(values).sort().map((value) => ({ value, label: value }))];
 }
 
-function populateFilters() {
-  const devices = state.data?.devices || [];
-  const currentCategory = els.categoryFilter.value;
-  const currentBrand = els.brandFilter.value;
+function setupPage() {
+  const config = BOARD[state.board];
+  document.title = `${config.title} | STC Device Operations`;
+  els.pageTitle.textContent = config.title;
+  els.pageSubtitle.textContent = config.subtitle;
+  document.querySelectorAll(".boardNav a").forEach((link) => link.classList.toggle("active", link.dataset.board === state.board));
 
-  const categories = unique(devices.map((device) => device.category)).sort();
-  const brands = unique(devices.map((device) => device.brand)).sort();
+  const devices = currentDevices();
+  const brands = devices.map((device) => device.brand);
+  const categories = devices.map((device) => device.category);
+  const search = filterField("searchFilter", "Search", [], "Device, item group, item code...");
+  const brand = filterField("brandFilter", "Brand", options(brands, "All brands"));
+  const category = filterField("categoryFilter", "Category", options(categories, "All categories"));
 
-  els.categoryFilter.innerHTML = '<option value="">All categories</option>';
-  for (const category of categories) {
-    els.categoryFilter.insertAdjacentHTML("beforeend", `<option value="${esc(category)}">${esc(category)}</option>`);
+  if (state.board === "all") {
+    els.toolbar.innerHTML = search + filterField("statusFilter", "Status", [
+      { value: "", label: "All current statuses" }, { value: "ACTIVE", label: "ACTIVE" }, { value: "ADDED", label: "ADDED" }
+    ]) + category + brand;
+    els.exportBtn.textContent = "Download Full Excel";
+    els.exportBtn.href = apiUrl("/api/download-report");
+  } else if (state.board === "stock") {
+    els.toolbar.innerHTML = search + filterField("availabilityFilter", "Availability", [
+      { value: "", label: "All availability" }, { value: "IN STOCK", label: "In Stock" },
+      { value: "OUT OF STOCK", label: "Out of Stock" }, { value: "UNKNOWN", label: "Unknown" }
+    ]) + brand + category;
+    els.exportBtn.textContent = "Export Filtered Excel";
+    els.exportBtn.href = "#";
+  } else if (state.board === "zed") {
+    const periods = (state.data?.zeed || []).map((row) => String(row.period || ""));
+    els.toolbar.innerHTML = search + brand + filterField("periodFilter", "Period", options(periods, "All periods"));
+    hideExport();
+  } else if (state.board === "content") {
+    els.toolbar.innerHTML = search + category + brand;
+    hideExport();
+  } else if (state.board === "plans") {
+    const planNames = (state.data?.plans || []).map((row) => row.planName);
+    els.toolbar.innerHTML = filterField("planFilter", "Plan", options(planNames, "All plans")) + search + brand;
+    hideExport();
+  } else {
+    els.toolbar.innerHTML = search + filterField("availabilityFilter", "Availability", [
+      { value: "", label: "All availability" }, { value: "IN STOCK", label: "In Stock" },
+      { value: "OUT OF STOCK", label: "Out of Stock" }, { value: "UNKNOWN", label: "Unknown" }
+    ]) + brand;
+    hideExport();
   }
-  els.brandFilter.innerHTML = '<option value="">All brands</option>';
-  for (const brand of brands) {
-    els.brandFilter.insertAdjacentHTML("beforeend", `<option value="${esc(brand)}">${esc(brand)}</option>`);
-  }
 
-  els.categoryFilter.value = categories.includes(currentCategory) ? currentCategory : "";
-  els.brandFilter.value = brands.includes(currentBrand) ? currentBrand : "";
+  els.toolbar.querySelectorAll("input, select").forEach((control) => {
+    control.addEventListener(control.tagName === "INPUT" ? "input" : "change", applyFilters);
+  });
+}
+
+function hideExport() {
+  els.exportBtn.hidden = true;
+}
+
+function buildRows() {
+  const devices = currentDevices();
+  const byGroup = deviceMap();
+  if (state.board === "all" || state.board === "content") return devices;
+  if (state.board === "zed") return (state.data?.zeed || []).filter((row) => byGroup.has(row.itemGroup));
+  if (state.board === "plans") return (state.data?.plans || []).filter((row) => byGroup.has(row.itemGroup));
+
+  const colorRows = (state.data?.colors || []).filter((row) => byGroup.has(row.itemGroup));
+  const groupsWithColor = new Set(colorRows.map((row) => row.itemGroup));
+  const fallbacks = devices.filter((device) => !groupsWithColor.has(device.itemGroup)).map((device) => ({
+    itemGroup: device.itemGroup,
+    model: device.deviceName,
+    itemCode: device.defaultItemCode,
+    colorName: "",
+    capacity: "",
+    unit: "",
+    qty: "",
+    available: null
+  }));
+  return [...colorRows, ...fallbacks];
+}
+
+function controlValue(id) {
+  return document.querySelector(`#${id}`)?.value || "";
+}
+
+function rowContext(row) {
+  return deviceMap().get(row.itemGroup) || row;
 }
 
 function applyFilters() {
-  const query = els.searchInput.value.trim().toLowerCase();
-  const status = els.statusFilter.value;
-  const category = els.categoryFilter.value;
-  const brand = els.brandFilter.value;
+  const query = controlValue("searchFilter").trim().toLowerCase();
+  const brand = controlValue("brandFilter");
+  const category = controlValue("categoryFilter");
+  const status = controlValue("statusFilter");
+  const availability = controlValue("availabilityFilter");
+  const period = controlValue("periodFilter");
+  const plan = controlValue("planFilter");
 
-  state.filtered = (state.data?.devices || []).filter((device) => {
-    const haystack = [
-      device.label,
-      displayStatus(device),
-      device.category,
-      device.brand,
-      device.deviceName,
-      device.productName,
-      device.itemGroup,
-      device.defaultItemCode,
-      device.productUrl,
-      device.cardStartingPriceText,
-      device.cardZeedPriceText,
-      device.cardCashPriceText
-    ]
-      .join(" ")
-      .toLowerCase();
-
-    return (
-      (!query || haystack.includes(query)) &&
-      (!status || displayStatus(device) === status) &&
+  state.filtered = state.rows.filter((row) => {
+    const device = rowContext(row);
+    const haystack = [...Object.values(row), ...Object.values(device)].join(" ").toLowerCase();
+    return (!query || haystack.includes(query)) &&
+      (!brand || device.brand === brand) &&
       (!category || device.category === category) &&
-      (!brand || device.brand === brand)
-    );
+      (!status || displayStatus(device) === status) &&
+      (!availability || stockStatus(row) === availability) &&
+      (!period || String(row.period || "") === period) &&
+      (!plan || row.planName === plan);
   });
-
+  renderMetrics();
   renderTable();
+  updateExportLink();
+}
+
+function metric(value, label) {
+  return `<div class="metric"><strong>${esc(value)}</strong><span>${esc(label)}</span></div>`;
+}
+
+function renderMetrics() {
+  const current = currentDevices();
+  let cards = [];
+  if (state.board === "all") {
+    cards = [
+      [state.filtered.length, "Filtered devices"],
+      [current.length, "Current devices"],
+      [current.filter((device) => displayStatus(device) === "ADDED").length, "Recently added"],
+      [unique(current.map((device) => device.brand)).length, "Brands"]
+    ];
+  } else if (state.board === "stock" || state.board === "master") {
+    cards = [
+      [state.filtered.length, "Filtered SKU rows"],
+      [state.rows.filter((row) => stockStatus(row) === "IN STOCK").length, "In stock"],
+      [state.rows.filter((row) => stockStatus(row) === "OUT OF STOCK").length, "Out of stock"],
+      [state.rows.filter((row) => stockStatus(row) === "UNKNOWN").length, "Stock unknown"]
+    ];
+  } else if (state.board === "zed") {
+    cards = [[state.filtered.length, "Filtered offers"], [unique(state.rows.map((row) => row.itemGroup)).length, "Devices"], [unique(state.rows.map((row) => row.period)).length, "Periods"], [state.rows.length, "Total ZED offers"]];
+  } else if (state.board === "content") {
+    cards = [[state.filtered.length, "Filtered devices"], [state.rows.filter((row) => row.productDescription).length, "With description"], [unique((state.data?.specs || []).map((row) => row.itemGroup)).length, "With specifications"], [state.rows.length, "Current devices"]];
+  } else {
+    cards = [[state.filtered.length, "Filtered offers"], [unique(state.filtered.map((row) => row.itemGroup)).length, "Matching devices"], [unique(state.rows.map((row) => row.planName)).length, "Available plans"], [state.rows.length, "Total plan offers"]];
+  }
+  els.metrics.innerHTML = cards.map(([value, label]) => metric(value, label)).join("");
+}
+
+function columnsForBoard() {
+  const link = (device) => device.productUrl ? `<a class="tableLink" href="${esc(device.productUrl)}" target="_blank" rel="noreferrer">Open</a>` : "-";
+  if (state.board === "all") return [
+    ["No.", (_, i) => i + 1], ["Status", (d) => pill(displayStatus(d))], ["Label", (d) => valueOrDash(d.label)],
+    ["Category", (d) => valueOrDash(d.category)], ["Brand", (d) => valueOrDash(d.brand)], ["Device", (d) => valueOrDash(d.deviceName)],
+    ["Item group", (d) => valueOrDash(d.itemGroup)], ["Default item code", (d) => valueOrDash(d.defaultItemCode)],
+    ["Starting", (d) => valueOrDash(d.cardStartingPriceText)], ["ZED", (d) => valueOrDash(d.cardZeedPriceText)],
+    ["Cash", (d) => valueOrDash(d.cardCashPriceText)], ["Product URL", (d) => link(d)],
+    ["Storage", (d) => valueOrDash(d.storageOptions)], ["Colors", (d) => valueOrDash(d.colorNames)]
+  ];
+  if (state.board === "stock") return [
+    ["No.", (_, i) => i + 1], ["Availability", (r) => stockPill(r)], ["Stock", (r) => valueOrDash(r.qty)],
+    ["Brand", (r) => valueOrDash(rowContext(r).brand)], ["Device", (r) => valueOrDash(rowContext(r).deviceName || r.model)],
+    ["Item group", (r) => valueOrDash(r.itemGroup)], ["Item code", (r) => valueOrDash(r.itemCode)],
+    ["Storage", (r) => valueOrDash(storageLabel(r))], ["Color", (r) => valueOrDash(r.colorName)],
+    ["Preorder", (r) => r.preorder === true ? "YES" : "NO"], ["Standalone price", (r) => valueOrDash(r.standalonePrice)],
+    ["Device URL", (r) => link(rowContext(r))]
+  ];
+  if (state.board === "zed") return [
+    ["No.", (_, i) => i + 1], ["Brand", (r) => valueOrDash(rowContext(r).brand)], ["Device", (r) => valueOrDash(rowContext(r).deviceName || r.model)],
+    ["Item group", (r) => valueOrDash(r.itemGroup)], ["Item code", (r) => valueOrDash(r.itemCode)], ["Storage", (r) => valueOrDash(r.name)],
+    ["Period", (r) => r.period ? `${esc(r.period)} months` : "-"], ["Device rent", (r) => price(r.deviceRent, r.currency)],
+    ["Minimum rental", (r) => price(r.minimumRentalPrice, r.currency)], ["Commitment", (r) => valueOrDash(r.commitmentDescription)],
+    ["Parent plan", (r) => valueOrDash(r.parentPlan)], ["Device URL", (r) => link(rowContext(r))]
+  ];
+  if (state.board === "content") return [
+    ["No.", (_, i) => i + 1], ["Brand", (d) => valueOrDash(d.brand)], ["Device Title", (d) => valueOrDash(d.detailTitle || d.deviceName)],
+    ["Description", (d) => valueOrDash(d.productDescription)], ["Specifications", (d) => specsText(d)],
+    ["Item group", (d) => valueOrDash(d.itemGroup)], ["Device URL", (d) => link(d)]
+  ];
+  if (state.board === "plans") return [
+    ["No.", (_, i) => i + 1], ["Plan", (r) => valueOrDash(r.planName)], ["Brand", (r) => valueOrDash(rowContext(r).brand)],
+    ["Device", (r) => valueOrDash(rowContext(r).deviceName || r.model)], ["Item code", (r) => valueOrDash(r.itemCode)],
+    ["Period", (r) => r.period ? `${esc(r.period)} months` : "-"], ["Device rent", (r) => price(r.deviceRent, r.currency)],
+    ["Plan price", (r) => price(r.parentPlanPrice, r.currency)], ["Commitment", (r) => valueOrDash(r.commitmentDescription)],
+    ["Benefits", (r) => valueOrDash(r.benefits)], ["Device URL", (r) => link(rowContext(r))]
+  ];
+  return [
+    ["No.", (_, i) => i + 1], ["Device Name", (r) => valueOrDash(rowContext(r).deviceName || r.model)],
+    ["Item Group", (r) => valueOrDash(r.itemGroup)], ["Default Item Code", (r) => valueOrDash(rowContext(r).defaultItemCode)],
+    ["Item Code", (r) => valueOrDash(r.itemCode)], ["Color Name", (r) => valueOrDash(r.colorName)],
+    ["Availability Status", (r) => stockPill(r)], ["Device URL", (r) => link(rowContext(r))]
+  ];
+}
+
+function pill(status) {
+  return `<span class="statusPill ${esc(status.toLowerCase().replaceAll(" ", "-"))}">${esc(status)}</span>`;
+}
+
+function stockPill(row) {
+  return pill(stockStatus(row));
+}
+
+function price(value, currency) {
+  return value === "" || value == null ? "-" : `${esc(currency || "KWD")} ${esc(value)}`;
+}
+
+function specsText(device) {
+  const rows = rowsFor(state.data?.specs, device);
+  return rows.length ? rows.map((row) => `${esc(row.specTitle)}: ${esc(row.specValue)}`).join(" | ") : "-";
 }
 
 function renderTable() {
+  const columns = columnsForBoard();
+  els.tableHead.innerHTML = columns.map(([label]) => `<th>${esc(label)}</th>`).join("");
+  els.dataTable.style.minWidth = `${Math.max(920, columns.length * 145)}px`;
   els.resultCount.textContent = `${state.filtered.length} results`;
   if (!state.filtered.length) {
-    els.tableBody.innerHTML = `
-      <tr>
-        <td colspan="14" class="empty">No devices match the current filters.</td>
-      </tr>`;
+    els.tableBody.innerHTML = `<tr><td colspan="${columns.length}" class="empty">${esc(BOARD[state.board].empty)}</td></tr>`;
     return;
   }
+  els.tableBody.innerHTML = state.filtered.map((row, index) => `<tr data-index="${index}" tabindex="0">${columns.map(([, render]) => `<td>${render(row, index)}</td>`).join("")}</tr>`).join("");
+}
 
-  els.tableBody.innerHTML = state.filtered
-    .map((device, index) => {
-      const skuRows = rowsFor(state.data.colors, device);
-      const colors = unique(skuRows.map((row) => row.colorName)).join(", ");
-      const capacities = unique(rowsFor(state.data.capacities, device).map((row) => row.capacity)).join(", ");
-      const skuPreview = skuRows
-        .slice(0, 3)
-        .map((row) => `${row.capacity || ""}${row.unit || ""} ${row.colorName || ""}: ${row.itemCode || "-"}`.trim())
-        .join(" / ");
-      const skuMore = skuRows.length > 3 ? ` +${skuRows.length - 3} more` : "";
-      return `
-        <tr data-index="${index}" tabindex="0">
-          <td>${index + 1}</td>
-          <td><span class="statusPill ${esc(displayStatus(device).toLowerCase())}">${esc(displayStatus(device))}</span></td>
-          <td>${esc(device.label || "-")}</td>
-          <td>${esc(device.category || "-")}</td>
-          <td>${esc(device.brand || "-")}</td>
-          <td class="strong">${esc(device.deviceName || device.productName || "-")}</td>
-          <td>${esc(device.itemGroup || "-")}</td>
-          <td>${esc(device.defaultItemCode || "-")}</td>
-          <td>${esc(moneyText(device.cardStartingPriceText, device.startingPriceText))}</td>
-          <td>${esc(moneyText(device.cardZeedPriceText, device.zeedPriceText))}</td>
-          <td>${esc(moneyText(device.cardCashPriceText, device.cashPriceText))}</td>
-          <td>${device.productUrl ? `<a class="tableLink" href="${esc(device.productUrl)}" target="_blank" rel="noreferrer">Open</a>` : "-"}</td>
-          <td>${esc([capacities, colors].filter(Boolean).join(" | ") || "-")}</td>
-          <td class="skuCell">${esc((skuPreview || "-") + skuMore)}</td>
-        </tr>`;
-    })
-    .join("");
+function updateExportLink() {
+  if (state.board !== "stock") return;
+  const params = new URLSearchParams({ board: "stock" });
+  for (const id of ["searchFilter", "availabilityFilter", "brandFilter", "categoryFilter"]) {
+    const value = controlValue(id);
+    if (value) params.set(id.replace("Filter", ""), value);
+  }
+  els.exportBtn.href = apiUrl(`/api/download-board?${params}`);
 }
 
 function fact(label, value) {
-  return `
-    <div class="fact">
-      <span>${esc(label)}</span>
-      <strong>${esc(value || "-")}</strong>
-    </div>`;
+  return `<div class="fact"><span>${esc(label)}</span><strong>${esc(valueOrDash(value))}</strong></div>`;
 }
 
 function renderList(container, rows, emptyText) {
-  if (!rows.length) {
-    container.innerHTML = `<p class="muted">${esc(emptyText)}</p>`;
-    return;
-  }
-  container.innerHTML = rows.map((row) => `<li>${row}</li>`).join("");
+  container.innerHTML = rows.length ? rows.map((row) => `<li>${row}</li>`).join("") : `<li class="muted">${esc(emptyText)}</li>`;
 }
 
-function openDrawer(device) {
-  state.activeDevice = device;
-  const colors = rowsFor(state.data.colors, device);
-  const specs = rowsFor(state.data.specs, device);
-  const plans = rowsFor(state.data.plans, device);
-  const zeed = rowsFor(state.data.zeed, device);
-  const capacities = rowsFor(state.data.capacities, device);
-  const images = rowsFor(state.data.images, device);
-
-  els.drawerTitle.textContent = device.deviceName || device.productName || "Device details";
+function openDrawer(row) {
+  const device = rowContext(row);
+  if (!device?.itemGroup) return;
+  const colors = rowsFor(state.data?.colors, device);
+  const specs = rowsFor(state.data?.specs, device);
+  const plans = rowsFor(state.data?.plans, device);
+  const zeed = rowsFor(state.data?.zeed, device);
+  const images = rowsFor(state.data?.images, device);
+  els.drawerTitle.textContent = device.deviceName || device.productName || row.model || "Device details";
   els.drawerSubtitle.textContent = [device.label, device.brand, device.category].filter(Boolean).join(" / ");
-  const imageUrl = images[0]?.imageUrl || device.firstImageUrl || device.imageUrl || "";
-  if (imageUrl) {
-    els.drawerImage.src = imageUrl;
-  } else {
-    els.drawerImage.removeAttribute("src");
-  }
-  els.drawerImage.alt = device.deviceName || device.productName || "Device image";
+  const imageUrl = images[0]?.imageUrl || device.firstImageUrl || "";
   els.drawerImage.hidden = !imageUrl;
-
+  if (imageUrl) els.drawerImage.src = imageUrl;
+  els.drawerImage.alt = device.deviceName || "Device image";
   els.drawerFacts.innerHTML = [
-    fact("Starting price", moneyText(device.cardStartingPriceText, device.startingPriceText)),
-    fact("Status", displayStatus(device)),
-    fact("First seen", formatDate(device.firstSeenAt)),
-    fact("Last seen", formatDate(device.lastSeenAt)),
-    fact("Removed at", device.removedAt ? formatDate(device.removedAt) : ""),
-    fact("Item group", device.itemGroup),
-    fact("Item code", device.defaultItemCode),
-    fact("Product URL", device.productUrl),
-    fact("Zeed price", moneyText(device.cardZeedPriceText, device.zeedPriceText)),
-    fact("Cash price", moneyText(device.cardCashPriceText, device.cashPriceText)),
-    fact("Storage", unique(capacities.map((row) => row.capacity)).join(", ")),
-    fact("Colors", unique(colors.map((row) => row.colorName)).join(", ")),
-    fact("Available SKUs", colors.length),
-    fact("Plan offers", plans.length),
-    fact("Zeed offers", zeed.length)
+    fact("Status", displayStatus(device)), fact("Item group", device.itemGroup), fact("Default item code", device.defaultItemCode),
+    fact("Starting price", device.cardStartingPriceText), fact("ZED price", device.cardZeedPriceText), fact("Cash price", device.cardCashPriceText),
+    fact("Color / SKU rows", colors.length), fact("Plan offers", plans.length), fact("ZED offers", zeed.length), fact("Last seen", formatDate(device.lastSeenAt))
   ].join("");
-
-  renderList(
-    els.drawerSpecs,
-    specs.map((row) => `<strong>${esc(row.specTitle || row.specName || row.specKey || "Spec")}</strong>: ${esc(row.specValue)}`),
-    "No detailed specifications found."
-  );
-  renderList(
-    els.drawerColors,
-    colors.map((row) => {
-      const storage = [row.capacity, row.unit].filter(Boolean).join(" ");
-      const stock = row.available === false ? "Not available" : `Available${row.qty !== "" && row.qty != null ? `, qty ${row.qty}` : ""}`;
-      const price = row.standalonePrice ? `, standalone ${row.standalonePrice}` : "";
-      return `
-        <strong>${esc(storage || "-")} / ${esc(row.colorName || "-")}</strong>
-        <span>Item code: ${esc(row.itemCode || "-")}</span>
-        <span>${esc(stock + price)}</span>
-      `;
-    }),
-    "No color/SKU rows found."
-  );
-  renderList(
-    els.drawerPlans,
-    [
-      ...plans.slice(0, 10).map((row) => `<strong>${esc(row.offerName || "Plan")}</strong>: ${esc(row.commitment || row.price || row.monthlyPrice || "-")}`),
-      ...zeed.slice(0, 10).map((row) => `<strong>Zeed</strong>: ${esc(row.commitment || row.monthlyPrice || row.price || "-")}`)
-    ],
-    "No plan or Zeed offers found."
-  );
-
+  renderList(els.drawerSpecs, specs.map((item) => `<strong>${esc(item.specTitle || "Specification")}</strong><span>${esc(item.specValue)}</span>`), "No specifications found.");
+  renderList(els.drawerColors, colors.map((item) => `<strong>${esc([storageLabel(item), item.colorName].filter(Boolean).join(" / "))}</strong><span>${esc(item.itemCode || "-")} | ${esc(stockStatus(item))} | Qty ${esc(valueOrDash(item.qty))}</span>`), "No color/SKU rows found.");
+  renderList(els.drawerPlans, [
+    ...plans.slice(0, 12).map((item) => `<strong>${esc(item.planName || "Plan")}</strong><span>${esc(item.period || "-")} months | ${price(item.deviceRent, item.currency)}</span>`),
+    ...zeed.slice(0, 12).map((item) => `<strong>ZED ${esc(item.name || "")}</strong><span>${esc(item.period || "-")} months | ${price(item.deviceRent, item.currency)}</span>`)
+  ], "No plan or ZED offers found.");
   els.drawerLink.href = device.productUrl || "#";
   els.drawerLink.hidden = !device.productUrl;
   els.drawer.classList.add("open");
+  els.drawer.setAttribute("aria-hidden", "false");
 }
 
-async function loadData() {
+async function loadData(live = false) {
   setLoading(true);
-  setStatus("Fetching live data from STC...", "busy");
+  setStatus(live ? "Fetching live data from STC..." : "Loading saved STC snapshot...", "busy");
   try {
-    const response = await fetch(apiUrl("/api/live-data"));
-    if (!response.ok) throw new Error(`Live fetch failed: ${response.status}`);
+    const response = await fetch(apiUrl(live ? "/api/live-data" : "/api/cached-data"), { cache: "no-store" });
+    if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
     state.data = await response.json();
-    state.filtered = state.data.devices || [];
-    updateMetrics();
-    populateFilters();
+    if (!state.data?.devices?.length) throw new Error("No device data is available.");
+    setupPage();
+    state.rows = buildRows();
     applyFilters();
-    if (state.data.fetchWarning) {
-      setStatus(`Showing last saved snapshot: ${state.data.fetchWarning}`, "error");
-    } else {
-      const removed = state.data.changeSummary?.removed || 0;
-      setStatus(`Live data loaded: ${state.data.changeSummary?.currentTotal || state.data.devices.length} current devices, ${removed} removed tracked`, "ok");
-    }
+    const freshness = formatDate(state.data.generatedAt);
+    els.generatedAt.textContent = state.data.fetchWarning ? `Saved snapshot ${freshness}` : `Generated ${freshness}`;
+    els.sidebarFreshness.textContent = `Updated ${freshness}`;
+    setStatus(state.data.fetchWarning ? `Saved data shown: ${state.data.fetchWarning}` : "Latest saved data loaded successfully", state.data.fetchWarning ? "error" : "ok");
   } catch (error) {
     console.error(error);
-    setStatus(error.message || "Unable to fetch live data", "error");
+    setStatus(error.message || "Unable to load device data", "error");
   } finally {
     setLoading(false);
   }
 }
 
-els.refreshBtn.addEventListener("click", loadData);
-els.searchInput.addEventListener("input", applyFilters);
-els.statusFilter.addEventListener("change", applyFilters);
-els.categoryFilter.addEventListener("change", applyFilters);
-els.brandFilter.addEventListener("change", applyFilters);
+els.refreshBtn.addEventListener("click", () => loadData(true));
+els.exportBtn.addEventListener("click", () => setStatus("Preparing Excel download...", "busy"));
 els.tableBody.addEventListener("click", (event) => {
-  const row = event.target.closest("tr[data-index]");
-  if (row) openDrawer(state.filtered[Number(row.dataset.index)]);
+  if (event.target.closest("a")) return;
+  const tr = event.target.closest("tr[data-index]");
+  if (tr) openDrawer(state.filtered[Number(tr.dataset.index)]);
 });
 els.tableBody.addEventListener("keydown", (event) => {
-  if (event.key !== "Enter") return;
-  const row = event.target.closest("tr[data-index]");
-  if (row) openDrawer(state.filtered[Number(row.dataset.index)]);
+  if (event.key === "Enter") {
+    const tr = event.target.closest("tr[data-index]");
+    if (tr) openDrawer(state.filtered[Number(tr.dataset.index)]);
+  }
 });
-els.closeDrawer.addEventListener("click", () => els.drawer.classList.remove("open"));
+els.closeDrawer.addEventListener("click", () => {
+  els.drawer.classList.remove("open");
+  els.drawer.setAttribute("aria-hidden", "true");
+});
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") els.drawer.classList.remove("open");
+  if (event.key === "Escape") els.closeDrawer.click();
 });
-els.downloadBtn.href = apiUrl("/api/download-report");
-els.downloadBtn.addEventListener("click", () => setStatus("Preparing a fresh Excel download...", "busy"));
 
-loadData();
+loadData(false);

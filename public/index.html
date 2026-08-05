@@ -3,88 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>STC Kuwait Device Dashboard</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>STC Kuwait Device Operations</title>
+    <link rel="stylesheet" href="/styles.css?v=20260805-1" />
   </head>
   <body>
-    <main class="shell">
-      <header class="topbar">
-        <div>
-          <h1>STC Kuwait Devices</h1>
-          <p>Live device dashboard with added and removed tracking</p>
+    <div class="appShell">
+      <aside class="sidebar">
+        <a class="brand" href="/all-devices" aria-label="STC Device Operations">
+          <span class="brandMark">stc</span>
+          <span>Device Operations</span>
+        </a>
+        <nav class="boardNav" aria-label="Dashboard boards">
+          <a data-board="all" href="/all-devices">All Devices</a>
+          <a data-board="stock" href="/stock">Stock Management</a>
+          <a data-board="zed" href="/zed-prices">Device ZED Price</a>
+          <a data-board="content" href="/content">Device Content</a>
+          <a data-board="plans" href="/plans">Devices by Plan</a>
+          <a data-board="master" href="/device-master">Device Master</a>
+        </nav>
+        <div class="sourceNote">
+          <span>Source</span>
+          <strong>STC Kuwait e-store</strong>
+          <small id="sidebarFreshness">Loading snapshot</small>
         </div>
-        <div class="actions">
-          <button id="refreshBtn" class="button secondary" type="button">Refresh live data</button>
-          <a id="downloadBtn" class="button primary" href="/api/download-report">Download Excel</a>
-        </div>
-      </header>
+      </aside>
 
-      <section class="metrics" aria-label="Summary metrics">
-        <div class="metric"><span id="totalDevices">0</span><label>Displayed devices</label></div>
-        <div class="metric"><span id="activeDevices">0</span><label>Current on STC</label></div>
-        <div class="metric"><span id="addedDevices">0</span><label>New since last refresh</label></div>
-        <div class="metric"><span id="removedDevices">0</span><label>Removed from STC</label></div>
-        <div class="metric"><span id="totalSkus">0</span><label>Color / SKU rows</label></div>
-        <div class="metric"><span id="totalPlans">0</span><label>Plan and Zeed rows</label></div>
-      </section>
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <h1 id="pageTitle">All Devices Board</h1>
+            <p id="pageSubtitle">Complete current device overview</p>
+          </div>
+          <div class="actions">
+            <button id="refreshBtn" class="button secondary" type="button">
+              <span aria-hidden="true">&#8635;</span> Refresh live data
+            </button>
+            <a id="exportBtn" class="button primary" href="/api/download-report">Download Excel</a>
+          </div>
+        </header>
 
-      <section class="toolbar">
-        <label class="field">
-          <span>Search</span>
-          <input id="searchInput" type="search" placeholder="Device, brand, category, price..." />
-        </label>
-        <label class="field">
-          <span>Status</span>
-          <select id="statusFilter">
-            <option value="">All statuses</option>
-            <option value="ACTIVE">ACTIVE</option>
-            <option value="ADDED">ADDED</option>
-            <option value="REMOVED">REMOVED</option>
-          </select>
-        </label>
-        <label class="field">
-          <span>Category</span>
-          <select id="categoryFilter"></select>
-        </label>
-        <label class="field">
-          <span>Brand</span>
-          <select id="brandFilter"></select>
-        </label>
-      </section>
+        <section id="metrics" class="metrics" aria-label="Summary metrics"></section>
+        <section id="toolbar" class="toolbar" aria-label="Board filters"></section>
 
-      <section class="statusbar">
-        <span id="status">Loading live STC data...</span>
-        <span id="generatedAt">Generated -</span>
-        <strong id="resultCount">0 results</strong>
-      </section>
+        <section class="statusbar">
+          <span id="status">Loading saved STC data...</span>
+          <span id="generatedAt">Generated -</span>
+          <strong id="resultCount">0 results</strong>
+        </section>
 
-      <section class="tableWrap">
-        <table>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Status</th>
-              <th>Label</th>
-              <th>Category</th>
-              <th>Brand</th>
-              <th>Device</th>
-              <th>Item group</th>
-              <th>Item code</th>
-              <th>Starting</th>
-              <th>Zeed</th>
-              <th>Cash</th>
-              <th>Product URL</th>
-              <th>Storage / colors</th>
-              <th>Storage / color item codes</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
-      </section>
-    </main>
+        <section class="tableWrap">
+          <table id="dataTable">
+            <thead><tr id="tableHead"></tr></thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
 
     <aside class="drawer" id="drawer" aria-hidden="true">
-      <button class="close" id="closeDrawer" type="button">Close</button>
+      <button class="close" id="closeDrawer" type="button" aria-label="Close details">Close</button>
       <img id="drawerImage" alt="" />
       <h2 id="drawerTitle"></h2>
       <p id="drawerSubtitle"></p>
@@ -93,14 +70,12 @@
       <ul id="drawerSpecs" class="detailList"></ul>
       <h3>Colors and SKUs</h3>
       <ul id="drawerColors" class="detailList"></ul>
-      <h3>Plan and Zeed offers</h3>
+      <h3>Plan and ZED offers</h3>
       <ul id="drawerPlans" class="detailList"></ul>
       <a id="drawerLink" class="button primary wide" target="_blank" rel="noreferrer">Open product</a>
     </aside>
 
-    <script>
-      window.STC_API_BASE = window.STC_API_BASE || "";
-    </script>
-    <script src="./app.js?v=20260803-2" type="module"></script>
+    <script>window.STC_API_BASE = window.STC_API_BASE || "";</script>
+    <script src="/app.js?v=20260805-1" type="module"></script>
   </body>
 </html>
