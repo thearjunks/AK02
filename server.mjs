@@ -24,6 +24,8 @@ async function readPreviousSnapshot() {
   }
 }
 
+lastData = await readPreviousSnapshot();
+
 function mergeRowsForRemoved(currentRows, previousRows, removedKeys) {
   const existing = new Set(currentRows.map((row) => `${deviceKey(row)}:${row.itemCode || row.specTitle || row.imageUrl || row.capacity || ""}`));
   const restored = [];

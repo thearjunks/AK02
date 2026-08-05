@@ -109,14 +109,15 @@ Run: $runId
     while ((Get-Date) -lt $deadline) {
       try {
         $health = Invoke-RestMethod -Uri $healthUrl -TimeoutSec 20
-        if ($health.status -eq "ok" -and $health.deploymentId -eq $deploymentId) {
+        if ($health.status -eq "ok" -and $health.deploymentId -eq $deploymentId -and $health.cachedDataLoaded) {
           $homepage = Invoke-WebRequest -Uri $websiteUrl -UseBasicParsing -TimeoutSec 20
-          if ($homepage.StatusCode -eq 200) {
+          $cachedData = Invoke-RestMethod -Uri "$($websiteUrl)api/cached-data" -TimeoutSec 30
+          if ($homepage.StatusCode -eq 200 -and $cachedData.generatedAt -eq $summary.generatedAt) {
             $deployed = $true
             break
           }
         }
-        $lastDeploymentError = "Expected deployment $deploymentId but received $($health.deploymentId)."
+        $lastDeploymentError = "Expected deployment $deploymentId with snapshot $($summary.generatedAt), but production is not ready yet."
       } catch {
         $lastDeploymentError = $_.Exception.Message
       }
