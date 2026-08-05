@@ -93,9 +93,11 @@ async function applyHistory(rawData) {
   return data;
 }
 
-async function fetchWithHistory() {
+export async function refreshLiveData() {
   return applyHistory(await fetchStcDevices());
 }
+
+const fetchWithHistory = refreshLiveData;
 
 function showRestoredAsAdded(data) {
   const devices = (data.devices || []).map((device) => (

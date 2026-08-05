@@ -33,6 +33,30 @@ Hostinger's automatic deployment, and verifies the exact new deployment through
 the public `/health` endpoint. It opens the dashboard only after that release is
 confirmed live.
 
+### Automatic refresh and deployment
+
+The Windows automation runs at **10:00 AM** and **3:00 PM**, Sunday through
+Thursday. It does not run on Friday or Saturday. Each run:
+
+1. Fetches current STC device data locally.
+2. Emails data-fetch success or failure to `thearjunks@gmail.com`.
+3. Commits the snapshot to `thearjunks/AK02` and pushes `main`.
+4. Waits for Hostinger to publish the exact deployment.
+5. Emails deployment success or failure with the reason and log location.
+
+One-time setup:
+
+1. Enable Gmail two-step verification and create a Gmail App Password.
+2. Double-click `SETUP AUTOMATION.cmd`.
+3. Enter the Gmail sender address and the 16-character App Password.
+4. Confirm that the test email arrives.
+
+The credential is encrypted for the current Windows user and computer under
+`%LOCALAPPDATA%\STCDeviceDashboard`. Automation logs are stored in the `logs`
+folder there. The computer must be on and the Windows user must be signed in.
+
+To run the same automation immediately, double-click `RUN AUTOMATION NOW.cmd`.
+
 This app shows live STC Kuwait device information in a dashboard and lets you download the same data as an Excel file.
 
 It can:
