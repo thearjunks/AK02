@@ -111,8 +111,7 @@ Run: $runId
         $health = Invoke-RestMethod -Uri $healthUrl -TimeoutSec 20
         if ($health.status -eq "ok" -and $health.deploymentId -eq $deploymentId -and $health.cachedDataLoaded) {
           $homepage = Invoke-WebRequest -Uri $websiteUrl -UseBasicParsing -TimeoutSec 20
-          $cachedData = Invoke-RestMethod -Uri "$($websiteUrl)api/cached-data" -TimeoutSec 30
-          if ($homepage.StatusCode -eq 200 -and $cachedData.generatedAt -eq $summary.generatedAt) {
+          if ($homepage.StatusCode -eq 200 -and ([DateTimeOffset]$health.cachedDataGeneratedAt) -eq ([DateTimeOffset]$summary.generatedAt)) {
             $deployed = $true
             break
           }

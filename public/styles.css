@@ -72,6 +72,18 @@ button, input, select { font: inherit; }
 }
 .sourceNote span, .sourceNote small { color: #7a8491; font-size: 11px; }
 .sourceNote strong { font-size: 12px; }
+.logoutForm { margin-top: 14px; }
+.logoutForm button {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid #ccd2da;
+  border-radius: 6px;
+  background: #fff;
+  color: #4f008c;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
 
 .workspace { min-width: 0; padding: 24px; }
 .topbar {
@@ -228,6 +240,7 @@ tbody tr:hover { background: #faf7fc; }
   .boardNav a { flex: 0 0 auto; border-left: 0; border-bottom: 3px solid transparent; }
   .boardNav a.active { border-bottom-color: #4f008c; }
   .sourceNote { display: none; }
+  .logoutForm { position: absolute; top: 12px; right: 12px; width: 78px; margin: 0; }
   .workspace { padding: 18px; }
   .tableWrap { max-height: none; }
 }
