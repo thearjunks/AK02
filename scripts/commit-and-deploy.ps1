@@ -7,6 +7,20 @@ Write-Host "STC Dashboard - Commit and Deploy" -ForegroundColor Cyan
 Write-Host "Project: $projectRoot"
 Write-Host ""
 
+Write-Host "Fetching and validating the latest STC data before deployment..." -ForegroundColor Cyan
+$fetchOutput = & node (Join-Path $PSScriptRoot "fetch-live-data.mjs") 2>&1
+if ($LASTEXITCODE -ne 0) { throw ($fetchOutput -join [Environment]::NewLine) }
+$summary = ($fetchOutput -join "") | ConvertFrom-Json
+$snapshot = Get-Content -LiteralPath (Join-Path $projectRoot "data\latest-snapshot.json") -Raw | ConvertFrom-Json
+$generatedAt = [DateTimeOffset]::Parse([string]$snapshot.generatedAt)
+if ($generatedAt -ne [DateTimeOffset]::Parse([string]$summary.generatedAt)) { throw "Fetch summary and snapshot timestamps do not match." }
+if ((([DateTimeOffset]::UtcNow) - $generatedAt.ToUniversalTime()).TotalMinutes -gt 60) { throw "Fetched snapshot is older than 60 minutes." }
+if ([int]$summary.currentTotal -le 0) { throw "Current device total is zero." }
+if ([int]$summary.displayedTotal -lt [int]$summary.currentTotal) { throw "Displayed device total is lower than current total." }
+if ($snapshot.devices.Count -ne [int]$summary.displayedTotal) { throw "Snapshot device count does not match the fetch summary." }
+Write-Host "Validated $($summary.currentTotal) current devices, generated $($summary.generatedAt)." -ForegroundColor Green
+Write-Host ""
+
 $changes = git status --porcelain
 if (-not $changes) {
   Write-Host "No changes were found. Nothing to deploy." -ForegroundColor Yellow
@@ -42,7 +56,9 @@ $deadline = (Get-Date).AddMinutes(8)
 while ((Get-Date) -lt $deadline) {
   try {
     $health = Invoke-RestMethod -Uri $healthUrl -TimeoutSec 15
-    if ($health.status -eq "ok" -and $health.deploymentId -eq $deploymentId) {
+    if ($health.status -eq "ok" -and $health.deploymentId -eq $deploymentId -and $health.cachedDataLoaded -and ([DateTimeOffset]$health.cachedDataGeneratedAt) -eq ([DateTimeOffset]$summary.generatedAt)) {
+      $homepage = Invoke-WebRequest -Uri "https://devices.stcdigitalhub.com/" -UseBasicParsing -TimeoutSec 15
+      if ($homepage.StatusCode -ne 200) { throw "The dashboard homepage did not return HTTP 200." }
       Write-Host ""
       Write-Host "Deployment completed successfully." -ForegroundColor Green
       Write-Host "Commit: $commitSha"

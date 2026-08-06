@@ -35,14 +35,33 @@ confirmed live.
 
 ### Automatic refresh and deployment
 
-The Windows automation runs at **10:00 AM** and **3:00 PM**, Sunday through
-Thursday. It does not run on Friday or Saturday. Each run:
+The Windows automation starts once every day at **10:00 AM Kuwait time**. It
+automatically skips Fridays, Saturdays, Kuwait public holidays, and any date on
+which a successful deployment has already completed.
 
-1. Fetches current STC device data locally.
-2. Emails data-fetch success or failure to `thearjunks@gmail.com`.
-3. Commits the snapshot to `thearjunks/AK02` and pushes `main`.
-4. Waits for Hostinger to publish the exact deployment.
-5. Emails deployment success or failure with the reason and log location.
+Each working-day run fetches the latest STC data, validates the timestamp and
+device totals, updates the dashboard snapshot, commits and pushes `main`, waits
+for Hostinger auto-deployment, and verifies that the public website is serving
+the exact new snapshot. Nothing is pushed when fetch or validation fails.
+
+An email is sent to `thearjunks@gmail.com` for every stage:
+
+1. Data Fetch Started
+2. Data Fetch Completed
+3. Dashboard Update Completed
+4. GitHub Commit Started
+5. GitHub Commit Completed
+6. Hostinger Deployment Started
+7. Hostinger Deployment Completed
+8. Deployment Summary
+
+Each message contains Kuwait time, run ID, status, details, and the audit-log
+path. After a failure, all remaining stages are reported as `SKIPPED`. A skipped
+weekend, holiday, or duplicate daily run is also reported by email.
+
+The holiday guard refreshes Google's public **Holidays in Kuwait** calendar and
+keeps a local cached copy. If the feed is unavailable and no cache exists, the
+run fails closed and does not deploy.
 
 One-time setup:
 
@@ -52,8 +71,9 @@ One-time setup:
 4. Confirm that the test email arrives.
 
 The credential is encrypted for the current Windows user and computer under
-`%LOCALAPPDATA%\STCDeviceDashboard`. Automation logs are stored in the `logs`
-folder there. The computer must be on and the Windows user must be signed in.
+`%LOCALAPPDATA%\STCDeviceDashboard`. Automation logs, holiday cache, and the
+last-successful-run marker are stored there. The computer must be on, Windows
+must use the Kuwait timezone, and this Windows user must be signed in.
 
 To run the same automation immediately, double-click `RUN AUTOMATION NOW.cmd`.
 
