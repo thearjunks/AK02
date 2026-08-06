@@ -1,3 +1,5 @@
+import { compareDevicesByAddition } from "./device-order.js";
+
 const ROUTES = {
   "/": "all",
   "/all-devices": "all",
@@ -227,7 +229,7 @@ function applyFilters() {
       (!availability || stockStatus(row) === availability) &&
       (!period || String(row.period || "") === period) &&
       (!plan || row.planName === plan);
-  });
+  }).sort((a, b) => compareDevicesByAddition(rowContext(a), rowContext(b)));
   renderMetrics();
   renderTable();
   updateExportLink();
