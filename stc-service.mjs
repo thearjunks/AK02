@@ -5,6 +5,7 @@ let tokenRequest = null;
 let requestGate = Promise.resolve();
 let lastRequestAt = 0;
 const REQUEST_SPACING_MS = 350;
+const REQUEST_TIMEOUT_MS = 30_000;
 
 const DEFAULT_HEADERS = {
   channel: "WEB",
@@ -25,7 +26,10 @@ function pacedFetch(url, options) {
   const request = requestGate.then(async () => {
     await wait(Math.max(0, REQUEST_SPACING_MS - (Date.now() - lastRequestAt)));
     lastRequestAt = Date.now();
-    return fetch(url, options);
+    return fetch(url, {
+      ...options,
+      signal: options?.signal || AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    });
   });
   requestGate = request.then(() => undefined, () => undefined);
   return request;
@@ -186,6 +190,7 @@ async function getToken() {
     const response = await fetch(`${STC_BASE}/ClientCred/v1`, {
       method: "POST",
       headers: DEFAULT_HEADERS,
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
     if (!response.ok) throw new Error(`STC token request failed: ${response.status}`);
     const token = await response.json();

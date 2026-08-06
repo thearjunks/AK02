@@ -16,6 +16,7 @@ const sessionLifetimeMs = 12 * 60 * 60 * 1000;
 
 let lastData = null;
 let authConfig = null;
+let refreshInFlight = null;
 
 function deviceKey(device) {
   return device?.detailApiKey || device?.productUrl || device?.itemGroup || `${device?.category || ""}:${device?.deviceName || ""}`;
@@ -235,7 +236,12 @@ async function applyHistory(rawData) {
 }
 
 export async function refreshLiveData() {
-  return applyHistory(await fetchStcDevices());
+  if (!refreshInFlight) {
+    refreshInFlight = fetchStcDevices().then(applyHistory).finally(() => {
+      refreshInFlight = null;
+    });
+  }
+  return refreshInFlight;
 }
 
 const fetchWithHistory = refreshLiveData;

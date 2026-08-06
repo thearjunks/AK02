@@ -33,6 +33,27 @@ Hostinger's automatic deployment, and verifies the exact new deployment through
 the public `/health` endpoint. It opens the dashboard only after that release is
 confirmed live.
 
+### Mandatory live-data deployment gate
+
+Every deployment must fetch and validate the latest live STC eStore data before
+anything is committed or pushed. If the fetch or validation fails, stop the
+deployment and keep the last validated live snapshot online.
+
+One validated snapshot supplies all dashboard routes, so they must always be
+published together with the same `generatedAt` timestamp:
+
+- `/all-devices`
+- `/stock`
+- `/zed-prices`
+- `/content`
+- `/removed-devices`
+- `/plans`
+- `/device-master`
+
+After Hostinger deploys, `/health` must return `status: ok`, the expected
+deployment ID, and the same snapshot timestamp produced before the commit. A
+deployment is not complete until those checks pass.
+
 ### Automatic refresh and deployment
 
 The Windows automation starts once every day at **10:00 AM Kuwait time**. It

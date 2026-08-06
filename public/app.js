@@ -419,10 +419,15 @@ function openDrawer(row) {
 }
 
 async function loadData(live = false) {
+  const controller = live ? new AbortController() : null;
+  const timeoutId = live ? setTimeout(() => controller.abort(), 8 * 60 * 1000) : null;
   setLoading(true);
   setStatus(live ? "Fetching live data from STC..." : "Loading saved STC snapshot...", "busy");
   try {
-    const response = await fetch(apiUrl(live ? "/api/live-data" : "/api/cached-data"), { cache: "no-store" });
+    const response = await fetch(apiUrl(live ? "/api/live-data" : "/api/cached-data"), {
+      cache: "no-store",
+      signal: controller?.signal,
+    });
     if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
     state.data = await response.json();
     if (!state.data?.devices?.length) throw new Error("No device data is available.");
@@ -435,8 +440,11 @@ async function loadData(live = false) {
     setStatus(state.data.fetchWarning ? `Saved data shown: ${state.data.fetchWarning}` : "Latest saved data loaded successfully", state.data.fetchWarning ? "error" : "ok");
   } catch (error) {
     console.error(error);
-    setStatus(error.message || "Unable to load device data", "error");
+    setStatus(error.name === "AbortError"
+      ? "Live refresh timed out. The last validated data remains displayed."
+      : error.message || "Unable to load device data", "error");
   } finally {
+    if (timeoutId) clearTimeout(timeoutId);
     setLoading(false);
   }
 }
