@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { collectCatalogProducts } from "../stc-service.mjs";
-import { compareDevicesByAddition, deviceLifecycleStatus } from "../public/device-order.js";
+import { compareDevicesByAddition, compareRemovedDevices, deviceLifecycleStatus } from "../public/device-order.js";
 
 const now = Date.parse("2026-08-06T08:00:00Z");
 const devices = [
@@ -15,6 +15,10 @@ assert.deepEqual(devices.map(({ deviceName }) => deviceName), [
 ]);
 assert.equal(deviceLifecycleStatus({ firstSeenAt: "2026-07-22T08:00:01Z" }, now), "NEW");
 assert.equal(deviceLifecycleStatus({ firstSeenAt: "2026-07-22T08:00:00Z" }, now), "EXISTING");
+assert.deepEqual([
+  { name: "Older", removedAt: "2026-08-01T00:00:00Z" },
+  { name: "Newest", removedAt: "2026-08-05T00:00:00Z" }
+].sort(compareRemovedDevices).map((device) => device.name), ["Newest", "Older"]);
 
 const product = (slug) => ({ type: "StcB2cCardDevice", model: slug, link: { href: `/product/SMARTPHONE/${slug}` } });
 const catalogs = [

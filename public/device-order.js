@@ -11,3 +11,8 @@ export function compareDevicesByAddition(a, b) {
   const rank = (device) => ({ NEW: 0, EXISTING: 1, REMOVED: 2 })[deviceLifecycleStatus(device)];
   return rank(a) - rank(b) || timestamp(b) - timestamp(a);
 }
+
+export function compareRemovedDevices(a, b) {
+  const removedTime = (device) => Date.parse(device?.removedAt || device?.lastSeenAt || device?.firstSeenAt || "") || 0;
+  return removedTime(b) - removedTime(a);
+}

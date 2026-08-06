@@ -169,7 +169,11 @@ input:focus, select:focus { border-color: #4f008c; outline: 2px solid #eadcf3; }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 10px 11px; border-bottom: 1px solid #eceff2; text-align: left; vertical-align: top; font-size: 12px; }
 th { position: sticky; top: 0; z-index: 1; background: #4f008c; color: #fff; font-weight: 800; white-space: nowrap; }
-td { max-width: 360px; word-break: break-word; }
+td { max-width: 420px; overflow-wrap: anywhere; word-break: normal; }
+.nameColumn { min-width: 120px; }
+.deviceNameColumn { min-width: 230px; }
+.itemGroupColumn { min-width: 230px; }
+.descriptionColumn { min-width: 360px; }
 tbody tr { cursor: pointer; }
 tbody tr:hover { background: #faf7fc; }
 .empty { padding: 36px; color: #7a8491; text-align: center; }

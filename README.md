@@ -85,6 +85,7 @@ It can:
 - Show more or fewer than 122 devices if STC changes the list.
 - Show each device's Added Date and label current devices as `NEW` for 15 days, then `EXISTING`.
 - Track removed products without resetting their original Added Date if they return.
+- Keep removed devices in a dedicated `/removed-devices` history board.
 - Show item group, item code, bilingual product content and URLs, prices, colors, storage, specs, plans, and zeed Price details.
 - Download a fresh Excel report.
 

@@ -1,4 +1,4 @@
-import { compareDevicesByAddition, deviceLifecycleStatus } from "./device-order.js";
+import { compareDevicesByAddition, compareRemovedDevices, deviceLifecycleStatus } from "./device-order.js";
 
 const ROUTES = {
   "/": "all",
@@ -6,6 +6,7 @@ const ROUTES = {
   "/stock": "stock",
   "/zed-prices": "zed",
   "/content": "content",
+  "/removed-devices": "removed",
   "/plans": "plans",
   "/device-master": "master"
 };
@@ -30,6 +31,11 @@ const BOARD = {
     title: "Device Content Information Board",
     subtitle: "Review configured titles, descriptions, and specifications",
     empty: "No device content matches the current filters."
+  },
+  removed: {
+    title: "Removed Devices Board",
+    subtitle: "Historical record of devices no longer present in the live STC e-store",
+    empty: "No removed devices match the current filters."
   },
   plans: {
     title: "Device by Plan Board",
@@ -68,6 +74,7 @@ const esc = (value) => String(value ?? "")
 const valueOrDash = (value) => String(value ?? "").trim() || "-";
 const unique = (values) => [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
 const currentDevices = () => (state.data?.devices || []).filter((device) => displayStatus(device) !== "REMOVED");
+const removedDevices = () => (state.data?.devices || []).filter((device) => displayStatus(device) === "REMOVED");
 const deviceMap = () => new Map(currentDevices().map((device) => [device.itemGroup, device]));
 const rowsFor = (collection, device) => (collection || []).filter((row) => row.itemGroup === device.itemGroup);
 
@@ -131,7 +138,7 @@ function setupPage() {
   els.pageSubtitle.textContent = config.subtitle;
   document.querySelectorAll(".boardNav a").forEach((link) => link.classList.toggle("active", link.dataset.board === state.board));
 
-  const devices = currentDevices();
+  const devices = state.board === "removed" ? removedDevices() : currentDevices();
   const brands = devices.map((device) => device.brand);
   const categories = devices.map((device) => device.category);
   const search = filterField("searchFilter", "Search", [], "Device, item group, item code...");
@@ -158,6 +165,9 @@ function setupPage() {
   } else if (state.board === "content") {
     els.toolbar.innerHTML = search + category + brand;
     hideExport();
+  } else if (state.board === "removed") {
+    els.toolbar.innerHTML = search + category + brand;
+    hideExport();
   } else if (state.board === "plans") {
     const planNames = (state.data?.plans || []).map((row) => row.planName);
     els.toolbar.innerHTML = filterField("planFilter", "Plan", options(planNames, "All plans")) + search + brand;
@@ -180,6 +190,7 @@ function hideExport() {
 }
 
 function buildRows() {
+  if (state.board === "removed") return removedDevices();
   const devices = currentDevices();
   const byGroup = deviceMap();
   if (state.board === "all" || state.board === "content") return devices;
@@ -228,7 +239,9 @@ function applyFilters() {
       (!availability || stockStatus(row) === availability) &&
       (!period || String(row.period || "") === period) &&
       (!plan || row.planName === plan);
-  }).sort((a, b) => compareDevicesByAddition(rowContext(a), rowContext(b)));
+  }).sort((a, b) => state.board === "removed"
+    ? compareRemovedDevices(a, b)
+    : compareDevicesByAddition(rowContext(a), rowContext(b)));
   renderMetrics();
   renderTable();
   updateExportLink();
@@ -259,6 +272,8 @@ function renderMetrics() {
     cards = [[state.filtered.length, "Filtered offers"], [unique(state.rows.map((row) => row.itemGroup)).length, "Devices"], [unique(state.rows.map((row) => row.period)).length, "Periods"], [state.rows.length, "Total zeed Price offers"]];
   } else if (state.board === "content") {
     cards = [[state.filtered.length, "Filtered devices"], [state.rows.filter((row) => row.englishDescription).length, "With English content"], [state.rows.filter((row) => row.arabicDescription).length, "With Arabic content"], [state.rows.length, "Current devices"]];
+  } else if (state.board === "removed") {
+    cards = [[state.filtered.length, "Filtered removed"], [state.rows.length, "Removed history"], [unique(state.rows.map((row) => row.category)).length, "Categories"], [unique(state.rows.map((row) => row.brand)).length, "Brands"]];
   } else {
     cards = [[state.filtered.length, "Filtered offers"], [unique(state.filtered.map((row) => row.itemGroup)).length, "Matching devices"], [unique(state.rows.map((row) => row.planName)).length, "Available plans"], [state.rows.length, "Total plan offers"]];
   }
@@ -293,10 +308,15 @@ function columnsForBoard() {
   ];
   if (state.board === "content") return [
     ["No.", (_, i) => i + 1], ["Brand", (d) => valueOrDash(d.brand)], ["Item group", (d) => valueOrDash(d.itemGroup)],
-    ["English URL", (d) => urlLink(d.englishUrl)], ["Arabic URL", (d) => urlLink(d.arabicUrl)],
     ["English Device Title", (d) => valueOrDash(d.englishDeviceTitle)], ["Arabic Device Title", (d) => valueOrDash(d.arabicDeviceTitle)],
     ["English Description", (d) => valueOrDash(d.englishDescription)], ["Arabic Description", (d) => valueOrDash(d.arabicDescription)],
     ["English PDP URL", (d) => urlLink(d.englishPdpUrl)], ["Arabic PDP URL", (d) => urlLink(d.arabicPdpUrl)]
+  ];
+  if (state.board === "removed") return [
+    ["No.", (_, i) => i + 1], ["Status", (d) => pill(displayStatus(d))], ["Removed Date", (d) => formatDate(d.removedAt)],
+    ["Added Date", (d) => formatDate(d.firstSeenAt)], ["Brand", (d) => valueOrDash(d.brand)], ["Category", (d) => valueOrDash(d.category)],
+    ["Device Name", (d) => valueOrDash(d.deviceName)], ["Item group", (d) => valueOrDash(d.itemGroup)],
+    ["Default item code", (d) => valueOrDash(d.defaultItemCode)], ["Product URL", (d) => link(d)]
   ];
   if (state.board === "plans") return [
     ["No.", (_, i) => i + 1], ["Plan", (r) => valueOrDash(r.planName)], ["Brand", (r) => valueOrDash(rowContext(r).brand)],
@@ -332,14 +352,21 @@ function specsText(device) {
 
 function renderTable() {
   const columns = columnsForBoard();
-  els.tableHead.innerHTML = columns.map(([label]) => `<th>${esc(label)}</th>`).join("");
+  const columnClass = (label) => {
+    if (["Device", "Device Name", "English Device Title", "Arabic Device Title"].includes(label)) return "deviceNameColumn";
+    if (label.includes("Description")) return "descriptionColumn";
+    if (["Brand", "Category"].includes(label)) return "nameColumn";
+    if (label.toLowerCase().includes("item group")) return "itemGroupColumn";
+    return "";
+  };
+  els.tableHead.innerHTML = columns.map(([label]) => `<th class="${columnClass(label)}">${esc(label)}</th>`).join("");
   els.dataTable.style.minWidth = `${Math.max(920, columns.length * 145)}px`;
   els.resultCount.textContent = `${state.filtered.length} results`;
   if (!state.filtered.length) {
     els.tableBody.innerHTML = `<tr><td colspan="${columns.length}" class="empty">${esc(BOARD[state.board].empty)}</td></tr>`;
     return;
   }
-  els.tableBody.innerHTML = state.filtered.map((row, index) => `<tr data-index="${index}" tabindex="0">${columns.map(([, render]) => `<td>${render(row, index)}</td>`).join("")}</tr>`).join("");
+  els.tableBody.innerHTML = state.filtered.map((row, index) => `<tr data-index="${index}" tabindex="0">${columns.map(([label, render]) => `<td class="${columnClass(label)}">${render(row, index)}</td>`).join("")}</tr>`).join("");
 }
 
 function updateExportLink() {

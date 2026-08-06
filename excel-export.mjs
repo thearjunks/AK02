@@ -164,8 +164,6 @@ export async function buildExcel(data) {
     { key: "deviceName", label: "Device name", widthPx: 190 },
     { key: "itemGroup", label: "Item group", widthPx: 230 },
     { key: "productUrl", label: "Product URL", widthPx: 310 },
-    { key: "englishUrl", label: "English URL", widthPx: 310 },
-    { key: "arabicUrl", label: "Arabic URL", widthPx: 310 },
     { key: "englishDeviceTitle", label: "English Device Title", widthPx: 190 },
     { key: "arabicDeviceTitle", label: "Arabic Device Title", widthPx: 190 },
     { key: "englishDescription", label: "English Description", widthPx: 420 },

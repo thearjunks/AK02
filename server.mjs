@@ -288,7 +288,7 @@ function filenameStamp() {
 
 async function serveStatic(request, response) {
   const url = new URL(request.url, "http://localhost");
-  const dashboardRoutes = new Set(["/", "/all-devices", "/stock", "/zed-prices", "/content", "/plans", "/device-master"]);
+  const dashboardRoutes = new Set(["/", "/all-devices", "/stock", "/zed-prices", "/content", "/removed-devices", "/plans", "/device-master"]);
   const pathname = dashboardRoutes.has(url.pathname.replace(/\/$/, "") || "/") ? "/index.html" : url.pathname;
   const safePath = path.normalize(pathname).replace(/^(\.\.[/\\])+/, "");
   const filePath = path.join(publicDir, safePath);
