@@ -2,6 +2,9 @@ const STC_BASE = "https://digitalapi-gateway.stc.com.kw";
 let tokenCache = null;
 let tokenExpiresAt = 0;
 let tokenRequest = null;
+let requestGate = Promise.resolve();
+let lastRequestAt = 0;
+const REQUEST_SPACING_MS = 350;
 
 const DEFAULT_HEADERS = {
   channel: "WEB",
@@ -14,10 +17,24 @@ function text(value) {
   return value == null ? "" : String(value).replace(/\s+/g, " ").trim();
 }
 
-function absUrl(href) {
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function pacedFetch(url, options) {
+  const request = requestGate.then(async () => {
+    await wait(Math.max(0, REQUEST_SPACING_MS - (Date.now() - lastRequestAt)));
+    lastRequestAt = Date.now();
+    return fetch(url, options);
+  });
+  requestGate = request.then(() => undefined, () => undefined);
+  return request;
+}
+
+function absUrl(href, locale = "en") {
   if (!href) return "";
   if (href.startsWith("http")) return href;
-  return `https://www.stc.com.kw/en${href.startsWith("/") ? href : `/${href}`}`;
+  return `https://www.stc.com.kw/${locale}${href.startsWith("/") ? href : `/${href}`}`;
 }
 
 function productKey(product) {
@@ -185,21 +202,29 @@ async function getToken() {
   }
 }
 
-async function createClient() {
+async function createClient(locale = "en") {
   const token = await getToken();
   const headers = {
     ...DEFAULT_HEADERS,
+    locale,
+    "Accept-Language": locale,
     Authorization: `${token.token_type} ${token.access_token}`,
   };
 
   async function request(pathname, options = {}) {
-    const response = await fetch(`${STC_BASE}${pathname}`, {
-      ...options,
-      headers: {
-        ...headers,
-        ...(options.headers || {}),
-      },
-    });
+    let response;
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      response = await pacedFetch(`${STC_BASE}${pathname}`, {
+        ...options,
+        headers: {
+          ...headers,
+          ...(options.headers || {}),
+        },
+      });
+      if (response.status !== 403 || attempt === 3) break;
+      await response.text();
+      await wait(2000 * (attempt + 1));
+    }
     const bodyText = await response.text();
     let body;
     try {
@@ -245,6 +270,7 @@ async function withConcurrency(items, limit, worker) {
 
 export async function fetchStcDevices() {
   const client = await createClient();
+  const arabicClient = await createClient("ar");
   const catalogs = await Promise.all(Array.from({ length: 3 }, (_, index) => (
     client.get(`/dig-estoreAllDevices/v1/ESTORWEB?name=all-device&ver=v1&refresh=${Date.now()}-${index}`)
   )));
@@ -265,13 +291,18 @@ export async function fetchStcDevices() {
   const devices = await withConcurrency(products, 5, async (product, index) => {
     const key = productKey(product);
     let detail = {};
-    try {
-      detail = await client.get(`/b2cSC_getProductDetailPage/v5/${key}`);
-    } catch (error) {
-      errors.push({ itemGroup: product.itemGroup || "", key, stage: "detail", status: error.status || "", message: text(JSON.stringify(error.body || error.message)) });
-    }
+    let arabicDetail = {};
+    const localizedDetails = await Promise.allSettled([
+      client.get(`/b2cSC_getProductDetailPage/v5/${key}`),
+      arabicClient.get(`/b2cSC_getProductDetailPage/v5/${key}`),
+    ]);
+    if (localizedDetails[0].status === "fulfilled") detail = localizedDetails[0].value;
+    else errors.push({ itemGroup: product.itemGroup || "", key, stage: "detail-en", status: localizedDetails[0].reason?.status || "", message: text(JSON.stringify(localizedDetails[0].reason?.body || localizedDetails[0].reason?.message)) });
+    if (localizedDetails[1].status === "fulfilled") arabicDetail = localizedDetails[1].value;
+    else errors.push({ itemGroup: product.itemGroup || "", key, stage: "detail-ar", status: localizedDetails[1].reason?.status || "", message: text(JSON.stringify(localizedDetails[1].reason?.body || localizedDetails[1].reason?.message)) });
 
     const config = deviceConfig(detail);
+    const arabicConfig = deviceConfig(arabicDetail);
     const itemCode = firstItemCode(config, detail, product);
     const productSpecs = detailSpecs(detail);
     const specMap = Object.fromEntries(productSpecs.map((item) => [text(item.title), text(item.value)]));
@@ -425,6 +456,11 @@ export async function fetchStcDevices() {
     ]);
     const cashValue = product.retailPriceValue ?? "";
 
+    const englishPdpUrl = absUrl(product.link?.href, "en");
+    const arabicPdpUrl = absUrl(product.link?.href, "ar");
+    const englishDescription = text(config.productDescription || detail.meta?.description || detail.description || product.description);
+    const arabicDescription = text(arabicConfig.productDescription || arabicDetail.meta?.description || arabicDetail.description);
+
     return {
       no: index + 1,
       label: text(product.cardBadgeText),
@@ -432,7 +468,17 @@ export async function fetchStcDevices() {
       brand: text(product.brand),
       deviceName: text(product.model),
       itemGroup: product.itemGroup || "",
-      productUrl: absUrl(product.link?.href),
+      productUrl: englishPdpUrl,
+      englishUrl: text(detail.meta?.url || detail.meta?.canonical) || englishPdpUrl,
+      arabicUrl: text(arabicDetail.meta?.canonical || arabicDetail.meta?.url) || arabicPdpUrl,
+      englishDeviceTitle: text(detail.title || product.model),
+      arabicDeviceTitle: text(arabicDetail.title),
+      englishDescription,
+      arabicDescription,
+      englishPdpUrl,
+      arabicPdpUrl,
+      englishDetailLoaded: localizedDetails[0].status === "fulfilled",
+      arabicDetailLoaded: localizedDetails[1].status === "fulfilled",
       detailApiKey: key,
       cardStartingPriceText: product.startingPriceValue != null && product.startingPriceValue !== "" ? `From ${product.startingPriceCurrency}${product.startingPriceValue} ${product.startingPriceType}` : "",
       cardZeedPriceText: product.zeedPriceValue != null && product.zeedPriceValue !== "" ? `Zeed ${product.zeedPriceCurrency}${product.zeedPriceValue} ${product.zeedPriceType}` : "",
@@ -441,7 +487,7 @@ export async function fetchStcDevices() {
       cardZeedPriceValue: product.zeedPriceValue ?? "",
       cardCashValue: cashValue,
       detailTitle: text(detail.title),
-      productDescription: text(config.productDescription || detail.description || product.description),
+      productDescription: englishDescription,
       defaultItemCode: itemCode,
       cashOfferPrice: cashOffer.price ?? "",
       cashOfferCurrency: cashOffer.currency || "",
@@ -464,6 +510,11 @@ export async function fetchStcDevices() {
       firstImageUrl: productImages[0] || imageFromThumb(product.colors?.[0]?.thumbs?.[0]) || "",
     };
   });
+
+  const incompleteLocalizedDetails = devices.filter((device) => !device.englishDetailLoaded || !device.arabicDetailLoaded);
+  if (incompleteLocalizedDetails.length) {
+    throw new Error(`STC blocked or omitted bilingual details for ${incompleteLocalizedDetails.length} of ${devices.length} devices; the saved dashboard was not replaced.`);
+  }
 
   return {
     generatedAt: new Date().toISOString(),

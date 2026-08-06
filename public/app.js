@@ -22,9 +22,9 @@ const BOARD = {
     empty: "No stock rows match the current filters."
   },
   zed: {
-    title: "Device ZED Price Board",
-    subtitle: "Review ZED rental prices by device, item code, and commitment period",
-    empty: "No ZED price rows match the current filters."
+    title: "zeed Price Board",
+    subtitle: "Review zeed Price rental offers by device, item code, and commitment period",
+    empty: "No zeed Price rows match the current filters."
   },
   content: {
     title: "Device Content Information Board",
@@ -256,9 +256,9 @@ function renderMetrics() {
       [state.rows.filter((row) => stockStatus(row) === "UNKNOWN").length, "Stock unknown"]
     ];
   } else if (state.board === "zed") {
-    cards = [[state.filtered.length, "Filtered offers"], [unique(state.rows.map((row) => row.itemGroup)).length, "Devices"], [unique(state.rows.map((row) => row.period)).length, "Periods"], [state.rows.length, "Total ZED offers"]];
+    cards = [[state.filtered.length, "Filtered offers"], [unique(state.rows.map((row) => row.itemGroup)).length, "Devices"], [unique(state.rows.map((row) => row.period)).length, "Periods"], [state.rows.length, "Total zeed Price offers"]];
   } else if (state.board === "content") {
-    cards = [[state.filtered.length, "Filtered devices"], [state.rows.filter((row) => row.productDescription).length, "With description"], [unique((state.data?.specs || []).map((row) => row.itemGroup)).length, "With specifications"], [state.rows.length, "Current devices"]];
+    cards = [[state.filtered.length, "Filtered devices"], [state.rows.filter((row) => row.englishDescription).length, "With English content"], [state.rows.filter((row) => row.arabicDescription).length, "With Arabic content"], [state.rows.length, "Current devices"]];
   } else {
     cards = [[state.filtered.length, "Filtered offers"], [unique(state.filtered.map((row) => row.itemGroup)).length, "Matching devices"], [unique(state.rows.map((row) => row.planName)).length, "Available plans"], [state.rows.length, "Total plan offers"]];
   }
@@ -266,12 +266,13 @@ function renderMetrics() {
 }
 
 function columnsForBoard() {
-  const link = (device) => device.productUrl ? `<a class="tableLink" href="${esc(device.productUrl)}" target="_blank" rel="noreferrer">Open</a>` : "-";
+  const urlLink = (url) => url ? `<a class="tableLink" href="${esc(url)}" target="_blank" rel="noreferrer">Open</a>` : "-";
+  const link = (device) => urlLink(device.productUrl);
   if (state.board === "all") return [
     ["No.", (_, i) => i + 1], ["Status", (d) => pill(displayStatus(d))], ["Added Date", (d) => formatDate(d.firstSeenAt)], ["Label", (d) => valueOrDash(d.label)],
     ["Category", (d) => valueOrDash(d.category)], ["Brand", (d) => valueOrDash(d.brand)], ["Device", (d) => valueOrDash(d.deviceName)],
     ["Item group", (d) => valueOrDash(d.itemGroup)], ["Default item code", (d) => valueOrDash(d.defaultItemCode)],
-    ["Starting", (d) => valueOrDash(d.cardStartingPriceText)], ["ZED", (d) => valueOrDash(d.cardZeedPriceText)],
+    ["Starting", (d) => valueOrDash(d.cardStartingPriceText)], ["zeed Price", (d) => valueOrDash(d.cardZeedPriceText)],
     ["Cash", (d) => valueOrDash(d.cardCashPriceText)], ["Product URL", (d) => link(d)],
     ["Storage", (d) => valueOrDash(d.storageOptions)], ["Colors", (d) => valueOrDash(d.colorNames)]
   ];
@@ -291,9 +292,11 @@ function columnsForBoard() {
     ["Parent plan", (r) => valueOrDash(r.parentPlan)], ["Device URL", (r) => link(rowContext(r))]
   ];
   if (state.board === "content") return [
-    ["No.", (_, i) => i + 1], ["Brand", (d) => valueOrDash(d.brand)], ["Device Title", (d) => valueOrDash(d.detailTitle || d.deviceName)],
-    ["Description", (d) => valueOrDash(d.productDescription)], ["Specifications", (d) => specsText(d)],
-    ["Item group", (d) => valueOrDash(d.itemGroup)], ["Device URL", (d) => link(d)]
+    ["No.", (_, i) => i + 1], ["Brand", (d) => valueOrDash(d.brand)], ["Item group", (d) => valueOrDash(d.itemGroup)],
+    ["English URL", (d) => urlLink(d.englishUrl)], ["Arabic URL", (d) => urlLink(d.arabicUrl)],
+    ["English Device Title", (d) => valueOrDash(d.englishDeviceTitle)], ["Arabic Device Title", (d) => valueOrDash(d.arabicDeviceTitle)],
+    ["English Description", (d) => valueOrDash(d.englishDescription)], ["Arabic Description", (d) => valueOrDash(d.arabicDescription)],
+    ["English PDP URL", (d) => urlLink(d.englishPdpUrl)], ["Arabic PDP URL", (d) => urlLink(d.arabicPdpUrl)]
   ];
   if (state.board === "plans") return [
     ["No.", (_, i) => i + 1], ["Plan", (r) => valueOrDash(r.planName)], ["Brand", (r) => valueOrDash(rowContext(r).brand)],
@@ -373,15 +376,15 @@ function openDrawer(row) {
   els.drawerImage.alt = device.deviceName || "Device image";
   els.drawerFacts.innerHTML = [
     fact("Status", displayStatus(device)), fact("Added Date", formatDate(device.firstSeenAt)), fact("Item group", device.itemGroup), fact("Default item code", device.defaultItemCode),
-    fact("Starting price", device.cardStartingPriceText), fact("ZED price", device.cardZeedPriceText), fact("Cash price", device.cardCashPriceText),
-    fact("Color / SKU rows", colors.length), fact("Plan offers", plans.length), fact("ZED offers", zeed.length), fact("Last seen", formatDate(device.lastSeenAt))
+    fact("Starting price", device.cardStartingPriceText), fact("zeed Price", device.cardZeedPriceText), fact("Cash price", device.cardCashPriceText),
+    fact("Color / SKU rows", colors.length), fact("Plan offers", plans.length), fact("zeed Price offers", zeed.length), fact("Last seen", formatDate(device.lastSeenAt))
   ].join("");
   renderList(els.drawerSpecs, specs.map((item) => `<strong>${esc(item.specTitle || "Specification")}</strong><span>${esc(item.specValue)}</span>`), "No specifications found.");
   renderList(els.drawerColors, colors.map((item) => `<strong>${esc([storageLabel(item), item.colorName].filter(Boolean).join(" / "))}</strong><span>${esc(item.itemCode || "-")} | ${esc(stockStatus(item))} | Qty ${esc(valueOrDash(item.qty))}</span>`), "No color/SKU rows found.");
   renderList(els.drawerPlans, [
     ...plans.slice(0, 12).map((item) => `<strong>${esc(item.planName || "Plan")}</strong><span>${esc(item.period || "-")} months | ${price(item.deviceRent, item.currency)}</span>`),
-    ...zeed.slice(0, 12).map((item) => `<strong>ZED ${esc(item.name || "")}</strong><span>${esc(item.period || "-")} months | ${price(item.deviceRent, item.currency)}</span>`)
-  ], "No plan or ZED offers found.");
+    ...zeed.slice(0, 12).map((item) => `<strong>zeed Price ${esc(item.name || "")}</strong><span>${esc(item.period || "-")} months | ${price(item.deviceRent, item.currency)}</span>`)
+  ], "No plan or zeed Price offers found.");
   els.drawerLink.href = device.productUrl || "#";
   els.drawerLink.hidden = !device.productUrl;
   els.drawer.classList.add("open");

@@ -143,7 +143,7 @@ export async function buildExcel(data) {
     { metric: "Color / SKU rows", value: data.colors.length, notes: "Color, capacity, item-code combinations" },
     { metric: "Specification rows", value: data.specs.length, notes: "Device Specs from detail pages" },
     { metric: "Plan offer rows", value: data.plans.length, notes: "Default available item code per product" },
-    { metric: "Zeed offer rows", value: data.zeed.length, notes: "Default available item code per product" },
+    { metric: "zeed Price offer rows", value: data.zeed.length, notes: "Default available item code per product" },
     { metric: "Extraction notes", value: data.errors.length, notes: "Missing item codes or endpoint issues" },
     { metric: "Generated at", value: data.generatedAt, notes: "Live fetch timestamp" },
   ];
@@ -164,12 +164,20 @@ export async function buildExcel(data) {
     { key: "deviceName", label: "Device name", widthPx: 190 },
     { key: "itemGroup", label: "Item group", widthPx: 230 },
     { key: "productUrl", label: "Product URL", widthPx: 310 },
+    { key: "englishUrl", label: "English URL", widthPx: 310 },
+    { key: "arabicUrl", label: "Arabic URL", widthPx: 310 },
+    { key: "englishDeviceTitle", label: "English Device Title", widthPx: 190 },
+    { key: "arabicDeviceTitle", label: "Arabic Device Title", widthPx: 190 },
+    { key: "englishDescription", label: "English Description", widthPx: 420 },
+    { key: "arabicDescription", label: "Arabic Description", widthPx: 420 },
+    { key: "englishPdpUrl", label: "English PDP URL", widthPx: 310 },
+    { key: "arabicPdpUrl", label: "Arabic PDP URL", widthPx: 310 },
     { key: "cardStartingPriceText", label: "Grid starting price text", widthPx: 160 },
-    { key: "cardZeedPriceText", label: "Grid Zeed price text", widthPx: 150 },
+    { key: "cardZeedPriceText", label: "Grid zeed Price text", widthPx: 150 },
     { key: "cardCashPriceText", label: "Grid cash price text", widthPx: 150 },
     { key: "cashOfferPrice", label: "Detail cash offer price", widthPx: 130 },
-    { key: "zeedLowest24Month", label: "Zeed 24 months", widthPx: 120 },
-    { key: "zeedLowest36Month", label: "Zeed 36 months", widthPx: 120 },
+    { key: "zeedLowest24Month", label: "zeed Price 24 months", widthPx: 140 },
+    { key: "zeedLowest36Month", label: "zeed Price 36 months", widthPx: 140 },
     { key: "planOfferCount", label: "Plan offer count", widthPx: 120 },
     { key: "storageOptions", label: "Storage options", widthPx: 190 },
     { key: "colorNames", label: "Colors", widthPx: 260 },
@@ -222,7 +230,7 @@ export async function buildExcel(data) {
     { key: "benefits", label: "Benefits", widthPx: 520 },
   ]);
 
-  addSheet(workbook, "Zeed_Offers", data.zeed, [
+  addSheet(workbook, "zeed_Price_Offers", data.zeed, [
     { key: "itemGroup", label: "Item group", widthPx: 230 },
     { key: "model", label: "Device name", widthPx: 190 },
     { key: "itemCode", label: "Item code", widthPx: 250 },
