@@ -1,4 +1,4 @@
-import { compareDevicesByAddition, compareRemovedDevices, deviceLifecycleStatus } from "./device-order.js";
+import { compareDevicesByAddition, compareRemovedDevices, deviceLifecycleStatus } from "./device-order.js?v=20260806-2";
 
 const ROUTES = {
   "/": "all",
