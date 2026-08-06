@@ -13,6 +13,7 @@ try {
     added: data.changeSummary?.added ?? 0,
     removed: data.changeSummary?.removed ?? 0,
     colors: data.colors?.length ?? 0,
+    catalogSampleTotals: data.catalogSampleTotals || [],
   }));
 } catch (error) {
   console.error(error?.stack || error?.message || String(error));

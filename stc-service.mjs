@@ -27,6 +27,14 @@ function productKey(product) {
   return `${product.category || ""}/${product.itemGroup || ""}`;
 }
 
+export function collectCatalogProducts(catalogs) {
+  const products = catalogs.flatMap((catalog) => (catalog?.block || [])
+    .filter((block) => block?.type === "StcB2cStoreFilterDevices")
+    .flatMap((block) => block.items || []))
+    .filter(isRealProduct);
+  return [...new Map(products.map((product) => [productKey(product), product])).values()];
+}
+
 function isRealProduct(product) {
   return Boolean(
     text(product?.itemGroup) ||
@@ -237,10 +245,14 @@ async function withConcurrency(items, limit, worker) {
 
 export async function fetchStcDevices() {
   const client = await createClient();
-  const catalog = await client.get("/dig-estoreAllDevices/v1/ESTORWEB?name=all-device&ver=v1");
-  const products = (catalog?.block?.find((block) => Array.isArray(block.items) && block.items.length === 122)?.items
-    || catalog?.block?.flatMap((block) => block.items || [])
-    || []).filter(isRealProduct);
+  const catalogs = await Promise.all(Array.from({ length: 3 }, (_, index) => (
+    client.get(`/dig-estoreAllDevices/v1/ESTORWEB?name=all-device&ver=v1&refresh=${Date.now()}-${index}`)
+  )));
+  const products = collectCatalogProducts(catalogs);
+  const catalogSampleTotals = catalogs.map((catalog) => (catalog?.block || [])
+    .filter((block) => block?.type === "StcB2cStoreFilterDevices")
+    .reduce((total, block) => total + (block.items?.length || 0), 0));
+  if (!products.length) throw new Error("STC eStore catalog returned no devices.");
 
   const errors = [];
   const colors = [];
@@ -455,6 +467,7 @@ export async function fetchStcDevices() {
 
   return {
     generatedAt: new Date().toISOString(),
+    catalogSampleTotals,
     devices: devices.sort((a, b) => a.no - b.no),
     colors,
     capacities,

@@ -1,4 +1,4 @@
-import { compareDevicesByAddition } from "./device-order.js";
+import { compareDevicesByAddition, deviceLifecycleStatus } from "./device-order.js";
 
 const ROUTES = {
   "/": "all",
@@ -72,8 +72,7 @@ const deviceMap = () => new Map(currentDevices().map((device) => [device.itemGro
 const rowsFor = (collection, device) => (collection || []).filter((row) => row.itemGroup === device.itemGroup);
 
 function displayStatus(device) {
-  const status = String(device?.deviceStatus || "ACTIVE").trim().toUpperCase();
-  return status === "RESTORED" ? "ADDED" : status;
+  return deviceLifecycleStatus(device);
 }
 
 function stockStatus(row) {
@@ -141,7 +140,7 @@ function setupPage() {
 
   if (state.board === "all") {
     els.toolbar.innerHTML = search + filterField("statusFilter", "Status", [
-      { value: "", label: "All current statuses" }, { value: "ACTIVE", label: "ACTIVE" }, { value: "ADDED", label: "ADDED" }
+      { value: "", label: "All current statuses" }, { value: "NEW", label: "NEW" }, { value: "EXISTING", label: "EXISTING" }
     ]) + category + brand;
     els.exportBtn.textContent = "Download Full Excel";
     els.exportBtn.href = apiUrl("/api/download-report");
@@ -246,7 +245,7 @@ function renderMetrics() {
     cards = [
       [state.filtered.length, "Filtered devices"],
       [current.length, "Current devices"],
-      [current.filter((device) => displayStatus(device) === "ADDED").length, "Recently added"],
+      [current.filter((device) => displayStatus(device) === "NEW").length, "New (first 15 days)"],
       [unique(current.map((device) => device.brand)).length, "Brands"]
     ];
   } else if (state.board === "stock" || state.board === "master") {
@@ -269,7 +268,7 @@ function renderMetrics() {
 function columnsForBoard() {
   const link = (device) => device.productUrl ? `<a class="tableLink" href="${esc(device.productUrl)}" target="_blank" rel="noreferrer">Open</a>` : "-";
   if (state.board === "all") return [
-    ["No.", (_, i) => i + 1], ["Status", (d) => pill(displayStatus(d))], ["Label", (d) => valueOrDash(d.label)],
+    ["No.", (_, i) => i + 1], ["Status", (d) => pill(displayStatus(d))], ["Added Date", (d) => formatDate(d.firstSeenAt)], ["Label", (d) => valueOrDash(d.label)],
     ["Category", (d) => valueOrDash(d.category)], ["Brand", (d) => valueOrDash(d.brand)], ["Device", (d) => valueOrDash(d.deviceName)],
     ["Item group", (d) => valueOrDash(d.itemGroup)], ["Default item code", (d) => valueOrDash(d.defaultItemCode)],
     ["Starting", (d) => valueOrDash(d.cardStartingPriceText)], ["ZED", (d) => valueOrDash(d.cardZeedPriceText)],
@@ -373,7 +372,7 @@ function openDrawer(row) {
   if (imageUrl) els.drawerImage.src = imageUrl;
   els.drawerImage.alt = device.deviceName || "Device image";
   els.drawerFacts.innerHTML = [
-    fact("Status", displayStatus(device)), fact("Item group", device.itemGroup), fact("Default item code", device.defaultItemCode),
+    fact("Status", displayStatus(device)), fact("Added Date", formatDate(device.firstSeenAt)), fact("Item group", device.itemGroup), fact("Default item code", device.defaultItemCode),
     fact("Starting price", device.cardStartingPriceText), fact("ZED price", device.cardZeedPriceText), fact("Cash price", device.cardCashPriceText),
     fact("Color / SKU rows", colors.length), fact("Plan offers", plans.length), fact("ZED offers", zeed.length), fact("Last seen", formatDate(device.lastSeenAt))
   ].join("");

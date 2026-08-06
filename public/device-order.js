@@ -1,7 +1,13 @@
-const timestamp = (device) => Date.parse(device?.addedAt || device?.firstSeenAt || "") || 0;
+const FIFTEEN_DAYS = 15 * 24 * 60 * 60 * 1000;
+const timestamp = (device) => Date.parse(device?.firstSeenAt || "") || 0;
+
+export function deviceLifecycleStatus(device, now = Date.now()) {
+  if (String(device?.deviceStatus || "").toUpperCase() === "REMOVED") return "REMOVED";
+  const firstSeen = timestamp(device);
+  return firstSeen && now - firstSeen < FIFTEEN_DAYS ? "NEW" : "EXISTING";
+}
 
 export function compareDevicesByAddition(a, b) {
-  const aAdded = ["ADDED", "RESTORED"].includes(String(a?.deviceStatus || "").toUpperCase());
-  const bAdded = ["ADDED", "RESTORED"].includes(String(b?.deviceStatus || "").toUpperCase());
-  return Number(bAdded) - Number(aAdded) || timestamp(b) - timestamp(a);
+  const rank = (device) => ({ NEW: 0, EXISTING: 1, REMOVED: 2 })[deviceLifecycleStatus(device)];
+  return rank(a) - rank(b) || timestamp(b) - timestamp(a);
 }

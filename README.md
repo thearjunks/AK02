@@ -83,7 +83,8 @@ It can:
 
 - Fetch all current STC devices live.
 - Show more or fewer than 122 devices if STC changes the list.
-- Track device status as `ACTIVE`, `ADDED`, `RESTORED`, or `REMOVED`.
+- Show each device's Added Date and label current devices as `NEW` for 15 days, then `EXISTING`.
+- Track removed products without resetting their original Added Date if they return.
 - Show item group, item code, product URL, prices, colors, storage, specs, plans, and Zeed details.
 - Download a fresh Excel report.
 
@@ -241,22 +242,16 @@ Then you can:
 ## Device Status Meaning
 
 ```text
-ACTIVE
+NEW
 ```
 
-The device exists in the current STC live data.
+The device first appeared in the monitored live eStore less than 15 days ago.
 
 ```text
-ADDED
+EXISTING
 ```
 
-The device is new compared with the previous saved refresh.
-
-```text
-RESTORED
-```
-
-The device was removed before, but now it appeared again.
+The device is live and its Added Date is at least 15 days old.
 
 ```text
 REMOVED
@@ -281,7 +276,9 @@ previous saved list
 current STC live list
 ```
 
-That is how it knows which devices are added or removed.
+That is how it knows which devices are added or removed. Each refresh samples
+the complete eStore device block three times and combines unique product URLs
+so a temporarily incomplete API response cannot hide newly published devices.
 
 ## Hosting The App
 

@@ -18,7 +18,7 @@ let lastData = null;
 let authConfig = null;
 
 function deviceKey(device) {
-  return device?.itemGroup || device?.detailApiKey || device?.productUrl || `${device?.category || ""}:${device?.deviceName || ""}`;
+  return device?.detailApiKey || device?.productUrl || device?.itemGroup || `${device?.category || ""}:${device?.deviceName || ""}`;
 }
 
 async function readPreviousSnapshot() {
@@ -159,12 +159,12 @@ function safeNextPath(value) {
   return nextPath.startsWith("/") && !nextPath.startsWith("//") ? nextPath : "/all-devices";
 }
 
-function mergeRowsForRemoved(currentRows, previousRows, removedKeys) {
-  const existing = new Set(currentRows.map((row) => `${deviceKey(row)}:${row.itemCode || row.specTitle || row.imageUrl || row.capacity || ""}`));
+function mergeRowsForRemoved(currentRows, previousRows, removedItemGroups) {
+  const existing = new Set(currentRows.map((row) => `${row.itemGroup}:${row.itemCode || row.specTitle || row.imageUrl || row.capacity || ""}`));
   const restored = [];
   for (const row of previousRows || []) {
-    if (!removedKeys.has(deviceKey(row))) continue;
-    const key = `${deviceKey(row)}:${row.itemCode || row.specTitle || row.imageUrl || row.capacity || ""}`;
+    if (!removedItemGroups.has(row.itemGroup)) continue;
+    const key = `${row.itemGroup}:${row.itemCode || row.specTitle || row.imageUrl || row.capacity || ""}`;
     if (!existing.has(key)) restored.push(row);
   }
   return [...currentRows, ...restored];
@@ -173,8 +173,14 @@ function mergeRowsForRemoved(currentRows, previousRows, removedKeys) {
 async function applyHistory(rawData) {
   const previous = await readPreviousSnapshot();
   const fetchedAt = rawData.generatedAt || new Date().toISOString();
-  const previousDevices = previous?.devices || [];
-  const previousByKey = new Map(previousDevices.map((device) => [deviceKey(device), device]));
+  const previousByKey = new Map();
+  for (const device of previous?.devices || []) {
+    const key = deviceKey(device);
+    const prior = previousByKey.get(key);
+    if (!prior) previousByKey.set(key, { ...device });
+    else if (Date.parse(device.firstSeenAt || "") < Date.parse(prior.firstSeenAt || "")) prior.firstSeenAt = device.firstSeenAt;
+  }
+  const previousDevices = [...previousByKey.values()];
   const currentKeys = new Set(rawData.devices.map(deviceKey));
   const mergedDevices = rawData.devices.map((device) => {
     const key = deviceKey(device);
@@ -203,16 +209,16 @@ async function applyHistory(rawData) {
       lastSeenAt: device.lastSeenAt || previous?.generatedAt || "",
     }));
 
-  const removedKeys = new Set(removedDevices.map(deviceKey));
+  const removedItemGroups = new Set(removedDevices.map((device) => device.itemGroup));
   const data = {
     ...rawData,
     devices: [...mergedDevices, ...removedDevices],
-    colors: mergeRowsForRemoved(rawData.colors || [], previous?.colors || [], removedKeys),
-    capacities: mergeRowsForRemoved(rawData.capacities || [], previous?.capacities || [], removedKeys),
-    specs: mergeRowsForRemoved(rawData.specs || [], previous?.specs || [], removedKeys),
-    images: mergeRowsForRemoved(rawData.images || [], previous?.images || [], removedKeys),
-    plans: mergeRowsForRemoved(rawData.plans || [], previous?.plans || [], removedKeys),
-    zeed: mergeRowsForRemoved(rawData.zeed || [], previous?.zeed || [], removedKeys),
+    colors: mergeRowsForRemoved(rawData.colors || [], previous?.colors || [], removedItemGroups),
+    capacities: mergeRowsForRemoved(rawData.capacities || [], previous?.capacities || [], removedItemGroups),
+    specs: mergeRowsForRemoved(rawData.specs || [], previous?.specs || [], removedItemGroups),
+    images: mergeRowsForRemoved(rawData.images || [], previous?.images || [], removedItemGroups),
+    plans: mergeRowsForRemoved(rawData.plans || [], previous?.plans || [], removedItemGroups),
+    zeed: mergeRowsForRemoved(rawData.zeed || [], previous?.zeed || [], removedItemGroups),
     changeSummary: {
       active: mergedDevices.filter((device) => device.deviceStatus === "ACTIVE").length,
       added: mergedDevices.filter((device) => device.deviceStatus === "ADDED").length,

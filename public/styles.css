@@ -188,9 +188,9 @@ tbody tr:hover { background: #faf7fc; }
   font-weight: 800;
   white-space: nowrap;
 }
-.statusPill.active, .statusPill.in-stock { background: #e4f5ec; color: #087443; }
-.statusPill.added { background: #e8f1ff; color: #175cd3; }
-.statusPill.out-of-stock { background: #fdecec; color: #b42318; }
+.statusPill.active, .statusPill.existing, .statusPill.in-stock { background: #e4f5ec; color: #087443; }
+.statusPill.added, .statusPill.new { background: #e8f1ff; color: #175cd3; }
+.statusPill.removed, .statusPill.out-of-stock { background: #fdecec; color: #b42318; }
 .statusPill.unknown { background: #f1f3f5; color: #59636f; }
 
 .spinner {

@@ -1,4 +1,5 @@
 import ExcelJS from "exceljs";
+import { compareDevicesByAddition, deviceLifecycleStatus } from "./public/device-order.js";
 
 function addSheet(workbook, name, rows, columns) {
   const sheet = workbook.addWorksheet(name, {
@@ -42,10 +43,7 @@ function addSheet(workbook, name, rows, columns) {
 }
 
 function excelStatus(device) {
-  const status = String(device?.deviceStatus || "ACTIVE").trim().toUpperCase();
-  if (status === "REMOVED") return "REMOVED";
-  if (status === "ADDED" || status === "RESTORED") return "ADDED";
-  return "LIVE";
+  return deviceLifecycleStatus(device);
 }
 
 function stockStatus(row) {
@@ -129,19 +127,19 @@ export async function buildExcel(data) {
   workbook.creator = "STC Kuwait Live Device Dashboard";
   workbook.created = new Date();
   workbook.modified = new Date();
-  const devicesForExcel = (data.devices || []).map((device) => ({
+  const devicesForExcel = [...(data.devices || [])].sort(compareDevicesByAddition).map((device) => ({
     ...device,
     excelStatus: excelStatus(device),
   }));
-  const liveCount = devicesForExcel.filter((device) => device.excelStatus === "LIVE").length;
-  const addedCount = devicesForExcel.filter((device) => device.excelStatus === "ADDED").length;
+  const liveCount = devicesForExcel.filter((device) => device.excelStatus === "EXISTING").length;
+  const addedCount = devicesForExcel.filter((device) => device.excelStatus === "NEW").length;
   const removedCount = devicesForExcel.filter((device) => device.excelStatus === "REMOVED").length;
 
   const summaryRows = [
-    { metric: "LIVE devices", value: liveCount, notes: "Devices currently present in STC live data" },
-    { metric: "ADDED devices", value: addedCount, notes: "Newly added or returned devices being tracked as added" },
+    { metric: "EXISTING devices", value: liveCount, notes: "Current devices first seen more than 15 days ago" },
+    { metric: "NEW devices", value: addedCount, notes: "Current devices first seen during the last 15 days" },
     { metric: "REMOVED devices", value: removedCount, notes: "Previously seen devices missing from the latest STC data" },
-    { metric: "Displayed devices", value: devicesForExcel.length, notes: "LIVE + ADDED + REMOVED devices in the report" },
+    { metric: "Displayed devices", value: devicesForExcel.length, notes: "NEW + EXISTING + REMOVED devices in the report" },
     { metric: "Color / SKU rows", value: data.colors.length, notes: "Color, capacity, item-code combinations" },
     { metric: "Specification rows", value: data.specs.length, notes: "Device Specs from detail pages" },
     { metric: "Plan offer rows", value: data.plans.length, notes: "Default available item code per product" },
@@ -183,7 +181,7 @@ export async function buildExcel(data) {
     { key: "battery", label: "Battery", widthPx: 220 },
     { key: "networkType", label: "Network Type", widthPx: 110 },
     { key: "defaultItemCode", label: "Default item code", widthPx: 240 },
-    { key: "firstSeenAt", label: "First seen at", widthPx: 170 },
+    { key: "firstSeenAt", label: "Added Date", widthPx: 170 },
     { key: "lastSeenAt", label: "Last seen at", widthPx: 170 },
     { key: "removedAt", label: "Removed at", widthPx: 170 },
     { key: "firstImageUrl", label: "First image URL", widthPx: 320 },

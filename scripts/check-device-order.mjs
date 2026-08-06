@@ -1,14 +1,25 @@
 import assert from "node:assert/strict";
-import { compareDevicesByAddition } from "../public/device-order.js";
+import { collectCatalogProducts } from "../stc-service.mjs";
+import { compareDevicesByAddition, deviceLifecycleStatus } from "../public/device-order.js";
 
+const now = Date.parse("2026-08-06T08:00:00Z");
 const devices = [
-  { deviceName: "Active newer", deviceStatus: "ACTIVE", firstSeenAt: "2026-08-06T08:00:00Z" },
-  { deviceName: "Added older", deviceStatus: "ADDED", addedAt: "2026-08-04T08:00:00Z" },
-  { deviceName: "Added newest", deviceStatus: "ADDED", addedAt: "2026-08-05T08:00:00Z" },
-  { deviceName: "Restored", deviceStatus: "RESTORED", addedAt: "2026-08-03T08:00:00Z" }
+  { deviceName: "Existing", deviceStatus: "ACTIVE", firstSeenAt: "2026-07-01T08:00:00Z" },
+  { deviceName: "New older", deviceStatus: "ACTIVE", firstSeenAt: "2026-08-04T08:00:00Z" },
+  { deviceName: "New newest", deviceStatus: "ADDED", firstSeenAt: "2026-08-05T08:00:00Z" },
+  { deviceName: "Removed", deviceStatus: "REMOVED", firstSeenAt: "2026-08-06T08:00:00Z" }
 ].sort(compareDevicesByAddition);
 
 assert.deepEqual(devices.map(({ deviceName }) => deviceName), [
-  "Added newest", "Added older", "Restored", "Active newer"
+  "New newest", "New older", "Existing", "Removed"
 ]);
-console.log("Device addition ordering check passed.");
+assert.equal(deviceLifecycleStatus({ firstSeenAt: "2026-07-22T08:00:01Z" }, now), "NEW");
+assert.equal(deviceLifecycleStatus({ firstSeenAt: "2026-07-22T08:00:00Z" }, now), "EXISTING");
+
+const product = (slug) => ({ type: "StcB2cCardDevice", model: slug, link: { href: `/product/SMARTPHONE/${slug}` } });
+const catalogs = [
+  { block: [{ type: "StcCwsBreadcrumbs", items: [{ link: { href: "/en" } }] }, { type: "StcB2cStoreFilterDevices", items: [product("fold8")] }] },
+  { block: [{ type: "StcB2cStoreFilterDevices", items: [product("fold8"), product("flip8")] }] }
+];
+assert.deepEqual(collectCatalogProducts(catalogs).map((item) => item.model), ["fold8", "flip8"]);
+console.log("Device lifecycle and catalog synchronization checks passed.");
