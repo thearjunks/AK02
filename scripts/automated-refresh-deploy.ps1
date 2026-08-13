@@ -206,8 +206,8 @@ try {
   try {
     $snapshotPath = Join-Path $projectRoot "data\latest-snapshot.json"
     $snapshot = Get-Content -LiteralPath $snapshotPath -Raw | ConvertFrom-Json
-    $generatedAt = [DateTimeOffset]::Parse([string]$snapshot.generatedAt)
-    if ($generatedAt -ne [DateTimeOffset]::Parse([string]$summary.generatedAt)) { throw "Fetch summary and snapshot timestamps do not match." }
+    $generatedAt = [DateTimeOffset]$snapshot.generatedAt
+    if ($generatedAt -ne [DateTimeOffset]$summary.generatedAt) { throw "Fetch summary and snapshot timestamps do not match." }
     if ((([DateTimeOffset]::UtcNow) - $generatedAt.ToUniversalTime()).TotalMinutes -gt 60) { throw "Fetched snapshot is older than 60 minutes." }
     if ([int]$summary.currentTotal -le 0) { throw "Current device total is zero." }
     if ([int]$summary.displayedTotal -lt [int]$summary.currentTotal) { throw "Displayed device total is lower than current total." }

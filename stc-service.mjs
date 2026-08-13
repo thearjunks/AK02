@@ -297,10 +297,17 @@ export async function fetchStcDevices() {
     const key = productKey(product);
     let detail = {};
     let arabicDetail = {};
-    const localizedDetails = await Promise.allSettled([
+    let localizedDetails = await Promise.allSettled([
       client.get(`/b2cSC_getProductDetailPage/v5/${key}`),
       arabicClient.get(`/b2cSC_getProductDetailPage/v5/${key}`),
     ]);
+    if (localizedDetails.some((result) => result.status === "rejected")) {
+      await wait(5000);
+      localizedDetails = await Promise.allSettled([
+        localizedDetails[0].status === "fulfilled" ? localizedDetails[0].value : client.get(`/b2cSC_getProductDetailPage/v5/${key}`),
+        localizedDetails[1].status === "fulfilled" ? localizedDetails[1].value : arabicClient.get(`/b2cSC_getProductDetailPage/v5/${key}`),
+      ]);
+    }
     if (localizedDetails[0].status === "fulfilled") detail = localizedDetails[0].value;
     else errors.push({ itemGroup: product.itemGroup || "", key, stage: "detail-en", status: localizedDetails[0].reason?.status || "", message: text(JSON.stringify(localizedDetails[0].reason?.body || localizedDetails[0].reason?.message)) });
     if (localizedDetails[1].status === "fulfilled") arabicDetail = localizedDetails[1].value;
