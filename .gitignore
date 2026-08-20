@@ -4,3 +4,5 @@ node_modules/
 *.log
 test_*.xlsx
 auth-config.json
+data/account-credentials.enc.json
+data/account-device-data.json

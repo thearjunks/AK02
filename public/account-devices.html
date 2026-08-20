@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account Devices | STC Device Operations</title>
+    <link rel="stylesheet" href="/styles.css?v=20260820-1" />
+  </head>
+  <body>
+    <div class="appShell">
+      <aside class="sidebar">
+        <a class="brand" href="/all-devices" aria-label="STC Device Operations">
+          <span class="brandMark">stc</span>
+          <span>Device Operations</span>
+        </a>
+        <nav class="boardNav" aria-label="Dashboard boards">
+          <a href="/all-devices">All Devices</a>
+          <a href="/stock">Stock Management</a>
+          <a href="/zed-prices">zeed Price</a>
+          <a href="/content">Device Content</a>
+          <a href="/removed-devices">Removed Devices</a>
+          <a href="/plans">Devices by Plan</a>
+          <a href="/device-master">Device Master</a>
+          <a class="active" href="/account-devices">Account Devices</a>
+        </nav>
+        <div class="sourceNote">
+          <span>Source</span>
+          <strong>STC Kuwait Selfcare</strong>
+          <small id="sidebarFreshness">Not fetched</small>
+        </div>
+        <form class="logoutForm" method="post" action="/logout">
+          <button type="submit">Sign out</button>
+        </form>
+      </aside>
+
+      <main class="workspace accountWorkspace">
+        <header class="topbar">
+          <div>
+            <h1>Account Devices Board</h1>
+            <p>Device information available after STC account sign-in</p>
+          </div>
+          <button id="refreshAllBtn" class="button secondary" type="button" title="Refresh all connected accounts">
+            <span aria-hidden="true">&#8635;</span> Refresh all accounts
+          </button>
+        </header>
+
+        <section class="accountManager" aria-labelledby="connectTitle">
+          <div>
+            <h2 id="connectTitle">Connect STC account</h2>
+            <p>Credentials are encrypted on the server and are never displayed after submission.</p>
+          </div>
+          <form id="accountForm" class="accountForm">
+            <label class="field">
+              <span>MSISDN</span>
+              <input id="msisdnInput" name="msisdn" inputmode="numeric" autocomplete="username" placeholder="8-digit mobile number" maxlength="16" required />
+            </label>
+            <label class="field">
+              <span>Password</span>
+              <input id="passwordInput" name="password" type="password" autocomplete="current-password" required />
+            </label>
+            <button id="connectBtn" class="button primary" type="submit">Connect account</button>
+          </form>
+        </section>
+
+        <section id="connectionMessage" class="connectionMessage" hidden role="status"></section>
+        <section id="accounts" class="accountList" aria-label="Connected STC accounts"></section>
+
+        <section id="metrics" class="metrics" aria-label="Account device summary"></section>
+        <section class="toolbar" aria-label="Account device filters">
+          <label class="field searchField"><span>Search</span><input id="searchInput" type="search" placeholder="Device, brand, category, or product ID" /></label>
+          <label class="field"><span>MSISDN</span><select id="accountFilter"><option value="">All accounts</option></select></label>
+          <label class="field"><span>Availability</span><select id="availabilityFilter"><option value="">All availability</option><option value="IN STOCK">IN STOCK</option><option value="OUT OF STOCK">OUT OF STOCK</option></select></label>
+        </section>
+
+        <section class="statusbar">
+          <span id="status">Loading saved account data...</span>
+          <span id="generatedAt">Generated -</span>
+          <strong id="resultCount">0 results</strong>
+        </section>
+
+        <section class="tableWrap accountTableWrap">
+          <table>
+            <thead><tr><th>No.</th><th>MSISDN</th><th>Product ID</th><th>Brand</th><th>Device</th><th>Category</th><th>Availability</th><th>Quantity</th><th>Starting</th><th>Cash</th><th>zeed Price</th></tr></thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script src="/account-devices.js?v=20260820-1" type="module"></script>
+  </body>
+</html>

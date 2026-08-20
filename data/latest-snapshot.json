@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T07:34:16.622Z",
+  "generatedAt": "2026-08-20T08:18:33.241Z",
   "catalogSampleTotals": [
     83,
     83,
@@ -56,7 +56,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-23T06:36:53.212Z",
       "addedAt": "2026-08-03T08:11:44.323Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -109,7 +109,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-29T10:00:29.051Z",
       "addedAt": "2026-08-05T10:59:44.985Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -162,7 +162,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-29T10:00:29.051Z",
       "addedAt": "2026-08-05T10:59:44.985Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -215,7 +215,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-23T06:36:53.212Z",
       "addedAt": "2026-08-03T08:11:44.323Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -268,7 +268,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-23T06:36:53.212Z",
       "addedAt": "2026-08-03T08:11:44.323Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -321,7 +321,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -374,7 +374,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -427,7 +427,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -480,7 +480,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-07-02T09:33:26.190Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -533,7 +533,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -586,7 +586,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -639,7 +639,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -692,7 +692,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -745,7 +745,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -798,7 +798,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-07-02T09:33:26.190Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -851,7 +851,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -904,7 +904,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -957,7 +957,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1010,7 +1010,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1063,7 +1063,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1116,7 +1116,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1169,7 +1169,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-08-13T09:29:39.638Z",
       "addedAt": "2026-08-13T09:29:39.638Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1222,7 +1222,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-08-05T10:59:44.985Z",
       "addedAt": "2026-08-05T10:59:44.985Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1275,7 +1275,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-08-05T10:59:44.985Z",
       "addedAt": "2026-08-05T10:59:44.985Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1328,7 +1328,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1381,7 +1381,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1434,7 +1434,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1487,7 +1487,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1540,7 +1540,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-02T09:33:26.190Z",
       "addedAt": "2026-07-09T08:23:06.071Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1593,7 +1593,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-02T09:33:26.190Z",
       "addedAt": "2026-07-09T08:23:06.071Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1646,7 +1646,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1699,7 +1699,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1752,7 +1752,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1805,7 +1805,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1858,7 +1858,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1911,7 +1911,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -1964,7 +1964,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2017,7 +2017,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2070,7 +2070,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2123,7 +2123,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2176,7 +2176,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2229,7 +2229,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2282,7 +2282,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "2026-07-27T10:29:34.637Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2335,7 +2335,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2388,7 +2388,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2441,7 +2441,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2494,7 +2494,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2547,7 +2547,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2600,7 +2600,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2653,7 +2653,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2706,7 +2706,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2759,7 +2759,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2812,7 +2812,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2865,7 +2865,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-19T12:50:38.250Z",
       "addedAt": "2026-07-19T12:50:38.250Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2918,7 +2918,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-19T12:50:38.250Z",
       "addedAt": "2026-07-19T12:50:38.250Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -2971,7 +2971,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-07-19T12:50:38.250Z",
       "addedAt": "2026-07-19T12:50:38.250Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3020,11 +3020,11 @@
       "filterBrand": "Xiaomi",
       "filterStorage": "",
       "featured": "false",
-      "firstImageUrl": "https://cws.stc.com.kw/sites/stc/en_US/Xiaomi-TV-A-65-e-store-image-700x7003.webp.webp",
+      "firstImageUrl": "https://cws.stc.com.kw/sites/stc/en_US/Xiaomi-TV-A-Pro-65-estore-image.avif",
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "2026-07-20T11:31:47.310Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3077,7 +3077,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-06-07T15:45:04.581Z",
       "addedAt": "2026-07-20T11:31:47.310Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3130,7 +3130,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "2026-07-20T11:31:47.310Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3183,7 +3183,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "2026-07-20T11:31:47.310Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3236,7 +3236,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "2026-07-20T11:31:47.310Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3289,7 +3289,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3342,7 +3342,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3395,7 +3395,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3448,7 +3448,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3501,7 +3501,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3554,7 +3554,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3607,7 +3607,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3660,7 +3660,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3713,7 +3713,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3766,7 +3766,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3819,7 +3819,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3872,7 +3872,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3925,7 +3925,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -3978,7 +3978,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4031,7 +4031,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4084,7 +4084,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4137,7 +4137,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4190,7 +4190,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4243,7 +4243,7 @@
       "deviceStatus": "ADDED",
       "firstSeenAt": "2026-08-20T07:34:16.622Z",
       "addedAt": "2026-08-20T07:34:16.622Z",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4296,7 +4296,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4349,7 +4349,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -4402,7 +4402,7 @@
       "deviceStatus": "ACTIVE",
       "firstSeenAt": "2026-06-07T09:01:30.200Z",
       "addedAt": "",
-      "lastSeenAt": "2026-08-20T07:34:16.622Z",
+      "lastSeenAt": "2026-08-20T08:18:33.241Z",
       "removedAt": ""
     },
     {
@@ -10911,7 +10911,7 @@
       "qty": 1,
       "standalonePrice": "170",
       "imageName": "Xiaomi-TV-A-Pro-65-estore-image",
-      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/Xiaomi-TV-A-65-e-store-image-700x7003.webp.webp"
+      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/Xiaomi-TV-A-Pro-65-estore-image.avif"
     },
     {
       "itemGroup": "XIAOMITV_PRO_55",
@@ -11233,13 +11233,13 @@
       "model": "PlayStation Portal",
       "capacity": "",
       "unit": "GB",
-      "itemCode": "672357e90564dc0008c1bcb7|PS15",
+      "itemCode": "66389899853da300073dddbe|ACS146",
       "colorName": "white",
       "colorCode": "#FFFFFF",
-      "available": true,
+      "available": false,
       "preorder": false,
-      "qty": 1,
-      "standalonePrice": "239",
+      "qty": 0,
+      "standalonePrice": "66",
       "imageName": "PS5-portal-Image",
       "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/PS5-Portal.webp"
     },
@@ -11248,13 +11248,13 @@
       "model": "PlayStation Portal",
       "capacity": "",
       "unit": "GB",
-      "itemCode": "66389899853da300073dddbe|ACS146",
+      "itemCode": "672357e90564dc0008c1bcb7|PS15",
       "colorName": "white",
       "colorCode": "#FFFFFF",
-      "available": false,
+      "available": true,
       "preorder": false,
-      "qty": 0,
-      "standalonePrice": "66",
+      "qty": 1,
+      "standalonePrice": "239",
       "imageName": "PS5-portal-Image",
       "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/PS5-Portal.webp"
     },
@@ -11398,6 +11398,21 @@
       "model": "A07",
       "capacity": "128 GB",
       "unit": "GB",
+      "itemCode": "699f381e62e0619307f7f22b|MH1070",
+      "colorName": "Black",
+      "colorCode": "#000000",
+      "available": true,
+      "preorder": false,
+      "qty": 10,
+      "standalonePrice": "61",
+      "imageName": "Samsung-Galaxy-A07-E-store-Black",
+      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/black-a07-700x700-02.webp"
+    },
+    {
+      "itemGroup": "Samsung_A07",
+      "model": "A07",
+      "capacity": "128 GB",
+      "unit": "GB",
       "itemCode": "67e1604717a349000839a2c5|MH1030",
       "colorName": "Black",
       "colorCode": "#000000",
@@ -11428,21 +11443,6 @@
       "model": "A07",
       "capacity": "128 GB",
       "unit": "GB",
-      "itemCode": "699f381e62e0619307f7f22b|MH1070",
-      "colorName": "Black",
-      "colorCode": "#000000",
-      "available": true,
-      "preorder": false,
-      "qty": 10,
-      "standalonePrice": "61",
-      "imageName": "Samsung-Galaxy-A07-E-store-Black",
-      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/black-a07-700x700-02.webp"
-    },
-    {
-      "itemGroup": "Samsung_A07",
-      "model": "A07",
-      "capacity": "128 GB",
-      "unit": "GB",
       "itemCode": "699f381e62e0619307f7f22b|MH1069",
       "colorName": "Light Violet",
       "colorCode": "#b3b9ce",
@@ -11452,21 +11452,6 @@
       "standalonePrice": "61",
       "imageName": "Samsung-Galaxy-A07-E-store-Violet",
       "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/vilot-a07-700x700-03.webp"
-    },
-    {
-      "itemGroup": "Samsung_A07",
-      "model": "A07",
-      "capacity": "128 GB",
-      "unit": "GB",
-      "itemCode": "67e1604717a349000839a2c5|MH1032",
-      "colorName": "Light Green",
-      "colorCode": "#1a4140",
-      "available": false,
-      "preorder": false,
-      "qty": 0,
-      "standalonePrice": "0",
-      "imageName": "Samsung-Galaxy-A07-E-store-Green",
-      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/green-a07-700x700-01.webp"
     },
     {
       "itemGroup": "Samsung_A07",
@@ -11489,6 +11474,21 @@
       "capacity": "128 GB",
       "unit": "GB",
       "itemCode": "67e1604717a349000839a2c5|MH956",
+      "colorName": "Light Green",
+      "colorCode": "#1a4140",
+      "available": false,
+      "preorder": false,
+      "qty": 0,
+      "standalonePrice": "0",
+      "imageName": "Samsung-Galaxy-A07-E-store-Green",
+      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/green-a07-700x700-01.webp"
+    },
+    {
+      "itemGroup": "Samsung_A07",
+      "model": "A07",
+      "capacity": "128 GB",
+      "unit": "GB",
+      "itemCode": "67e1604717a349000839a2c5|MH1032",
       "colorName": "Light Green",
       "colorCode": "#1a4140",
       "available": false,
@@ -15429,8 +15429,8 @@
       "available": true,
       "preorder": false,
       "qty": 1,
-      "standalonePrice": "66",
-      "equipId": "6899a9323c6b311dad469414|66389899853da300073dddbe"
+      "standalonePrice": "3",
+      "equipId": "66a9eecbaee87e10736f1a8f|61768ba89c9e68ff8d33f94d"
     },
     {
       "itemGroup": "HUAWEI_5G_Mobile_WIFI_Pro_5",
@@ -20217,7 +20217,7 @@
       "itemGroup": "XiaomiTV_APro_65",
       "model": "TV A Pro 65",
       "imageNo": 1,
-      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/Xiaomi-TV-A-65-e-store-image-700x7003.webp.webp"
+      "imageUrl": "https://cws.stc.com.kw/sites/stc/en_US/Xiaomi-TV-A-Pro-65-estore-image.avif"
     },
     {
       "itemGroup": "XIAOMITV_PRO_55",
@@ -20661,11 +20661,11 @@
       "itemCode": "6a6097f672ff69f5fb8b1c75|MH1128",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 36,
-      "deviceRent": 7,
+      "period": 24,
+      "deviceRent": 12,
       "parentPlanPrice": 16,
       "currency": "KWD",
-      "commitmentDescription": "Huawei Pura 90s Pro Max 36M",
+      "commitmentDescription": "Huawei Pura 90s Pro Max 24M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -20675,11 +20675,11 @@
       "itemCode": "6a6097f672ff69f5fb8b1c75|MH1128",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 24,
-      "deviceRent": 12,
+      "period": 36,
+      "deviceRent": 7,
       "parentPlanPrice": 16,
       "currency": "KWD",
-      "commitmentDescription": "Huawei Pura 90s Pro Max 24M",
+      "commitmentDescription": "Huawei Pura 90s Pro Max 36M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -20731,20 +20731,6 @@
       "itemCode": "6a6081cf72ff69f5fb8af8e7|MH1126",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 24,
-      "deviceRent": 4,
-      "parentPlanPrice": 25,
-      "currency": "KWD",
-      "commitmentDescription": "Huawei Pura 90s Pro 24M",
-      "parentPlan": "MONTHLY 25 NP PS",
-      "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
-    },
-    {
-      "itemGroup": "Huawei_Pura90s_Pro",
-      "model": "Pura90s Pro",
-      "itemCode": "6a6081cf72ff69f5fb8af8e7|MH1126",
-      "planName": "Always ON 25",
-      "planId": "63690c9eeda1f2e9ccb418a3",
       "period": 36,
       "deviceRent": 0,
       "parentPlanPrice": 25,
@@ -20757,15 +20743,15 @@
       "itemGroup": "Huawei_Pura90s_Pro",
       "model": "Pura90s Pro",
       "itemCode": "6a6081cf72ff69f5fb8af8e7|MH1126",
-      "planName": "Always ON 16",
-      "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 36,
+      "planName": "Always ON 25",
+      "planId": "63690c9eeda1f2e9ccb418a3",
+      "period": 24,
       "deviceRent": 4,
-      "parentPlanPrice": 16,
+      "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Huawei Pura 90s Pro 36M",
-      "parentPlan": "MONTHLY 16 NP PS",
-      "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
+      "commitmentDescription": "Huawei Pura 90s Pro 24M",
+      "parentPlan": "MONTHLY 25 NP PS",
+      "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
     {
       "itemGroup": "Huawei_Pura90s_Pro",
@@ -20778,6 +20764,20 @@
       "parentPlanPrice": 16,
       "currency": "KWD",
       "commitmentDescription": "Huawei Pura 90s Pro 24M",
+      "parentPlan": "MONTHLY 16 NP PS",
+      "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
+    },
+    {
+      "itemGroup": "Huawei_Pura90s_Pro",
+      "model": "Pura90s Pro",
+      "itemCode": "6a6081cf72ff69f5fb8af8e7|MH1126",
+      "planName": "Always ON 16",
+      "planId": "671dde6d92246ae8a6eee0b9",
+      "period": 36,
+      "deviceRent": 4,
+      "parentPlanPrice": 16,
+      "currency": "KWD",
+      "commitmentDescription": "Huawei Pura 90s Pro 36M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -20843,11 +20843,11 @@
       "itemCode": "6a5f479d90dbcb961b4ad938|MH1117",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 36,
-      "deviceRent": 14,
+      "period": 24,
+      "deviceRent": 22,
       "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung Z Fold 8 Ultra 36M",
+      "commitmentDescription": "Samsung Z Fold 8 Ultra 24M",
       "parentPlan": "MONTHLY 25 NP PS",
       "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
@@ -20857,11 +20857,11 @@
       "itemCode": "6a5f479d90dbcb961b4ad938|MH1117",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 24,
-      "deviceRent": 22,
+      "period": 36,
+      "deviceRent": 14,
       "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung Z Fold 8 Ultra 24M",
+      "commitmentDescription": "Samsung Z Fold 8 Ultra 36M",
       "parentPlan": "MONTHLY 25 NP PS",
       "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
@@ -20927,20 +20927,6 @@
       "itemCode": "6a5f191490dbcb961b4a899d|MH1103",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 36,
-      "deviceRent": 5,
-      "parentPlanPrice": 25,
-      "currency": "KWD",
-      "commitmentDescription": "Samsung Z Flip 8 36M",
-      "parentPlan": "MONTHLY 25 NP PS",
-      "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
-    },
-    {
-      "itemGroup": "Samsung_Z_Flip8",
-      "model": "Flip8",
-      "itemCode": "6a5f191490dbcb961b4a899d|MH1103",
-      "planName": "Always ON 25",
-      "planId": "63690c9eeda1f2e9ccb418a3",
       "period": 24,
       "deviceRent": 10,
       "parentPlanPrice": 25,
@@ -20953,15 +20939,15 @@
       "itemGroup": "Samsung_Z_Flip8",
       "model": "Flip8",
       "itemCode": "6a5f191490dbcb961b4a899d|MH1103",
-      "planName": "Always ON 16",
-      "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 24,
-      "deviceRent": 13,
-      "parentPlanPrice": 16,
+      "planName": "Always ON 25",
+      "planId": "63690c9eeda1f2e9ccb418a3",
+      "period": 36,
+      "deviceRent": 5,
+      "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung Z Flip 8 24M",
-      "parentPlan": "MONTHLY 16 NP PS",
-      "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
+      "commitmentDescription": "Samsung Z Flip 8 36M",
+      "parentPlan": "MONTHLY 25 NP PS",
+      "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
     {
       "itemGroup": "Samsung_Z_Flip8",
@@ -20974,6 +20960,20 @@
       "parentPlanPrice": 16,
       "currency": "KWD",
       "commitmentDescription": "Samsung Z Flip 8 36M",
+      "parentPlan": "MONTHLY 16 NP PS",
+      "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
+    },
+    {
+      "itemGroup": "Samsung_Z_Flip8",
+      "model": "Flip8",
+      "itemCode": "6a5f191490dbcb961b4a899d|MH1103",
+      "planName": "Always ON 16",
+      "planId": "671dde6d92246ae8a6eee0b9",
+      "period": 24,
+      "deviceRent": 13,
+      "parentPlanPrice": 16,
+      "currency": "KWD",
+      "commitmentDescription": "Samsung Z Flip 8 24M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -21025,11 +21025,11 @@
       "itemCode": "68c5450d6c07c9000899f91d|GAMHPRO14",
       "planName": "Youth 11",
       "planId": "65bb4efa57de37d013d4d4f1",
-      "period": 36,
-      "deviceRent": 15,
+      "period": 24,
+      "deviceRent": 21,
       "parentPlanPrice": 11,
       "currency": "KWD",
-      "commitmentDescription": "iPhone 17 Pro Max 36M Youth",
+      "commitmentDescription": "iPhone 17 Pro Max 24M Youth",
       "parentPlan": "MONTHLY 11 Uth PS",
       "benefits": "Local mins: 300 | stc-to-stc mins: Unlimited* | Internet (4G/5G): 500GB | Social Media: Unlimited* | Roaming internet: 10 GB yearly | Premium number: Platinum | Entertainment: 2 On us | Gaming Service: N/A"
     },
@@ -21039,11 +21039,11 @@
       "itemCode": "68c5450d6c07c9000899f91d|GAMHPRO14",
       "planName": "Youth 11",
       "planId": "65bb4efa57de37d013d4d4f1",
-      "period": 24,
-      "deviceRent": 21,
+      "period": 36,
+      "deviceRent": 15,
       "parentPlanPrice": 11,
       "currency": "KWD",
-      "commitmentDescription": "iPhone 17 Pro Max 24M Youth",
+      "commitmentDescription": "iPhone 17 Pro Max 36M Youth",
       "parentPlan": "MONTHLY 11 Uth PS",
       "benefits": "Local mins: 300 | stc-to-stc mins: Unlimited* | Internet (4G/5G): 500GB | Social Media: Unlimited* | Roaming internet: 10 GB yearly | Premium number: Platinum | Entertainment: 2 On us | Gaming Service: N/A"
     },
@@ -21095,11 +21095,11 @@
       "itemCode": "68c536d66c07c90008998ab0|AMHPRO18",
       "planName": "Youth 11",
       "planId": "65bb4efa57de37d013d4d4f1",
-      "period": 24,
-      "deviceRent": 19,
+      "period": 36,
+      "deviceRent": 12,
       "parentPlanPrice": 11,
       "currency": "KWD",
-      "commitmentDescription": "iPhone 17 Pro 24M Youth",
+      "commitmentDescription": "iPhone 17 Pro 36M Youth",
       "parentPlan": "MONTHLY 11 Uth PS",
       "benefits": "Local mins: 300 | stc-to-stc mins: Unlimited* | Internet (4G/5G): 500GB | Social Media: Unlimited* | Roaming internet: 10 GB yearly | Premium number: Platinum | Entertainment: 2 On us | Gaming Service: N/A"
     },
@@ -21109,11 +21109,11 @@
       "itemCode": "68c536d66c07c90008998ab0|AMHPRO18",
       "planName": "Youth 11",
       "planId": "65bb4efa57de37d013d4d4f1",
-      "period": 36,
-      "deviceRent": 12,
+      "period": 24,
+      "deviceRent": 19,
       "parentPlanPrice": 11,
       "currency": "KWD",
-      "commitmentDescription": "iPhone 17 Pro 36M Youth",
+      "commitmentDescription": "iPhone 17 Pro 24M Youth",
       "parentPlan": "MONTHLY 11 Uth PS",
       "benefits": "Local mins: 300 | stc-to-stc mins: Unlimited* | Internet (4G/5G): 500GB | Social Media: Unlimited* | Roaming internet: 10 GB yearly | Premium number: Platinum | Entertainment: 2 On us | Gaming Service: N/A"
     },
@@ -21319,6 +21319,20 @@
       "itemCode": "6a2ff7dbe83d1b11d07c687f|MH1096",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
+      "period": 36,
+      "deviceRent": 13,
+      "parentPlanPrice": 16,
+      "currency": "KWD",
+      "commitmentDescription": "Honor Magic V6 36M",
+      "parentPlan": "MONTHLY 16 NP PS",
+      "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
+    },
+    {
+      "itemGroup": "Honor_Magic_V6",
+      "model": "Magic V6",
+      "itemCode": "6a2ff7dbe83d1b11d07c687f|MH1096",
+      "planName": "Always ON 16",
+      "planId": "671dde6d92246ae8a6eee0b9",
       "period": 24,
       "deviceRent": 22,
       "parentPlanPrice": 16,
@@ -21331,15 +21345,15 @@
       "itemGroup": "Honor_Magic_V6",
       "model": "Magic V6",
       "itemCode": "6a2ff7dbe83d1b11d07c687f|MH1096",
-      "planName": "Always ON 16",
-      "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 36,
+      "planName": "Always ON 35",
+      "planId": "63690c26134d74b31c068786",
+      "period": 24,
       "deviceRent": 13,
-      "parentPlanPrice": 16,
+      "parentPlanPrice": 35,
       "currency": "KWD",
-      "commitmentDescription": "Honor Magic V6 36M",
-      "parentPlan": "MONTHLY 16 NP PS",
-      "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
+      "commitmentDescription": "Honor Magic V6 24M",
+      "parentPlan": "Monthly 35 NP PS",
+      "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
     },
     {
       "itemGroup": "Honor_Magic_V6",
@@ -21352,20 +21366,6 @@
       "parentPlanPrice": 35,
       "currency": "KWD",
       "commitmentDescription": "Honor Magic V6 36M",
-      "parentPlan": "Monthly 35 NP PS",
-      "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
-    },
-    {
-      "itemGroup": "Honor_Magic_V6",
-      "model": "Magic V6",
-      "itemCode": "6a2ff7dbe83d1b11d07c687f|MH1096",
-      "planName": "Always ON 35",
-      "planId": "63690c26134d74b31c068786",
-      "period": 24,
-      "deviceRent": 13,
-      "parentPlanPrice": 35,
-      "currency": "KWD",
-      "commitmentDescription": "Honor Magic V6 24M",
       "parentPlan": "Monthly 35 NP PS",
       "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
     },
@@ -21571,11 +21571,11 @@
       "itemCode": "698ad1ddcad6a3a35e976084|MH1049",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 24,
-      "deviceRent": 7,
+      "period": 36,
+      "deviceRent": 2,
       "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung S26 Plus 24M",
+      "commitmentDescription": "Samsung S26 Plus 36M",
       "parentPlan": "MONTHLY 25 NP PS",
       "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
@@ -21585,11 +21585,11 @@
       "itemCode": "698ad1ddcad6a3a35e976084|MH1049",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 36,
-      "deviceRent": 2,
+      "period": 24,
+      "deviceRent": 7,
       "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung S26 Plus 36M",
+      "commitmentDescription": "Samsung S26 Plus 24M",
       "parentPlan": "MONTHLY 25 NP PS",
       "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
@@ -21725,11 +21725,11 @@
       "itemCode": "698ad355f97f3f7671ab8092|MH1056",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 24,
-      "deviceRent": 11,
+      "period": 36,
+      "deviceRent": 6,
       "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung S26 Ultra 24M",
+      "commitmentDescription": "Samsung S26 Ultra 36M",
       "parentPlan": "MONTHLY 25 NP PS",
       "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
@@ -21739,11 +21739,11 @@
       "itemCode": "698ad355f97f3f7671ab8092|MH1056",
       "planName": "Always ON 25",
       "planId": "63690c9eeda1f2e9ccb418a3",
-      "period": 36,
-      "deviceRent": 6,
+      "period": 24,
+      "deviceRent": 11,
       "parentPlanPrice": 25,
       "currency": "KWD",
-      "commitmentDescription": "Samsung S26 Ultra 36M",
+      "commitmentDescription": "Samsung S26 Ultra 24M",
       "parentPlan": "MONTHLY 25 NP PS",
       "benefits": "Local Mins: 2000 | Internet (5G/5G Advanced): 100 GB | Local SMS: Unlimited** | 5G Advanced: Compatible**"
     },
@@ -21879,11 +21879,11 @@
       "itemCode": "69e9ce66eafdf4e9c7823638|MH1086",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 24,
-      "deviceRent": 5,
+      "period": 36,
+      "deviceRent": 3,
       "parentPlanPrice": 16,
       "currency": "KWD",
-      "commitmentDescription": "Honor 600 24M",
+      "commitmentDescription": "Honor 600 36M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -21893,11 +21893,11 @@
       "itemCode": "69e9ce66eafdf4e9c7823638|MH1086",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 36,
-      "deviceRent": 3,
+      "period": 24,
+      "deviceRent": 5,
       "parentPlanPrice": 16,
       "currency": "KWD",
-      "commitmentDescription": "Honor 600 36M",
+      "commitmentDescription": "Honor 600 24M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -22019,11 +22019,11 @@
       "itemCode": "69e9d024f2fd1dd017ba631a|MH1089",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 36,
-      "deviceRent": 5,
+      "period": 24,
+      "deviceRent": 8,
       "parentPlanPrice": 16,
       "currency": "KWD",
-      "commitmentDescription": "Honor 600 Pro 36M",
+      "commitmentDescription": "Honor 600 Pro 24M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -22033,11 +22033,11 @@
       "itemCode": "69e9d024f2fd1dd017ba631a|MH1089",
       "planName": "Always ON 16",
       "planId": "671dde6d92246ae8a6eee0b9",
-      "period": 24,
-      "deviceRent": 8,
+      "period": 36,
+      "deviceRent": 5,
       "parentPlanPrice": 16,
       "currency": "KWD",
-      "commitmentDescription": "Honor 600 Pro 24M",
+      "commitmentDescription": "Honor 600 Pro 36M",
       "parentPlan": "MONTHLY 16 NP PS",
       "benefits": "Local Mins: 1000 | Internet (5G/5G Advanced): 100 GB | Local SMS: 500 | 5G Advanced: Compatible** | Social media: Unlimited"
     },
@@ -22761,11 +22761,11 @@
       "itemCode": "6899eefa238f5400073568f5|MH1012",
       "planName": "Youth 11",
       "planId": "65bb4efa57de37d013d4d4f1",
-      "period": 36,
-      "deviceRent": 17,
+      "period": 24,
+      "deviceRent": 24,
       "parentPlanPrice": 11,
       "currency": "KWD",
-      "commitmentDescription": "Honor Magic V5 36M - Youth",
+      "commitmentDescription": "Honor Magic V5 24M - Youth",
       "parentPlan": "MONTHLY 11 Uth PS",
       "benefits": "Local mins: 300 | stc-to-stc mins: Unlimited* | Internet (4G/5G): 500GB | Social Media: Unlimited* | Roaming internet: 10 GB yearly | Premium number: Platinum | Entertainment: 2 On us | Gaming Service: N/A"
     },
@@ -22775,11 +22775,11 @@
       "itemCode": "6899eefa238f5400073568f5|MH1012",
       "planName": "Youth 11",
       "planId": "65bb4efa57de37d013d4d4f1",
-      "period": 24,
-      "deviceRent": 24,
+      "period": 36,
+      "deviceRent": 17,
       "parentPlanPrice": 11,
       "currency": "KWD",
-      "commitmentDescription": "Honor Magic V5 24M - Youth",
+      "commitmentDescription": "Honor Magic V5 36M - Youth",
       "parentPlan": "MONTHLY 11 Uth PS",
       "benefits": "Local mins: 300 | stc-to-stc mins: Unlimited* | Internet (4G/5G): 500GB | Social Media: Unlimited* | Roaming internet: 10 GB yearly | Premium number: Platinum | Entertainment: 2 On us | Gaming Service: N/A"
     },
@@ -22859,11 +22859,11 @@
       "itemCode": "6899eefa238f5400073568f5|MH1012",
       "planName": "Always ON 35",
       "planId": "63690c26134d74b31c068786",
-      "period": 24,
-      "deviceRent": 8,
+      "period": 36,
+      "deviceRent": 2,
       "parentPlanPrice": 35,
       "currency": "KWD",
-      "commitmentDescription": "Honor Magic V5 24M",
+      "commitmentDescription": "Honor Magic V5 36M",
       "parentPlan": "Monthly 35 NP PS",
       "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
     },
@@ -22873,11 +22873,11 @@
       "itemCode": "6899eefa238f5400073568f5|MH1012",
       "planName": "Always ON 35",
       "planId": "63690c26134d74b31c068786",
-      "period": 36,
-      "deviceRent": 2,
+      "period": 24,
+      "deviceRent": 8,
       "parentPlanPrice": 35,
       "currency": "KWD",
-      "commitmentDescription": "Honor Magic V5 36M",
+      "commitmentDescription": "Honor Magic V5 24M",
       "parentPlan": "Monthly 35 NP PS",
       "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
     },
@@ -22901,20 +22901,6 @@
       "itemCode": "6899eefa238f5400073568f5|MH1012",
       "planName": "Youth 22",
       "planId": "65bb528f131a64b8aa2bd0a5",
-      "period": 24,
-      "deviceRent": 18,
-      "parentPlanPrice": 22,
-      "currency": "KWD",
-      "commitmentDescription": "Honor Magic V5 24M - Youth",
-      "parentPlan": "MONTHLY 22 Uth PS",
-      "benefits": "Local mins: 2000 | stc-to-stc mins: Unlimited* | Internet (5G/5G Advanced): Unlimited* | Social Media: Unlimited* | Roaming internet: 30GB yearly | Premium number: Platinum | Entertainment: 3 On us | Gaming Service: Free foz | 5G Advanced: Compatibile**"
-    },
-    {
-      "itemGroup": "Honor_Magic_V5",
-      "model": "Magic V5",
-      "itemCode": "6899eefa238f5400073568f5|MH1012",
-      "planName": "Youth 22",
-      "planId": "65bb528f131a64b8aa2bd0a5",
       "period": 36,
       "deviceRent": 11,
       "parentPlanPrice": 22,
@@ -22924,18 +22910,18 @@
       "benefits": "Local mins: 2000 | stc-to-stc mins: Unlimited* | Internet (5G/5G Advanced): Unlimited* | Social Media: Unlimited* | Roaming internet: 30GB yearly | Premium number: Platinum | Entertainment: 3 On us | Gaming Service: Free foz | 5G Advanced: Compatibile**"
     },
     {
-      "itemGroup": "Samsung_Z_Fold_7",
-      "model": "Galaxy Z Fold7",
-      "itemCode": "687624b6b44f1d0007142029|MH999",
-      "planName": "Always ON 45",
-      "planId": "63690c32f84b240f1345349d",
+      "itemGroup": "Honor_Magic_V5",
+      "model": "Magic V5",
+      "itemCode": "6899eefa238f5400073568f5|MH1012",
+      "planName": "Youth 22",
+      "planId": "65bb528f131a64b8aa2bd0a5",
       "period": 24,
-      "deviceRent": 12,
-      "parentPlanPrice": 45,
+      "deviceRent": 18,
+      "parentPlanPrice": 22,
       "currency": "KWD",
-      "commitmentDescription": "Samsung Z Fold 7 24M",
-      "parentPlan": "MONTHLY 45 NP PS",
-      "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 1 TB | Local SMS: Unlimited** | Roaming internet: 10 GB | 5G Advanced: Compatible**"
+      "commitmentDescription": "Honor Magic V5 24M - Youth",
+      "parentPlan": "MONTHLY 22 Uth PS",
+      "benefits": "Local mins: 2000 | stc-to-stc mins: Unlimited* | Internet (5G/5G Advanced): Unlimited* | Social Media: Unlimited* | Roaming internet: 30GB yearly | Premium number: Platinum | Entertainment: 3 On us | Gaming Service: Free foz | 5G Advanced: Compatibile**"
     },
     {
       "itemGroup": "Samsung_Z_Fold_7",
@@ -22948,6 +22934,20 @@
       "parentPlanPrice": 45,
       "currency": "KWD",
       "commitmentDescription": "Samsung Z Fold 7 36M",
+      "parentPlan": "MONTHLY 45 NP PS",
+      "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 1 TB | Local SMS: Unlimited** | Roaming internet: 10 GB | 5G Advanced: Compatible**"
+    },
+    {
+      "itemGroup": "Samsung_Z_Fold_7",
+      "model": "Galaxy Z Fold7",
+      "itemCode": "687624b6b44f1d0007142029|MH999",
+      "planName": "Always ON 45",
+      "planId": "63690c32f84b240f1345349d",
+      "period": 24,
+      "deviceRent": 12,
+      "parentPlanPrice": 45,
+      "currency": "KWD",
+      "commitmentDescription": "Samsung Z Fold 7 24M",
       "parentPlan": "MONTHLY 45 NP PS",
       "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 1 TB | Local SMS: Unlimited** | Roaming internet: 10 GB | 5G Advanced: Compatible**"
     },
@@ -23083,11 +23083,11 @@
       "itemCode": "687624b6b44f1d0007142029|MH999",
       "planName": "Always ON 35",
       "planId": "63690c26134d74b31c068786",
-      "period": 36,
-      "deviceRent": 5,
+      "period": 24,
+      "deviceRent": 15,
       "parentPlanPrice": 35,
       "currency": "KWD",
-      "commitmentDescription": "Samsung Z Fold 7 36M",
+      "commitmentDescription": "Samsung Z Fold 7 24M",
       "parentPlan": "Monthly 35 NP PS",
       "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
     },
@@ -23097,11 +23097,11 @@
       "itemCode": "687624b6b44f1d0007142029|MH999",
       "planName": "Always ON 35",
       "planId": "63690c26134d74b31c068786",
-      "period": 24,
-      "deviceRent": 15,
+      "period": 36,
+      "deviceRent": 5,
       "parentPlanPrice": 35,
       "currency": "KWD",
-      "commitmentDescription": "Samsung Z Fold 7 24M",
+      "commitmentDescription": "Samsung Z Fold 7 36M",
       "parentPlan": "Monthly 35 NP PS",
       "benefits": "Local Mins: Unlimited* | Internet (5G/5G Advanced): 500 GB | Local SMS: Unlimited** | Roaming internet: 1 GB | 5G Advanced: Compatible**"
     },
@@ -24847,6 +24847,19 @@
       "itemGroup": "Samsung_Z_Fold8",
       "model": "Fold8",
       "itemCode": "6a5f223d2d7a8d9bbdec70eb|MH1108",
+      "period": 24,
+      "deviceRent": 27,
+      "minimumRentalPrice": 27,
+      "currency": "KWD",
+      "name": "256GB",
+      "commitmentDescription": "Zeed Samsung Z Fold 8 24M D1",
+      "parentPlan": "5KD Retirement Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Samsung_Z_Fold8",
+      "model": "Fold8",
+      "itemCode": "6a5f223d2d7a8d9bbdec70eb|MH1108",
       "period": 12,
       "deviceRent": 51,
       "minimumRentalPrice": 51,
@@ -24866,19 +24879,6 @@
       "currency": "KWD",
       "name": "256GB",
       "commitmentDescription": "Zeed Samsung Z Fold 8 36M D1",
-      "parentPlan": "5KD Retirement Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Samsung_Z_Fold8",
-      "model": "Fold8",
-      "itemCode": "6a5f223d2d7a8d9bbdec70eb|MH1108",
-      "period": 24,
-      "deviceRent": 27,
-      "minimumRentalPrice": 27,
-      "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "Zeed Samsung Z Fold 8 24M D1",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -24964,19 +24964,6 @@
       "itemGroup": "Samsung_Z_Fold8_Ultra",
       "model": "Fold8 Ultra",
       "itemCode": "6a5f479d90dbcb961b4ad938|MH1117",
-      "period": 24,
-      "deviceRent": 30,
-      "minimumRentalPrice": 30,
-      "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "Zeed Samsung Z Fold8 Ultra 24M D1",
-      "parentPlan": "5KD Retirement Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Samsung_Z_Fold8_Ultra",
-      "model": "Fold8 Ultra",
-      "itemCode": "6a5f479d90dbcb961b4ad938|MH1117",
       "period": 36,
       "deviceRent": 21,
       "minimumRentalPrice": 21,
@@ -24990,12 +24977,38 @@
       "itemGroup": "Samsung_Z_Fold8_Ultra",
       "model": "Fold8 Ultra",
       "itemCode": "6a5f479d90dbcb961b4ad938|MH1117",
+      "period": 24,
+      "deviceRent": 30,
+      "minimumRentalPrice": 30,
+      "currency": "KWD",
+      "name": "256GB",
+      "commitmentDescription": "Zeed Samsung Z Fold8 Ultra 24M D1",
+      "parentPlan": "5KD Retirement Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Samsung_Z_Fold8_Ultra",
+      "model": "Fold8 Ultra",
+      "itemCode": "6a5f479d90dbcb961b4ad938|MH1117",
       "period": 12,
       "deviceRent": 56,
       "minimumRentalPrice": 30,
       "currency": "KWD",
       "name": "256GB",
       "commitmentDescription": "Zeed Samsung Z Fold8 Ultra 12M",
+      "parentPlan": "5KD Retirement Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Samsung_Z_Flip8",
+      "model": "Flip8",
+      "itemCode": "6a5f191490dbcb961b4a899d|MH1103",
+      "period": 36,
+      "deviceRent": 12,
+      "minimumRentalPrice": 12,
+      "currency": "KWD",
+      "name": "256GB",
+      "commitmentDescription": "Zeed Samsung Z Flip 8 36M D1",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25026,15 +25039,15 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Samsung_Z_Flip8",
-      "model": "Flip8",
-      "itemCode": "6a5f191490dbcb961b4a899d|MH1103",
-      "period": 36,
-      "deviceRent": 12,
-      "minimumRentalPrice": 12,
+      "itemGroup": "iPhone_17_Pro_Max",
+      "model": "iPhone 17 Pro Max",
+      "itemCode": "68c5450d6c07c9000899f91d|GAMHPRO14",
+      "period": 24,
+      "deviceRent": 25,
+      "minimumRentalPrice": 25,
       "currency": "KWD",
       "name": "256GB",
-      "commitmentDescription": "Zeed Samsung Z Flip 8 36M D1",
+      "commitmentDescription": "Zeed iPhone 17 Pro Max 24M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25048,19 +25061,6 @@
       "currency": "KWD",
       "name": "256GB",
       "commitmentDescription": "Zeed iPhone 17 Pro Max 36M",
-      "parentPlan": "5KD Retirement Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "iPhone_17_Pro_Max",
-      "model": "iPhone 17 Pro Max",
-      "itemCode": "68c5450d6c07c9000899f91d|GAMHPRO14",
-      "period": 24,
-      "deviceRent": 25,
-      "minimumRentalPrice": 25,
-      "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "Zeed iPhone 17 Pro Max 24M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25094,6 +25094,19 @@
       "itemGroup": "iPhone_17_Air",
       "model": "iPhone Air",
       "itemCode": "68c533b26c07c900089985ad|AMHAR04",
+      "period": 36,
+      "deviceRent": "10.5",
+      "minimumRentalPrice": "10.5",
+      "currency": "KWD",
+      "name": "256GB",
+      "commitmentDescription": "Zeed iPhone Air + Magsafe Battery + Clear Case 36M",
+      "parentPlan": "Baity 5G 10KD Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "iPhone_17_Air",
+      "model": "iPhone Air",
+      "itemCode": "68c533b26c07c900089985ad|AMHAR04",
       "period": 24,
       "deviceRent": 13,
       "minimumRentalPrice": 13,
@@ -25104,16 +25117,16 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "iPhone_17_Air",
-      "model": "iPhone Air",
-      "itemCode": "68c533b26c07c900089985ad|AMHAR04",
-      "period": 36,
-      "deviceRent": "10.5",
-      "minimumRentalPrice": "10.5",
+      "itemGroup": "Honor_Magic_V6",
+      "model": "Magic V6",
+      "itemCode": "6a2ff7dbe83d1b11d07c687f|MH1096",
+      "period": 24,
+      "deviceRent": "27.5",
+      "minimumRentalPrice": "27.5",
       "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "Zeed iPhone Air + Magsafe Battery + Clear Case 36M",
-      "parentPlan": "Baity 5G 10KD Plan PS",
+      "name": "512GB",
+      "commitmentDescription": "Zeed Honor Magic V6 24M",
+      "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -25139,19 +25152,6 @@
       "currency": "KWD",
       "name": "512GB",
       "commitmentDescription": "Zeed Honor Magic V6 36M",
-      "parentPlan": "5KD Retirement Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Honor_Magic_V6",
-      "model": "Magic V6",
-      "itemCode": "6a2ff7dbe83d1b11d07c687f|MH1096",
-      "period": 24,
-      "deviceRent": "27.5",
-      "minimumRentalPrice": "27.5",
-      "currency": "KWD",
-      "name": "512GB",
-      "commitmentDescription": "Zeed Honor Magic V6 24M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25237,6 +25237,19 @@
       "itemGroup": "Honor_600",
       "model": "600",
       "itemCode": "69e9ce66eafdf4e9c7823638|MH1086",
+      "period": 24,
+      "deviceRent": "8.5",
+      "minimumRentalPrice": "8.5",
+      "currency": "KWD",
+      "name": "256GB",
+      "commitmentDescription": "Zeed Honor 600 + Earbuds Clip2 Pro 24M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Honor_600",
+      "model": "600",
+      "itemCode": "69e9ce66eafdf4e9c7823638|MH1086",
       "period": 36,
       "deviceRent": 6,
       "minimumRentalPrice": 6,
@@ -25260,15 +25273,15 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Honor_600",
-      "model": "600",
-      "itemCode": "69e9ce66eafdf4e9c7823638|MH1086",
-      "period": 24,
-      "deviceRent": "8.5",
-      "minimumRentalPrice": "8.5",
+      "itemGroup": "Honor_600_Pro",
+      "model": "600 Pro",
+      "itemCode": "69e9d024f2fd1dd017ba631a|MH1089",
+      "period": 36,
+      "deviceRent": 9,
+      "minimumRentalPrice": 9,
       "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "Zeed Honor 600 + Earbuds Clip2 Pro 24M",
+      "name": "512GB",
+      "commitmentDescription": "Zeed Honor 600 Pro + Earbuds Clip2 Pro 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -25295,19 +25308,6 @@
       "currency": "KWD",
       "name": "512GB",
       "commitmentDescription": "Zeed Honor 600 Pro + Earbuds Clip2 Pro 24M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Honor_600_Pro",
-      "model": "600 Pro",
-      "itemCode": "69e9d024f2fd1dd017ba631a|MH1089",
-      "period": 36,
-      "deviceRent": 9,
-      "minimumRentalPrice": 9,
-      "currency": "KWD",
-      "name": "512GB",
-      "commitmentDescription": "Zeed Honor 600 Pro + Earbuds Clip2 Pro 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -25393,6 +25393,19 @@
       "itemGroup": "Samsung_A37",
       "model": "Galaxy A37 5G",
       "itemCode": "69c8c7ded01a09ea563d1744|MH1073",
+      "period": 36,
+      "deviceRent": 5,
+      "minimumRentalPrice": 5,
+      "currency": "KWD",
+      "name": "Samsung A37 256GB",
+      "commitmentDescription": "ZeedE Samsung A37 36M",
+      "parentPlan": "7.5 internet Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Samsung_A37",
+      "model": "Galaxy A37 5G",
+      "itemCode": "69c8c7ded01a09ea563d1744|MH1073",
       "period": 12,
       "deviceRent": 13,
       "minimumRentalPrice": 13,
@@ -25412,19 +25425,6 @@
       "currency": "KWD",
       "name": "Samsung A37 256GB",
       "commitmentDescription": "ZeedE Samsung A37 24M",
-      "parentPlan": "7.5 internet Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Samsung_A37",
-      "model": "Galaxy A37 5G",
-      "itemCode": "69c8c7ded01a09ea563d1744|MH1073",
-      "period": 36,
-      "deviceRent": 5,
-      "minimumRentalPrice": 5,
-      "currency": "KWD",
-      "name": "Samsung A37 256GB",
-      "commitmentDescription": "ZeedE Samsung A37 36M",
       "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
@@ -25549,12 +25549,12 @@
       "itemGroup": "Samsung_A17",
       "model": "Galaxy A17 5G",
       "itemCode": "68a722668ac03300078c9ef9|MH1015",
-      "period": 36,
-      "deviceRent": "2.5",
-      "minimumRentalPrice": "2.5",
+      "period": 24,
+      "deviceRent": 3,
+      "minimumRentalPrice": 3,
       "currency": "KWD",
       "name": "128GB",
-      "commitmentDescription": "ZeedE Samsung Galaxy A17 36M",
+      "commitmentDescription": "Zeed Samsung Galaxy A17 24M INP",
       "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
@@ -25575,12 +25575,12 @@
       "itemGroup": "Samsung_A17",
       "model": "Galaxy A17 5G",
       "itemCode": "68a722668ac03300078c9ef9|MH1015",
-      "period": 24,
-      "deviceRent": 3,
-      "minimumRentalPrice": 3,
+      "period": 36,
+      "deviceRent": "2.5",
+      "minimumRentalPrice": "2.5",
       "currency": "KWD",
       "name": "128GB",
-      "commitmentDescription": "Zeed Samsung Galaxy A17 24M INP",
+      "commitmentDescription": "ZeedE Samsung Galaxy A17 36M",
       "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
@@ -25627,19 +25627,6 @@
       "itemGroup": "Samsung_Watch_Ultra2",
       "model": "Ultra 2",
       "itemCode": "6a65bb79c64dcb8f67d9df3b|GW67",
-      "period": 24,
-      "deviceRent": "9.5",
-      "minimumRentalPrice": "9.5",
-      "currency": "KWD",
-      "name": "Samsung Watch Ultra 2",
-      "commitmentDescription": "ZeedP Samsung Watch Ultra 2 24M",
-      "parentPlan": "5KD Retirement Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Samsung_Watch_Ultra2",
-      "model": "Ultra 2",
-      "itemCode": "6a65bb79c64dcb8f67d9df3b|GW67",
       "period": 36,
       "deviceRent": 7,
       "minimumRentalPrice": 7,
@@ -25663,15 +25650,15 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Samsung_Watch_9",
-      "model": "Watch 9",
-      "itemCode": "6a65b76e4ccffb53ac678482|GW62",
-      "period": 12,
-      "deviceRent": "10.75",
-      "minimumRentalPrice": "10.75",
+      "itemGroup": "Samsung_Watch_Ultra2",
+      "model": "Ultra 2",
+      "itemCode": "6a65bb79c64dcb8f67d9df3b|GW67",
+      "period": 24,
+      "deviceRent": "9.5",
+      "minimumRentalPrice": "9.5",
       "currency": "KWD",
-      "name": "40mm",
-      "commitmentDescription": "ZeedP Samsung Watch 9 12M",
+      "name": "Samsung Watch Ultra 2",
+      "commitmentDescription": "ZeedP Samsung Watch Ultra 2 24M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25702,6 +25689,19 @@
       "parentPlanPrice": 0
     },
     {
+      "itemGroup": "Samsung_Watch_9",
+      "model": "Watch 9",
+      "itemCode": "6a65b76e4ccffb53ac678482|GW62",
+      "period": 12,
+      "deviceRent": "10.75",
+      "minimumRentalPrice": "10.75",
+      "currency": "KWD",
+      "name": "40mm",
+      "commitmentDescription": "ZeedP Samsung Watch 9 12M",
+      "parentPlan": "5KD Retirement Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
       "itemGroup": "Huawei_Watch_X1_Pro",
       "model": "Watch KIDS X1 Pro",
       "itemCode": "6a425fff4a61d2f4fbc0879f|GW59",
@@ -25711,19 +25711,6 @@
       "currency": "KWD",
       "name": "Huawei Watch kids X1 Pro",
       "commitmentDescription": "ZeedP Huawei Watch kids X1 Pro 24M",
-      "parentPlan": "5KD Retirement Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Huawei_Watch_X1_Pro",
-      "model": "Watch KIDS X1 Pro",
-      "itemCode": "6a425fff4a61d2f4fbc0879f|GW59",
-      "period": 36,
-      "deviceRent": "2.75",
-      "minimumRentalPrice": "2.75",
-      "currency": "KWD",
-      "name": "Huawei Watch kids X1 Pro",
-      "commitmentDescription": "ZeedP Huawei Watch kids X1 Pro 36M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25741,15 +25728,15 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Huawei_Watch_X1",
-      "model": "WATCH KIDS X1",
-      "itemCode": "6a42734e31352e54ff7933fa|GW61",
+      "itemGroup": "Huawei_Watch_X1_Pro",
+      "model": "Watch KIDS X1 Pro",
+      "itemCode": "6a425fff4a61d2f4fbc0879f|GW59",
       "period": 36,
-      "deviceRent": "2.25",
-      "minimumRentalPrice": "2.25",
+      "deviceRent": "2.75",
+      "minimumRentalPrice": "2.75",
       "currency": "KWD",
-      "name": "Huawei Watch kids X1",
-      "commitmentDescription": "ZeedP Huawei Watch kids X1 36M",
+      "name": "Huawei Watch kids X1 Pro",
+      "commitmentDescription": "ZeedP Huawei Watch kids X1 Pro 36M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25776,6 +25763,19 @@
       "currency": "KWD",
       "name": "Huawei Watch kids X1",
       "commitmentDescription": "ZeedP Huawei Watch kids X1 12M",
+      "parentPlan": "5KD Retirement Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Huawei_Watch_X1",
+      "model": "WATCH KIDS X1",
+      "itemCode": "6a42734e31352e54ff7933fa|GW61",
+      "period": 36,
+      "deviceRent": "2.25",
+      "minimumRentalPrice": "2.25",
+      "currency": "KWD",
+      "name": "Huawei Watch kids X1",
+      "commitmentDescription": "ZeedP Huawei Watch kids X1 36M",
       "parentPlan": "5KD Retirement Plan PS",
       "parentPlanPrice": 0
     },
@@ -25822,12 +25822,12 @@
       "itemGroup": "iPhone17_Case",
       "model": "iPhone 17 Clear Case with MagSafe",
       "itemCode": "68c818c8991b18000774a3c2|AACS281",
-      "period": 36,
-      "deviceRent": "0.55",
-      "minimumRentalPrice": "0.55",
+      "period": 24,
+      "deviceRent": "0.75",
+      "minimumRentalPrice": "0.75",
       "currency": "KWD",
       "name": "iPhone 17 Clear Case with MagSafe",
-      "commitmentDescription": "ACS iPhone 17 Case 36M",
+      "commitmentDescription": "ACS iPhone 17 Case 24M",
       "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
@@ -25835,12 +25835,12 @@
       "itemGroup": "iPhone17_Case",
       "model": "iPhone 17 Clear Case with MagSafe",
       "itemCode": "68c818c8991b18000774a3c2|AACS281",
-      "period": 24,
-      "deviceRent": "0.75",
-      "minimumRentalPrice": "0.75",
+      "period": 36,
+      "deviceRent": "0.55",
+      "minimumRentalPrice": "0.55",
       "currency": "KWD",
       "name": "iPhone 17 Clear Case with MagSafe",
-      "commitmentDescription": "ACS iPhone 17 Case 24M",
+      "commitmentDescription": "ACS iPhone 17 Case 36M",
       "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
@@ -25978,19 +25978,6 @@
       "itemGroup": "Honor_Magic_V5",
       "model": "Magic V5",
       "itemCode": "6899eefa238f5400073568f5|MH1012",
-      "period": 12,
-      "deviceRent": 41,
-      "minimumRentalPrice": 41,
-      "currency": "KWD",
-      "name": "512GB",
-      "commitmentDescription": "Zeed Honor Magic V5 12M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Honor_Magic_V5",
-      "model": "Magic V5",
-      "itemCode": "6899eefa238f5400073568f5|MH1012",
       "period": 24,
       "deviceRent": 21,
       "minimumRentalPrice": 21,
@@ -26014,6 +26001,19 @@
       "parentPlanPrice": 0
     },
     {
+      "itemGroup": "Honor_Magic_V5",
+      "model": "Magic V5",
+      "itemCode": "6899eefa238f5400073568f5|MH1012",
+      "period": 12,
+      "deviceRent": 41,
+      "minimumRentalPrice": 41,
+      "currency": "KWD",
+      "name": "512GB",
+      "commitmentDescription": "Zeed Honor Magic V5 12M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
       "itemGroup": "Samsung_Z_Fold_7",
       "model": "Galaxy Z Fold7",
       "itemCode": "687624b6b44f1d0007142029|MH999",
@@ -26023,19 +26023,6 @@
       "currency": "KWD",
       "name": "256GB",
       "commitmentDescription": "Zeed Samsung Z Fold 7 12M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Samsung_Z_Fold_7",
-      "model": "Galaxy Z Fold7",
-      "itemCode": "687624b6b44f1d0007142029|MH999",
-      "period": 36,
-      "deviceRent": 18,
-      "minimumRentalPrice": 18,
-      "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "Zeed Samsung Z Fold 7 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26053,16 +26040,16 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "iPhone_16_ProMax",
-      "model": "iPhone 16 Pro Max",
-      "itemCode": "66d4622860bd4000074b29ae|AMHPM75",
-      "period": 24,
-      "deviceRent": "21.5",
-      "minimumRentalPrice": "21.5",
+      "itemGroup": "Samsung_Z_Fold_7",
+      "model": "Galaxy Z Fold7",
+      "itemCode": "687624b6b44f1d0007142029|MH999",
+      "period": 36,
+      "deviceRent": 18,
+      "minimumRentalPrice": 18,
       "currency": "KWD",
-      "name": "iPhone 16 Pro Max 256GB",
-      "commitmentDescription": "Zeed iPhone 16 Pro Max 24M",
-      "parentPlan": "5KD Retirement Plan PS",
+      "name": "256GB",
+      "commitmentDescription": "Zeed Samsung Z Fold 7 36M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -26076,6 +26063,32 @@
       "name": "iPhone 16 Pro Max 256GB",
       "commitmentDescription": "Zeed iPhone 16 Pro Max 36M",
       "parentPlan": "7.5 internet Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "iPhone_16_ProMax",
+      "model": "iPhone 16 Pro Max",
+      "itemCode": "66d4622860bd4000074b29ae|AMHPM75",
+      "period": 24,
+      "deviceRent": "21.5",
+      "minimumRentalPrice": "21.5",
+      "currency": "KWD",
+      "name": "iPhone 16 Pro Max 256GB",
+      "commitmentDescription": "Zeed iPhone 16 Pro Max 24M",
+      "parentPlan": "5KD Retirement Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Samsung_A26",
+      "model": "A26 5G",
+      "itemCode": "67e1646c4d4b120007e2ab60|MH959",
+      "period": 12,
+      "deviceRent": 8,
+      "minimumRentalPrice": 0,
+      "currency": "KWD",
+      "name": "256GB",
+      "commitmentDescription": "ZeedE Samsung A26 12M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -26105,15 +26118,15 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Samsung_A26",
-      "model": "A26 5G",
-      "itemCode": "67e1646c4d4b120007e2ab60|MH959",
+      "itemGroup": "Samsung_A56",
+      "model": "A56 5G",
+      "itemCode": "67e167d64d4b120007e2afb0|MH967",
       "period": 12,
-      "deviceRent": 8,
+      "deviceRent": 12,
       "minimumRentalPrice": 0,
       "currency": "KWD",
       "name": "256GB",
-      "commitmentDescription": "ZeedE Samsung A26 12M",
+      "commitmentDescription": "ZeedE Samsung A56 12M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26140,19 +26153,6 @@
       "currency": "KWD",
       "name": "256GB",
       "commitmentDescription": "Zeed Samsung A56 36M D1",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "Samsung_A56",
-      "model": "A56 5G",
-      "itemCode": "67e167d64d4b120007e2afb0|MH967",
-      "period": 12,
-      "deviceRent": 12,
-      "minimumRentalPrice": 0,
-      "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "ZeedE Samsung A56 12M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26225,19 +26225,6 @@
       "itemGroup": "iPadA_11_M4",
       "model": "iPad Air 11 M4",
       "itemCode": "69aea370c2a01e740685c131|AIP188",
-      "period": 24,
-      "deviceRent": 10,
-      "minimumRentalPrice": 10,
-      "currency": "KWD",
-      "name": "128GB",
-      "commitmentDescription": "ZeedT iPad Air 11 M4 Wi-Fi 24M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "iPadA_11_M4",
-      "model": "iPad Air 11 M4",
-      "itemCode": "69aea370c2a01e740685c131|AIP188",
       "period": 36,
       "deviceRent": 7,
       "minimumRentalPrice": 7,
@@ -26248,16 +26235,16 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Huawei_MatePad_2025",
-      "model": "MatePad 11.5",
-      "itemCode": "68889f6a238f540007048e50|TB151",
+      "itemGroup": "iPadA_11_M4",
+      "model": "iPad Air 11 M4",
+      "itemCode": "69aea370c2a01e740685c131|AIP188",
       "period": 24,
-      "deviceRent": "4.75",
-      "minimumRentalPrice": "4.75",
+      "deviceRent": 10,
+      "minimumRentalPrice": 10,
       "currency": "KWD",
-      "name": "256GB",
-      "commitmentDescription": "ZeedT Huawei MatePad 11.5 24M",
-      "parentPlan": "7.5 internet Plan PS",
+      "name": "128GB",
+      "commitmentDescription": "ZeedT iPad Air 11 M4 Wi-Fi 24M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -26274,16 +26261,16 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "iPad_Pro_11_M5",
-      "model": "iPad Pro M5 11",
-      "itemCode": "68f510cb0140e10007e57704|AIP177",
+      "itemGroup": "Huawei_MatePad_2025",
+      "model": "MatePad 11.5",
+      "itemCode": "68889f6a238f540007048e50|TB151",
       "period": 24,
-      "deviceRent": 16,
-      "minimumRentalPrice": 16,
+      "deviceRent": "4.75",
+      "minimumRentalPrice": "4.75",
       "currency": "KWD",
-      "name": "iPadPro13 M5 WiFi 256GB",
-      "commitmentDescription": "Zeed iPad Pro 13 WiFi M5 24M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "name": "256GB",
+      "commitmentDescription": "ZeedT Huawei MatePad 11.5 24M",
+      "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -26296,6 +26283,19 @@
       "currency": "KWD",
       "name": "iPadPro13 M5 WiFi 256GB",
       "commitmentDescription": "ZeedT iPad Pro 13 WiFi M5 36M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "iPad_Pro_11_M5",
+      "model": "iPad Pro M5 11",
+      "itemCode": "68f510cb0140e10007e57704|AIP177",
+      "period": 24,
+      "deviceRent": 16,
+      "minimumRentalPrice": 16,
+      "currency": "KWD",
+      "name": "iPadPro13 M5 WiFi 256GB",
+      "commitmentDescription": "Zeed iPad Pro 13 WiFi M5 24M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26329,12 +26329,12 @@
       "itemGroup": "iPad_11_A16",
       "model": "iPad 11 A16",
       "itemCode": "67cef91e05a5fa0007338b18|AIP130",
-      "period": 36,
-      "deviceRent": "5.25",
-      "minimumRentalPrice": "5.25",
+      "period": 12,
+      "deviceRent": "14.5",
+      "minimumRentalPrice": "14.5",
       "currency": "KWD",
       "name": "128GB",
-      "commitmentDescription": "ZeedE iPad 11 Wi-Fi A16 36M",
+      "commitmentDescription": "ZeedE iPad 11 Wi-Fi A16 12M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26355,12 +26355,12 @@
       "itemGroup": "iPad_11_A16",
       "model": "iPad 11 A16",
       "itemCode": "67cef91e05a5fa0007338b18|AIP130",
-      "period": 12,
-      "deviceRent": "14.5",
-      "minimumRentalPrice": "14.5",
+      "period": 36,
+      "deviceRent": "5.25",
+      "minimumRentalPrice": "5.25",
       "currency": "KWD",
       "name": "128GB",
-      "commitmentDescription": "ZeedE iPad 11 Wi-Fi A16 12M",
+      "commitmentDescription": "ZeedE iPad 11 Wi-Fi A16 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26394,19 +26394,6 @@
       "itemGroup": "XiaomiTV_SPro_Mini_65",
       "model": "TV S Pro Mini LED 65",
       "itemCode": "6a4279ca4a61d2f4fbc0eeac|XIATV14",
-      "period": 36,
-      "deviceRent": 8,
-      "minimumRentalPrice": 8,
-      "currency": "KWD",
-      "name": "Xiaomi TV S Pro Mini LED 65",
-      "commitmentDescription": "ZTV Xiaomi S Pro Mini 65 TV 36M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "XiaomiTV_SPro_Mini_65",
-      "model": "TV S Pro Mini LED 65",
-      "itemCode": "6a4279ca4a61d2f4fbc0eeac|XIATV14",
       "period": 24,
       "deviceRent": "10.25",
       "minimumRentalPrice": "10.25",
@@ -26417,15 +26404,15 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "XiaomiTV_SPro_Mini_75",
-      "model": "TV S Pro Mini LED 75",
-      "itemCode": "6a427a7d4a61d2f4fbc0ef6c|XIATV15",
+      "itemGroup": "XiaomiTV_SPro_Mini_65",
+      "model": "TV S Pro Mini LED 65",
+      "itemCode": "6a4279ca4a61d2f4fbc0eeac|XIATV14",
       "period": 36,
-      "deviceRent": "10.75",
-      "minimumRentalPrice": "10.75",
+      "deviceRent": 8,
+      "minimumRentalPrice": 8,
       "currency": "KWD",
-      "name": "Xiaomi TV S Pro Mini LED 75",
-      "commitmentDescription": "ZTV Xiaomi S Pro Mini 75 TV 36M",
+      "name": "Xiaomi TV S Pro Mini LED 65",
+      "commitmentDescription": "ZTV Xiaomi S Pro Mini 65 TV 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26439,6 +26426,19 @@
       "currency": "KWD",
       "name": "Xiaomi TV S Pro Mini LED 75",
       "commitmentDescription": "ZTV Xiaomi S Pro Mini 75 TV 24M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "XiaomiTV_SPro_Mini_75",
+      "model": "TV S Pro Mini LED 75",
+      "itemCode": "6a427a7d4a61d2f4fbc0ef6c|XIATV15",
+      "period": 36,
+      "deviceRent": "10.75",
+      "minimumRentalPrice": "10.75",
+      "currency": "KWD",
+      "name": "Xiaomi TV S Pro Mini LED 75",
+      "commitmentDescription": "ZTV Xiaomi S Pro Mini 75 TV 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26524,12 +26524,12 @@
       "itemGroup": "XiaomiTV_AMax_85",
       "model": "TV A Max 85",
       "itemCode": "67949772b1c96b000773b8c6|XIATV06",
-      "period": 36,
-      "deviceRent": 13,
-      "minimumRentalPrice": 13,
+      "period": 24,
+      "deviceRent": 17,
+      "minimumRentalPrice": 17,
       "currency": "KWD",
       "name": "Xiaomi TV A Max 85",
-      "commitmentDescription": "ZTV Xiaomi Max 85 TV 36M",
+      "commitmentDescription": "ZTV Xiaomi Max 85 TV 24M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26537,12 +26537,12 @@
       "itemGroup": "XiaomiTV_AMax_85",
       "model": "TV A Max 85",
       "itemCode": "67949772b1c96b000773b8c6|XIATV06",
-      "period": 24,
-      "deviceRent": 17,
-      "minimumRentalPrice": 17,
+      "period": 36,
+      "deviceRent": 13,
+      "minimumRentalPrice": 13,
       "currency": "KWD",
       "name": "Xiaomi TV A Max 85",
-      "commitmentDescription": "ZTV Xiaomi Max 85 TV 24M",
+      "commitmentDescription": "ZTV Xiaomi Max 85 TV 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26615,12 +26615,12 @@
       "itemGroup": "Apple_Watch_10_CL",
       "model": "Watch 10 Cellular",
       "itemCode": "66d46eeadba6950008729b8c|AW274",
-      "period": 24,
-      "deviceRent": "7.5",
-      "minimumRentalPrice": "7.5",
+      "period": 36,
+      "deviceRent": "5.5",
+      "minimumRentalPrice": "5.5",
       "currency": "KWD",
       "name": "Apple Watch 10 42mm CL",
-      "commitmentDescription": "ZeedP Apple Watch 10 CEL 24M",
+      "commitmentDescription": "ZeedP Apple Watch 10 CEL 36M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26628,12 +26628,12 @@
       "itemGroup": "Apple_Watch_10_CL",
       "model": "Watch 10 Cellular",
       "itemCode": "66d46eeadba6950008729b8c|AW274",
-      "period": 36,
-      "deviceRent": "5.5",
-      "minimumRentalPrice": "5.5",
+      "period": 24,
+      "deviceRent": "7.5",
+      "minimumRentalPrice": "7.5",
       "currency": "KWD",
       "name": "Apple Watch 10 42mm CL",
-      "commitmentDescription": "ZeedP Apple Watch 10 CEL 36M",
+      "commitmentDescription": "ZeedP Apple Watch 10 CEL 24M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26771,19 +26771,6 @@
       "itemGroup": "iPhone17_ProMax_Protector",
       "model": "iPhone 17 Pro max Protector",
       "itemCode": "68c81ce1991b18000774ade0|GAACS27",
-      "period": 24,
-      "deviceRent": "0.3",
-      "minimumRentalPrice": "0.3",
-      "currency": "KWD",
-      "name": "iPhone 17 Pro Max Screen Protector ESR",
-      "commitmentDescription": "ACS iPhone 17 Pro max Protector 24M",
-      "parentPlan": "7.5 internet Plan PS",
-      "parentPlanPrice": 0
-    },
-    {
-      "itemGroup": "iPhone17_ProMax_Protector",
-      "model": "iPhone 17 Pro max Protector",
-      "itemCode": "68c81ce1991b18000774ade0|GAACS27",
       "period": 36,
       "deviceRent": "0.25",
       "minimumRentalPrice": "0.25",
@@ -26794,16 +26781,16 @@
       "parentPlanPrice": 0
     },
     {
-      "itemGroup": "Airpods_Pro_2",
-      "model": "Airpods Pro (2nd gen)",
-      "itemCode": "6332f046e36cbe00072673b0|AACS108",
-      "period": 12,
-      "deviceRent": "7.5",
-      "minimumRentalPrice": "7.5",
+      "itemGroup": "iPhone17_ProMax_Protector",
+      "model": "iPhone 17 Pro max Protector",
+      "itemCode": "68c81ce1991b18000774ade0|GAACS27",
+      "period": 24,
+      "deviceRent": "0.3",
+      "minimumRentalPrice": "0.3",
       "currency": "KWD",
-      "name": "Airpods pro 2",
-      "commitmentDescription": "ZeedP Airpods Pro 2 12M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "name": "iPhone 17 Pro Max Screen Protector ESR",
+      "commitmentDescription": "ACS iPhone 17 Pro max Protector 24M",
+      "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -26816,6 +26803,19 @@
       "currency": "KWD",
       "name": "Airpods pro 2",
       "commitmentDescription": "ZeedP Airpods Pro 2 24M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "parentPlanPrice": 0
+    },
+    {
+      "itemGroup": "Airpods_Pro_2",
+      "model": "Airpods Pro (2nd gen)",
+      "itemCode": "6332f046e36cbe00072673b0|AACS108",
+      "period": 12,
+      "deviceRent": "7.5",
+      "minimumRentalPrice": "7.5",
+      "currency": "KWD",
+      "name": "Airpods pro 2",
+      "commitmentDescription": "ZeedP Airpods Pro 2 12M",
       "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
@@ -26836,13 +26836,13 @@
       "itemGroup": "Samsung_A07",
       "model": "A07",
       "itemCode": "699f381e62e0619307f7f22b|MH1070",
-      "period": 24,
-      "deviceRent": 3,
+      "period": 12,
+      "deviceRent": "5.25",
       "minimumRentalPrice": 0,
       "currency": "KWD",
       "name": "256GB",
-      "commitmentDescription": "ZeedE Samsung A07 24M",
-      "parentPlan": "7.5 internet Plan PS",
+      "commitmentDescription": "ZeedE Samsung A07 12M",
+      "parentPlan": "B2C Quality Net Employee Plan PS",
       "parentPlanPrice": 0
     },
     {
@@ -26862,13 +26862,13 @@
       "itemGroup": "Samsung_A07",
       "model": "A07",
       "itemCode": "699f381e62e0619307f7f22b|MH1070",
-      "period": 12,
-      "deviceRent": "5.25",
+      "period": 24,
+      "deviceRent": 3,
       "minimumRentalPrice": 0,
       "currency": "KWD",
       "name": "256GB",
-      "commitmentDescription": "ZeedE Samsung A07 12M",
-      "parentPlan": "B2C Quality Net Employee Plan PS",
+      "commitmentDescription": "ZeedE Samsung A07 24M",
+      "parentPlan": "7.5 internet Plan PS",
       "parentPlanPrice": 0
     },
     {

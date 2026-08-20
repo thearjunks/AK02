@@ -4,6 +4,14 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { buildExcel, buildStockExcel } from "./excel-export.mjs";
 import { fetchStcDevices } from "./stc-service.mjs";
+import {
+  configureAccountService,
+  connectStcAccount,
+  loadAccountData,
+  publicAccountData,
+  refreshStcAccounts,
+  removeStcAccount,
+} from "./stc-account-service.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "public");
@@ -32,6 +40,8 @@ async function readPreviousSnapshot() {
 
 export async function loadSavedData() {
   authConfig = await loadAuthConfig();
+  configureAccountService(process.env.ACCOUNT_CREDENTIAL_KEY || authConfig.sessionSecret);
+  await loadAccountData();
   lastData = await readPreviousSnapshot();
   return lastData;
 }
@@ -153,6 +163,21 @@ async function readForm(request) {
     chunks.push(chunk);
   }
   return new URLSearchParams(Buffer.concat(chunks).toString("utf8"));
+}
+
+async function readJson(request) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > 32_768) throw new Error("Request is too large.");
+    chunks.push(chunk);
+  }
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
+  } catch {
+    throw new Error("Invalid JSON request.");
+  }
 }
 
 function safeNextPath(value) {
@@ -295,7 +320,8 @@ function filenameStamp() {
 async function serveStatic(request, response) {
   const url = new URL(request.url, "http://localhost");
   const dashboardRoutes = new Set(["/", "/all-devices", "/stock", "/zed-prices", "/content", "/removed-devices", "/plans", "/device-master"]);
-  const pathname = dashboardRoutes.has(url.pathname.replace(/\/$/, "") || "/") ? "/index.html" : url.pathname;
+  const cleanPath = url.pathname.replace(/\/$/, "") || "/";
+  const pathname = dashboardRoutes.has(cleanPath) ? "/index.html" : cleanPath === "/account-devices" ? "/account-devices.html" : url.pathname;
   const safePath = path.normalize(pathname).replace(/^(\.\.[/\\])+/, "");
   const filePath = path.join(publicDir, safePath);
   if (!filePath.startsWith(publicDir)) {
@@ -421,6 +447,37 @@ export async function handleRequest(request, response) {
     }
     if (url.pathname === "/api/cached-data") {
       sendJson(response, 200, lastData || { devices: [], generatedAt: null });
+      return;
+    }
+    if (url.pathname === "/api/stc-accounts" && request.method === "GET") {
+      sendJson(response, 200, publicAccountData());
+      return;
+    }
+    if (url.pathname === "/api/stc-accounts" && request.method === "POST") {
+      const body = await readJson(request);
+      try {
+        sendJson(response, 200, await connectStcAccount(body.msisdn, body.password));
+      } catch (error) {
+        sendJson(response, 422, { error: error.message || "STC connection failed." });
+      }
+      return;
+    }
+    if (url.pathname === "/api/stc-accounts/refresh" && request.method === "POST") {
+      const body = await readJson(request);
+      try {
+        sendJson(response, 200, await refreshStcAccounts(body.msisdn || ""));
+      } catch (error) {
+        sendJson(response, 422, { error: error.message || "STC account refresh failed." });
+      }
+      return;
+    }
+    if (url.pathname.startsWith("/api/stc-accounts/") && request.method === "DELETE") {
+      const msisdn = decodeURIComponent(url.pathname.slice("/api/stc-accounts/".length));
+      try {
+        sendJson(response, 200, await removeStcAccount(msisdn));
+      } catch (error) {
+        sendJson(response, 422, { error: error.message || "STC account removal failed." });
+      }
       return;
     }
     await serveStatic(request, response);

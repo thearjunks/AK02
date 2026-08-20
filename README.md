@@ -406,6 +406,24 @@ When the Node app is running, these links should work:
 /api/download-report Excel download
 ```
 
+## STC Account Devices
+
+Open the protected account board at:
+
+```text
+/account-devices
+```
+
+Enter an STC Kuwait MSISDN and its password. The server validates the login with STC before it displays `Connected Successfully`. Passwords are encrypted on the server and are never returned to the browser, included in Excel, or committed to GitHub.
+
+For production, add a long random Hostinger environment variable named:
+
+```text
+ACCOUNT_CREDENTIAL_KEY
+```
+
+Do not change this value after accounts are saved. Changing it makes the existing encrypted credentials unreadable, and the accounts must then be added again. Runtime account credentials and account data are excluded from Git.
+
 If `/api/live-data` does not work, the dashboard cannot fetch live data.
 
 ## Common Problems
