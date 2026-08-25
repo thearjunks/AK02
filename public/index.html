@@ -14,19 +14,21 @@
           <span>Device Operations</span>
         </a>
         <nav class="boardNav" aria-label="Dashboard boards">
-          <a data-board="all" href="/all-devices">All Devices</a>
-          <a data-board="stock" href="/stock">Stock Management</a>
-          <a data-board="zed" href="/zed-prices">zeed Price</a>
-          <a data-board="content" href="/content">Device Content</a>
-          <a data-board="removed" href="/removed-devices">Removed Devices</a>
-          <a data-board="plans" href="/plans">Devices by Plan</a>
-          <a data-board="master" href="/device-master">Device Master</a>
-          <a href="/account-devices">Account Devices</a>
+          <a data-board="all" data-permission="all" href="/all-devices">All Devices</a>
+          <a data-board="stock" data-permission="stock" href="/stock">Stock Management</a>
+          <a data-board="zed" data-permission="zed" href="/zed-prices">zeed Price</a>
+          <a data-board="content" data-permission="content" href="/content">Device Content</a>
+          <a data-board="removed" data-permission="removed" href="/removed-devices">Removed Devices</a>
+          <a data-board="plans" data-permission="plans" href="/plans">Devices by Plan</a>
+          <a data-board="master" data-permission="master" href="/device-master">Device Master</a>
+          <a data-permission="accounts" href="/account-devices">Account Devices</a>
+          <a data-admin-only href="/admin/access">Access Management <span id="accessRequestBadge" class="navBadge" hidden></span></a>
         </nav>
         <div class="sourceNote">
           <span>Source</span>
           <strong>STC Kuwait e-store</strong>
           <small id="sidebarFreshness">Loading snapshot</small>
+          <small id="signedInUser"></small>
         </div>
         <form class="logoutForm" method="post" action="/logout">
           <button type="submit">Sign out</button>
@@ -43,7 +45,7 @@
             <button id="refreshBtn" class="button secondary" type="button">
               <span aria-hidden="true">&#8635;</span> Refresh live data
             </button>
-            <a id="exportBtn" class="button primary" href="/api/download-report">Download Excel</a>
+            <a id="exportBtn" data-download-action class="button primary" href="/api/download-report">Download Excel</a>
           </div>
         </header>
 
@@ -81,6 +83,6 @@
     </aside>
 
     <script>window.STC_API_BASE = window.STC_API_BASE || "";</script>
-    <script src="/app.js?v=20260806-7" type="module"></script>
+    <script src="/app.js?v=20260825-1" type="module"></script>
   </body>
 </html>

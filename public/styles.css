@@ -62,6 +62,7 @@ button, input, select { font: inherit; }
 }
 .boardNav a:hover { background: #f7f3fa; color: #4f008c; }
 .boardNav a.active { border-left-color: #4f008c; background: #f2eaf7; color: #4f008c; }
+.navBadge { min-width: 20px; margin-left: auto; padding: 2px 6px; border-radius: 10px; background: #ff375e; color: #fff; font-size: 10px; text-align: center; }
 
 .sourceNote {
   display: grid;
@@ -279,6 +280,41 @@ tbody tr:hover { background: #faf7fc; }
 .accountEmpty { padding: 18px; border: 1px dashed #ccd2da; border-radius: 7px; color: #727d89; font-size: 12px; text-align: center; }
 .accountTableWrap { max-height: calc(100vh - 390px); }
 
+.publicAccessPage { min-height: 100vh; display: grid; place-items: center; padding: 20px; background: #f4f5f7; }
+.accessRequestPanel { width: min(500px, 100%); padding: 28px; border: 1px solid #dfe3e8; border-radius: 8px; background: #fff; box-shadow: 0 14px 35px rgba(32, 38, 46, .1); }
+.accessRequestPanel .brand { padding-left: 0; }
+.accessRequestPanel h1 { font-size: 24px; }
+.requestAccessForm { display: grid; gap: 4px; margin-top: 22px; }
+.requestAccessForm .field { min-width: 0; }
+.backToLogin { display: block; margin-top: 18px; color: #4f008c; font-size: 13px; font-weight: 800; text-align: center; text-decoration: none; }
+
+.accessWorkspace { display: block; }
+.accessSection { margin-bottom: 18px; padding: 18px; border-top: 1px solid #dfe3e8; border-bottom: 1px solid #dfe3e8; background: #fff; }
+.sectionHeading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
+.sectionHeading h2 { margin: 0; font-size: 18px; letter-spacing: 0; }
+.sectionHeading p { font-size: 12px; }
+.sectionHeading select, .sectionHeading input { width: 220px; }
+.accessList { display: grid; gap: 10px; }
+.accessRow { display: grid; grid-template-columns: minmax(190px, .8fr) minmax(150px, .5fr) minmax(420px, 2fr); gap: 18px; align-items: start; padding: 14px 0; border-bottom: 1px solid #eceff2; }
+.accessRow:last-child { border-bottom: 0; }
+.accessIdentity strong, .accessIdentity span, .accessRow small, .decisionSummary span { display: block; }
+.accessIdentity span, .accessRow small, .decisionSummary span { margin-top: 4px; color: #727d89; font-size: 11px; }
+.requestDecision { display: grid; grid-template-columns: 160px 220px; gap: 10px; }
+.requestDecision .permissionSet { grid-column: 1 / -1; }
+.decisionActions { display: flex; grid-column: 1 / -1; justify-content: flex-end; gap: 8px; }
+.permissionSet { min-width: 0; margin: 0; padding: 10px 12px; border: 1px solid #dde1e6; border-radius: 6px; }
+.permissionSet legend { padding: 0 5px; color: #59636f; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+.permissionGrid { display: grid; grid-template-columns: repeat(4, minmax(100px, 1fr)); gap: 8px; }
+.permissionSet label, .toggleField { display: flex; align-items: center; gap: 6px; color: #3f4853; font-size: 12px; font-weight: 700; }
+.permissionSet input, .toggleField input { width: 16px; height: 16px; }
+.featurePermissions { display: flex; gap: 22px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #eceff2; }
+.userRow { grid-template-columns: 220px minmax(0, 1fr); }
+.userRow .permissionSet { grid-column: 1 / -1; }
+.userControls { display: grid; grid-template-columns: 140px 110px minmax(200px, 1fr); align-items: end; gap: 10px; }
+.toggleField { min-height: 40px; }
+.saveUser { display: flex; grid-column: 1 / -1; align-items: center; justify-content: flex-end; gap: 14px; }
+.saveUser span { color: #727d89; font-size: 11px; }
+
 @media (max-width: 980px) {
   .appShell { display: block; }
   .sidebar { position: static; height: auto; padding: 12px; border-right: 0; border-bottom: 1px solid #dfe3e8; }
@@ -291,6 +327,8 @@ tbody tr:hover { background: #faf7fc; }
   .workspace { padding: 18px; }
   .tableWrap { max-height: none; }
   .accountManager { align-items: stretch; flex-direction: column; }
+  .accessRow, .userRow { grid-template-columns: 1fr; }
+  .saveUser { grid-column: 1; }
 }
 
 @media (max-width: 720px) {
@@ -305,4 +343,8 @@ tbody tr:hover { background: #faf7fc; }
   .accountForm .field { min-width: 100%; }
   .accountRow { grid-template-columns: 1fr auto; }
   .accountMeta { grid-column: 1 / -1; }
+  .sectionHeading, .requestDecision, .userControls { align-items: stretch; grid-template-columns: 1fr; flex-direction: column; }
+  .sectionHeading select, .sectionHeading input { width: 100%; }
+  .permissionGrid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+  .requestDecision .permissionSet, .decisionActions { grid-column: 1; }
 }

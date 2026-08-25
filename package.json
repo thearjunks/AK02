@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "check:accounts": "node scripts/check-account-service.mjs"
+    "check:accounts": "node scripts/check-account-service.mjs",
+    "check:access": "node scripts/check-access-control.mjs"
   },
   "dependencies": {
     "exceljs": "^4.4.0",

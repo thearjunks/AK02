@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Access Management | STC Device Operations</title>
+    <link rel="stylesheet" href="/styles.css?v=20260825-1" />
+  </head>
+  <body>
+    <div class="appShell">
+      <aside class="sidebar">
+        <a class="brand" href="/admin/access"><span class="brandMark">stc</span><span>Device Operations</span></a>
+        <nav class="boardNav" aria-label="Dashboard boards">
+          <a data-permission="all" href="/all-devices">All Devices</a>
+          <a data-permission="stock" href="/stock">Stock Management</a>
+          <a data-permission="zed" href="/zed-prices">zeed Price</a>
+          <a data-permission="content" href="/content">Device Content</a>
+          <a data-permission="removed" href="/removed-devices">Removed Devices</a>
+          <a data-permission="plans" href="/plans">Devices by Plan</a>
+          <a data-permission="master" href="/device-master">Device Master</a>
+          <a data-permission="accounts" href="/account-devices">Account Devices</a>
+          <a data-admin-only class="active" href="/admin/access">Access Management <span id="accessRequestBadge" class="navBadge" hidden></span></a>
+        </nav>
+        <div class="sourceNote"><span>Signed in</span><strong id="signedInUser">Admin</strong><small>Role-based access control</small></div>
+        <form class="logoutForm" method="post" action="/logout"><button type="submit">Sign out</button></form>
+      </aside>
+
+      <main class="workspace accessWorkspace">
+        <header class="topbar"><div><h1>Access Management</h1><p>Review requests and control roles, dashboards, email, and downloads</p></div></header>
+        <section id="adminMessage" class="connectionMessage" hidden role="status"></section>
+        <section id="accessMetrics" class="metrics" aria-label="Access summary"></section>
+
+        <section class="accessSection">
+          <div class="sectionHeading"><div><h2>Access Requests</h2><p>Approve requests with an initial password and assigned permissions.</p></div><select id="requestStatusFilter" aria-label="Request status"><option value="">All requests</option><option value="PENDING">Pending</option><option value="APPROVED">Approved</option><option value="REJECTED">Rejected</option></select></div>
+          <div id="requestList" class="accessList"></div>
+        </section>
+
+        <section class="accessSection">
+          <div class="sectionHeading"><div><h2>Users and Permissions</h2><p>Changes take effect on the user's next request.</p></div><input id="userSearch" type="search" placeholder="Search users" aria-label="Search users" /></div>
+          <div id="userList" class="accessList"></div>
+        </section>
+      </main>
+    </div>
+    <script src="/admin-access.js?v=20260825-1" type="module"></script>
+  </body>
+</html>

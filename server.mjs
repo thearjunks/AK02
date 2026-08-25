@@ -12,6 +12,19 @@ import {
   refreshStcAccounts,
   removeStcAccount,
 } from "./stc-account-service.mjs";
+import {
+  DASHBOARD_ROUTES,
+  adminAccessData,
+  authenticateUser,
+  canAccessDashboard,
+  createAccessRequest,
+  decideAccessRequest,
+  defaultRouteFor,
+  findUserById,
+  loadAccessControl,
+  sessionUser,
+  updateAccessUser,
+} from "./access-control.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, "public");
@@ -25,6 +38,20 @@ const sessionLifetimeMs = 12 * 60 * 60 * 1000;
 let lastData = null;
 let authConfig = null;
 let refreshInFlight = null;
+const loginAttempts = new Map();
+const accessRequestAttempts = new Map();
+
+function clientKey(request) {
+  return String(request.headers["x-forwarded-for"] || request.socket?.remoteAddress || "unknown").split(",")[0].trim();
+}
+
+function tooManyAttempts(store, key, limit, windowMs) {
+  const now = Date.now();
+  const recent = (store.get(key) || []).filter((timestamp) => now - timestamp < windowMs);
+  recent.push(now);
+  store.set(key, recent);
+  return recent.length > limit;
+}
 
 function deviceKey(device) {
   return device?.detailApiKey || device?.productUrl || device?.itemGroup || `${device?.category || ""}:${device?.deviceName || ""}`;
@@ -40,6 +67,10 @@ async function readPreviousSnapshot() {
 
 export async function loadSavedData() {
   authConfig = await loadAuthConfig();
+  await loadAccessControl({
+    adminUsername: process.env.ADMIN_USERNAME || "arjun.sajimon",
+    adminPassword: process.env.ADMIN_PASSWORD || authConfig.password,
+  });
   configureAccountService(process.env.ACCOUNT_CREDENTIAL_KEY || authConfig.sessionSecret);
   await loadAccountData();
   lastData = await readPreviousSnapshot();
@@ -58,7 +89,7 @@ async function loadAuthConfig() {
     password: process.env.DASHBOARD_PASSWORD || privateConfig.password,
     sessionSecret: process.env.SESSION_SECRET || privateConfig.sessionSecret,
   };
-  if (!config.username || !config.password || !config.sessionSecret) {
+  if (!config.password || !config.sessionSecret) {
     throw new Error("Dashboard authentication is not configured.");
   }
   return config;
@@ -70,28 +101,29 @@ function safeEqual(left, right) {
   return leftBuffer.length === rightBuffer.length && crypto.timingSafeEqual(leftBuffer, rightBuffer);
 }
 
-function signSession(expiresAt) {
-  const payload = Buffer.from(JSON.stringify({ username: authConfig.username, expiresAt })).toString("base64url");
+function signSession(user, expiresAt) {
+  const payload = Buffer.from(JSON.stringify({ userId: user.id, expiresAt })).toString("base64url");
   const signature = crypto.createHmac("sha256", authConfig.sessionSecret).update(payload).digest("base64url");
   return `${payload}.${signature}`;
 }
 
-function validSession(request) {
+function sessionFromRequest(request) {
   const cookies = Object.fromEntries(String(request.headers.cookie || "").split(";").map((part) => {
     const separator = part.indexOf("=");
     return separator < 0 ? [part.trim(), ""] : [part.slice(0, separator).trim(), part.slice(separator + 1)];
   }));
   const token = cookies[authCookieName];
-  if (!token) return false;
+  if (!token) return null;
   const [payload, signature] = token.split(".");
-  if (!payload || !signature) return false;
+  if (!payload || !signature) return null;
   const expected = crypto.createHmac("sha256", authConfig.sessionSecret).update(payload).digest("base64url");
-  if (!safeEqual(signature, expected)) return false;
+  if (!safeEqual(signature, expected)) return null;
   try {
     const session = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
-    return session.username === authConfig.username && Number(session.expiresAt) > Date.now();
+    if (Number(session.expiresAt) <= Date.now()) return null;
+    return findUserById(session.userId);
   } catch {
-    return false;
+    return null;
   }
 }
 
@@ -118,7 +150,7 @@ function loginPage(errorMessage = "", nextPath = "/all-devices") {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign in | STC Device Operations</title>
   <style>
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:#f4f5f7;color:#20262e;font-family:Inter,"Segoe UI",Arial,sans-serif}.login{width:min(390px,100%);padding:28px;border:1px solid #dfe3e8;border-radius:8px;background:#fff;box-shadow:0 14px 35px rgba(32,38,46,.1)}.brand{display:flex;align-items:center;gap:10px;margin-bottom:26px;font-weight:800}.mark{display:grid;width:44px;height:38px;place-items:center;border-radius:5px;background:#4f008c;color:#fff;font-size:20px}h1{margin:0;font-size:24px;letter-spacing:0}p{margin:7px 0 22px;color:#6c7683;font-size:14px}.field{display:grid;gap:6px;margin:0 0 15px}.field span{color:#59636f;font-size:12px;font-weight:800}input{width:100%;height:44px;padding:0 12px;border:1px solid #cbd1d8;border-radius:6px;font:inherit}input:focus{border-color:#4f008c;outline:2px solid #eadcf3}button{width:100%;height:44px;border:0;border-radius:6px;background:#4f008c;color:#fff;font:inherit;font-weight:800;cursor:pointer}.error{margin:-4px 0 15px;padding:10px;border-left:3px solid #b42318;background:#fdecec;color:#b42318;font-size:13px}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:#f4f5f7;color:#20262e;font-family:Inter,"Segoe UI",Arial,sans-serif}.login{width:min(390px,100%);padding:28px;border:1px solid #dfe3e8;border-radius:8px;background:#fff;box-shadow:0 14px 35px rgba(32,38,46,.1)}.brand{display:flex;align-items:center;gap:10px;margin-bottom:26px;font-weight:800}.mark{display:grid;width:44px;height:38px;place-items:center;border-radius:5px;background:#4f008c;color:#fff;font-size:20px}h1{margin:0;font-size:24px;letter-spacing:0}p{margin:7px 0 22px;color:#6c7683;font-size:14px}.field{display:grid;gap:6px;margin:0 0 15px}.field span{color:#59636f;font-size:12px;font-weight:800}input{width:100%;height:44px;padding:0 12px;border:1px solid #cbd1d8;border-radius:6px;font:inherit}input:focus{border-color:#4f008c;outline:2px solid #eadcf3}button{width:100%;height:44px;border:0;border-radius:6px;background:#4f008c;color:#fff;font:inherit;font-weight:800;cursor:pointer}.request{display:block;margin-top:18px;color:#4f008c;font-size:13px;font-weight:800;text-align:center;text-decoration:none}.error{margin:-4px 0 15px;padding:10px;border-left:3px solid #b42318;background:#fdecec;color:#b42318;font-size:13px}
   </style>
 </head>
 <body>
@@ -132,6 +164,7 @@ function loginPage(errorMessage = "", nextPath = "/all-devices") {
       <label class="field"><span>Password</span><input name="password" type="password" autocomplete="current-password" required /></label>
       <button type="submit">Sign in</button>
     </form>
+    <a class="request" href="/request-access">Request Access</a>
   </main>
 </body>
 </html>`;
@@ -149,7 +182,7 @@ function sendLoginPage(response, errorMessage = "", nextPath = "/all-devices", s
     "Cache-Control": "no-store",
     "X-Frame-Options": "DENY",
     "X-Content-Type-Options": "nosniff",
-    "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+    "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; navigate-to 'self'",
   });
   response.end(body);
 }
@@ -183,6 +216,29 @@ async function readJson(request) {
 function safeNextPath(value) {
   const nextPath = String(value || "");
   return nextPath.startsWith("/") && !nextPath.startsWith("//") ? nextPath : "/all-devices";
+}
+
+const routeDashboard = new Map(Object.entries(DASHBOARD_ROUTES).map(([dashboard, route]) => [route, dashboard]));
+routeDashboard.set("/", "all");
+
+function dashboardForPath(pathname) {
+  return routeDashboard.get(pathname.replace(/\/$/, "") || "/") || "";
+}
+
+function requestedBoard(url) {
+  const board = url.searchParams.get("board") || "all";
+  return Object.hasOwn(DASHBOARD_ROUTES, board) ? board : "all";
+}
+
+function permittedNextPath(value, user) {
+  const nextPath = safeNextPath(value);
+  if (nextPath === "/admin/access" && user.role === "ADMIN") return nextPath;
+  const dashboard = dashboardForPath(nextPath);
+  return dashboard && canAccessDashboard(user, dashboard) ? nextPath : defaultRouteFor(user);
+}
+
+function deny(response, message = "You do not have permission to access this feature.") {
+  sendJson(response, 403, { error: message });
 }
 
 function mergeRowsForRemoved(currentRows, previousRows, removedItemGroups) {
@@ -321,7 +377,17 @@ async function serveStatic(request, response) {
   const url = new URL(request.url, "http://localhost");
   const dashboardRoutes = new Set(["/", "/all-devices", "/stock", "/zed-prices", "/content", "/removed-devices", "/plans", "/device-master"]);
   const cleanPath = url.pathname.replace(/\/$/, "") || "/";
-  const pathname = dashboardRoutes.has(cleanPath) ? "/index.html" : cleanPath === "/account-devices" ? "/account-devices.html" : url.pathname;
+  const pathname = dashboardRoutes.has(cleanPath)
+    ? "/index.html"
+    : cleanPath === "/account-devices"
+      ? "/account-devices.html"
+      : cleanPath === "/admin/access"
+        ? "/admin-access.html"
+        : cleanPath === "/no-access"
+          ? "/no-access.html"
+        : cleanPath === "/request-access"
+          ? "/request-access.html"
+          : url.pathname;
   const safePath = path.normalize(pathname).replace(/^(\.\.[/\\])+/, "");
   const filePath = path.join(publicDir, safePath);
   if (!filePath.startsWith(publicDir)) {
@@ -360,26 +426,34 @@ export async function handleRequest(request, response) {
       return;
     }
     if (url.pathname === "/login" && request.method === "GET") {
-      if (validSession(request)) {
-        sendRedirect(response, safeNextPath(url.searchParams.get("next")));
+      const user = sessionFromRequest(request);
+      if (user) {
+        sendRedirect(response, permittedNextPath(url.searchParams.get("next"), user));
       } else {
         sendLoginPage(response, "", safeNextPath(url.searchParams.get("next")));
       }
       return;
     }
     if (url.pathname === "/login" && request.method === "POST") {
+      const attemptKey = clientKey(request);
+      if (tooManyAttempts(loginAttempts, attemptKey, 10, 15 * 60 * 1000)) {
+        sendLoginPage(response, "Too many sign-in attempts. Please wait 15 minutes and try again.", safeNextPath(url.searchParams.get("next")), 429);
+        return;
+      }
       const form = await readForm(request);
       const username = form.get("username") || "";
       const password = form.get("password") || "";
       const nextPath = safeNextPath(url.searchParams.get("next"));
-      if (!safeEqual(username, authConfig.username) || !safeEqual(password, authConfig.password)) {
+      const user = await authenticateUser(username, password);
+      if (!user) {
         sendLoginPage(response, "Incorrect username or password.", nextPath, 401);
         return;
       }
+      loginAttempts.delete(attemptKey);
       const expiresAt = Date.now() + sessionLifetimeMs;
       const secure = secureRequest(request) ? "; Secure" : "";
-      const cookie = `${authCookieName}=${signSession(expiresAt)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${Math.floor(sessionLifetimeMs / 1000)}${secure}`;
-      sendRedirect(response, nextPath, cookie);
+      const cookie = `${authCookieName}=${signSession(user, expiresAt)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${Math.floor(sessionLifetimeMs / 1000)}${secure}`;
+      sendRedirect(response, permittedNextPath(nextPath, user), cookie);
       return;
     }
     if (url.pathname === "/logout" && request.method === "POST") {
@@ -387,7 +461,29 @@ export async function handleRequest(request, response) {
       sendRedirect(response, "/login", `${authCookieName}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${secure}`);
       return;
     }
-    if (!validSession(request)) {
+    if (url.pathname === "/request-access" && request.method === "GET") {
+      await serveStatic(request, response);
+      return;
+    }
+    if (url.pathname === "/api/access-requests" && request.method === "POST") {
+      if (tooManyAttempts(accessRequestAttempts, clientKey(request), 5, 60 * 60 * 1000)) {
+        sendJson(response, 429, { error: "Too many access requests. Please try again later." });
+        return;
+      }
+      try {
+        sendJson(response, 201, await createAccessRequest(await readJson(request)));
+      } catch (error) {
+        sendJson(response, 422, { error: error.message || "Access request could not be submitted." });
+      }
+      return;
+    }
+    const publicAssets = new Set(["/styles.css", "/request-access.js"]);
+    if (publicAssets.has(url.pathname)) {
+      await serveStatic(request, response);
+      return;
+    }
+    const user = sessionFromRequest(request);
+    if (!user) {
       if (url.pathname.startsWith("/api/")) {
         sendJson(response, 401, { error: "Authentication required." });
       } else if (url.pathname === "/styles.css" || url.pathname === "/app.js") {
@@ -398,7 +494,62 @@ export async function handleRequest(request, response) {
       }
       return;
     }
+    if (url.pathname === "/api/session") {
+      sendJson(response, 200, { user: sessionUser(user) });
+      return;
+    }
+    if (url.pathname.startsWith("/api/email") && !user.permissions.canEmail) {
+      deny(response, "Email permission is required.");
+      return;
+    }
+    if (url.pathname === "/admin/access" && user.role !== "ADMIN") {
+      sendRedirect(response, defaultRouteFor(user));
+      return;
+    }
+    if (url.pathname === "/no-access") {
+      await serveStatic(request, response);
+      return;
+    }
+    if (url.pathname === "/api/admin/access" && request.method === "GET") {
+      if (user.role !== "ADMIN") deny(response);
+      else sendJson(response, 200, adminAccessData());
+      return;
+    }
+    if (url.pathname.startsWith("/api/admin/requests/") && request.method === "PATCH") {
+      if (user.role !== "ADMIN") deny(response);
+      else {
+        try {
+          const requestId = decodeURIComponent(url.pathname.slice("/api/admin/requests/".length));
+          sendJson(response, 200, await decideAccessRequest(requestId, await readJson(request), user));
+        } catch (error) {
+          sendJson(response, 422, { error: error.message || "Access request could not be updated." });
+        }
+      }
+      return;
+    }
+    if (url.pathname.startsWith("/api/admin/users/") && request.method === "PATCH") {
+      if (user.role !== "ADMIN") deny(response);
+      else {
+        try {
+          const userId = decodeURIComponent(url.pathname.slice("/api/admin/users/".length));
+          sendJson(response, 200, await updateAccessUser(userId, await readJson(request)));
+        } catch (error) {
+          sendJson(response, 422, { error: error.message || "User permissions could not be updated." });
+        }
+      }
+      return;
+    }
+    const routePermission = dashboardForPath(url.pathname);
+    if (routePermission && !canAccessDashboard(user, routePermission)) {
+      sendRedirect(response, defaultRouteFor(user));
+      return;
+    }
     if (url.pathname === "/api/live-data") {
+      const board = requestedBoard(url);
+      if (!canAccessDashboard(user, board)) {
+        deny(response);
+        return;
+      }
       try {
         lastData = await fetchWithHistory();
       } catch (error) {
@@ -409,6 +560,10 @@ export async function handleRequest(request, response) {
       return;
     }
     if (url.pathname === "/api/download-report") {
+      if (!user.permissions.canDownload || !canAccessDashboard(user, "all")) {
+        deny(response, "Download permission is required.");
+        return;
+      }
       let data;
       try {
         data = await fetchWithHistory();
@@ -428,6 +583,10 @@ export async function handleRequest(request, response) {
       return;
     }
     if (url.pathname === "/api/download-board" && url.searchParams.get("board") === "stock") {
+      if (!user.permissions.canDownload || !canAccessDashboard(user, "stock")) {
+        deny(response, "Download permission is required.");
+        return;
+      }
       const data = lastData || await readPreviousSnapshot();
       if (!data) throw new Error("No saved device data is available for export.");
       const workbook = await buildStockExcel(data, {
@@ -446,14 +605,27 @@ export async function handleRequest(request, response) {
       return;
     }
     if (url.pathname === "/api/cached-data") {
+      const board = requestedBoard(url);
+      if (!canAccessDashboard(user, board)) {
+        deny(response);
+        return;
+      }
       sendJson(response, 200, lastData || { devices: [], generatedAt: null });
       return;
     }
     if (url.pathname === "/api/stc-accounts" && request.method === "GET") {
+      if (!canAccessDashboard(user, "accounts")) {
+        deny(response);
+        return;
+      }
       sendJson(response, 200, publicAccountData());
       return;
     }
     if (url.pathname === "/api/stc-accounts" && request.method === "POST") {
+      if (!canAccessDashboard(user, "accounts")) {
+        deny(response);
+        return;
+      }
       const body = await readJson(request);
       try {
         sendJson(response, 200, await connectStcAccount(body.msisdn, body.password));
@@ -463,6 +635,10 @@ export async function handleRequest(request, response) {
       return;
     }
     if (url.pathname === "/api/stc-accounts/refresh" && request.method === "POST") {
+      if (!canAccessDashboard(user, "accounts")) {
+        deny(response);
+        return;
+      }
       const body = await readJson(request);
       try {
         sendJson(response, 200, await refreshStcAccounts(body.msisdn || ""));
@@ -472,6 +648,10 @@ export async function handleRequest(request, response) {
       return;
     }
     if (url.pathname.startsWith("/api/stc-accounts/") && request.method === "DELETE") {
+      if (!canAccessDashboard(user, "accounts")) {
+        deny(response);
+        return;
+      }
       const msisdn = decodeURIComponent(url.pathname.slice("/api/stc-accounts/".length));
       try {
         sendJson(response, 200, await removeStcAccount(msisdn));

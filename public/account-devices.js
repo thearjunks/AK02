@@ -1,3 +1,7 @@
+import { applyAccessUi } from "./access-ui.js?v=20260825-1";
+
+await applyAccessUi();
+
 const state = { data: { accounts: [], devices: [], generatedAt: null }, filtered: [] };
 const $ = (id) => document.querySelector(`#${id}`);
 const els = Object.fromEntries([

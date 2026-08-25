@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Request Access | STC Device Operations</title>
+    <link rel="stylesheet" href="/styles.css?v=20260825-1" />
+  </head>
+  <body class="publicAccessPage">
+    <main class="accessRequestPanel">
+      <a class="brand" href="/login"><span class="brandMark">stc</span><span>Device Operations</span></a>
+      <h1>Request Access</h1>
+      <p>Your request will be sent to the dashboard Admin for review.</p>
+      <div id="requestMessage" class="connectionMessage" hidden role="status"></div>
+      <form id="requestAccessForm" class="requestAccessForm">
+        <label class="field"><span>Username</span><input name="username" autocomplete="username" required /></label>
+        <label class="field"><span>Mobile number</span><input name="mobile" inputmode="numeric" autocomplete="tel" placeholder="8-digit Kuwait mobile number" required /></label>
+        <label class="field"><span>Department</span><input name="department" autocomplete="organization-title" required /></label>
+        <label class="field"><span>STC email ID</span><input name="email" type="email" autocomplete="email" placeholder="name@stc.com.kw" required /></label>
+        <button id="submitRequestBtn" class="button primary" type="submit">Submit request</button>
+      </form>
+      <a class="backToLogin" href="/login">Back to sign in</a>
+    </main>
+    <script src="/request-access.js?v=20260825-1" type="module"></script>
+  </body>
+</html>

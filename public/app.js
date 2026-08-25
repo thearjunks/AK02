@@ -1,4 +1,7 @@
 import { compareDevicesByAddition, compareRemovedDevices, deviceLifecycleStatus } from "./device-order.js?v=20260806-2";
+import { applyAccessUi } from "./access-ui.js?v=20260825-1";
+
+const currentUser = await applyAccessUi();
 
 const ROUTES = {
   "/": "all",
@@ -424,7 +427,8 @@ async function loadData(live = false) {
   setLoading(true);
   setStatus(live ? "Fetching live data from STC..." : "Loading saved STC snapshot...", "busy");
   try {
-    const response = await fetch(apiUrl(live ? "/api/live-data" : "/api/cached-data"), {
+    const endpoint = live ? "/api/live-data" : "/api/cached-data";
+    const response = await fetch(apiUrl(`${endpoint}?board=${encodeURIComponent(state.board)}`), {
       cache: "no-store",
       signal: controller?.signal,
     });

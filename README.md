@@ -98,6 +98,28 @@ must use the Kuwait timezone, and this Windows user must be signed in.
 
 To run the same automation immediately, double-click `RUN AUTOMATION NOW.cmd`.
 
+### Admin and user access
+
+The login page includes **Request Access**. New requests remain pending until an
+admin approves them from `/admin/access`, assigns a role, chooses the permitted
+dashboard sections, and enables download or email actions when required.
+
+The initial production administrator is configured with environment variables:
+
+```text
+ADMIN_USERNAME=arjun.sajimon
+ADMIN_PASSWORD=<strong private password>
+```
+
+When `ADMIN_PASSWORD` is not set, the app uses the existing
+`DASHBOARD_PASSWORD` for the initial administrator only. Passwords are stored as
+salted hashes; they are never returned by the API.
+
+Access requests and permissions are stored in `data/access-control.json` by
+default. For durable production storage, set `RBAC_DATA_PATH` to a writable,
+persistent absolute path that is retained between Hostinger deployments. Back
+up that file with the other application data. Do not commit it to GitHub.
+
 This app shows live STC Kuwait device information in a dashboard and lets you download the same data as an Excel file.
 
 It can:

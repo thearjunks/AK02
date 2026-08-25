@@ -14,19 +14,21 @@
           <span>Device Operations</span>
         </a>
         <nav class="boardNav" aria-label="Dashboard boards">
-          <a href="/all-devices">All Devices</a>
-          <a href="/stock">Stock Management</a>
-          <a href="/zed-prices">zeed Price</a>
-          <a href="/content">Device Content</a>
-          <a href="/removed-devices">Removed Devices</a>
-          <a href="/plans">Devices by Plan</a>
-          <a href="/device-master">Device Master</a>
-          <a class="active" href="/account-devices">Account Devices</a>
+          <a data-permission="all" href="/all-devices">All Devices</a>
+          <a data-permission="stock" href="/stock">Stock Management</a>
+          <a data-permission="zed" href="/zed-prices">zeed Price</a>
+          <a data-permission="content" href="/content">Device Content</a>
+          <a data-permission="removed" href="/removed-devices">Removed Devices</a>
+          <a data-permission="plans" href="/plans">Devices by Plan</a>
+          <a data-permission="master" href="/device-master">Device Master</a>
+          <a data-permission="accounts" class="active" href="/account-devices">Account Devices</a>
+          <a data-admin-only href="/admin/access">Access Management <span id="accessRequestBadge" class="navBadge" hidden></span></a>
         </nav>
         <div class="sourceNote">
           <span>Source</span>
           <strong>STC Kuwait Selfcare</strong>
           <small id="sidebarFreshness">Not fetched</small>
+          <small id="signedInUser"></small>
         </div>
         <form class="logoutForm" method="post" action="/logout">
           <button type="submit">Sign out</button>
@@ -86,6 +88,6 @@
         </section>
       </main>
     </div>
-    <script src="/account-devices.js?v=20260820-1" type="module"></script>
+    <script src="/account-devices.js?v=20260825-1" type="module"></script>
   </body>
 </html>
